@@ -1,3 +1,1 @@
-# ![[tktk Module Name]](../assets/tktk-hero.png)
-
-[COMING SOON]
+# ![React Hoot](../assets/tktk-hero.png)
