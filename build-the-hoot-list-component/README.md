@@ -4,11 +4,19 @@
 
 ## Overview
 
-Let’s get a brief overview of what we’ll implement in this lesson. Our app will store `hoots` state in `**src/App.jsx**`. State will be passed down to the `src/components/HootList.jsx` component. Within `HootList`, we’ll map through the `hoots` to produce an array of hoot `<article>` tags. Each `<article>` tag will be responsible for displaying a single `hoot` object.
+In this lesson, we’ll implement the following user story:
+
+- AAU, I should be able to see a list of all hoots on a 'List' page.
+
+Let's walk through some of the logic involved here.
+
+Our app will store `hoots` state in `**src/App.jsx**`. State will be passed down to the `src/components/HootList.jsx` component.
+
+Within `HootList`, we’ll map through the `hoots` to produce an array of hoot `<article>` tags. Each `<article>` tag will be responsible for displaying a single `hoot` object.
 
 The data held in `hoots` state will come from our backend. Retrieving the data on our frontend will require the use of the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch). We'll group these `fetch()` requests in a dedicated module for each resource in our application. These modules are commonly referred to as **services**. 
 
-## Building the component
+## Scaffold the component
 
 Run the following command in your terminal:
 
@@ -96,11 +104,11 @@ Update your protected routes in `**src/App.jsx**` with the following:
 
 With our `<Route>` in place, we should now be able to navigate to the `HootList` component.
 
-## Adding a `index` functionality
+## Add `index` functionality
 
 The next step will be fetching data for the `HootList` to render. Utilizing the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch), we'll create an asynchronous `index` service function that retrieves a list of hoots from our backend. 
 
-### `hootService.js`
+### Create `hootService.js`
 
 We'll group all services related to the hoot resource in a dedicated module called `hootService.js`. This pattern works well, as all hoot related service functions will make requests to the same `BASE_URL` endpoint on our server (`'/hoots'`). When a service function needs to make a request to a more precise endpoint, we'll modify the endpoint in the function itself.
 
@@ -119,7 +127,7 @@ And add the following to the top of `src/services/hootService.js`:
 const BASE_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/hoots`
 ```
 
-### Building the service function
+### Build the service function
 
 Next we'll need to build out the `index` functionality. We'll be making a request to `'/hoots'`, so in this instance no modifications to the `BASE_URL` are necessary.
 
@@ -157,7 +165,7 @@ As a result, all of our hoot service functions will require this `'Authorization
 
 > 🚨 Don't forget to `export` each service function after adding them. Otherwise they will not be accessible in the component where they are called upon.
 
-### Calling upon the service
+### Call upon the service
 
 Back in `src/App.jsx`, add an import for our new `hootService` module:
 
@@ -232,7 +240,7 @@ Within `src/components/HootList.jsx`, verify that `hoots` is accessible through 
 
 > 🏆 After passing props, it is best verify that the data is being passed down to the child component with your React Dev Tools or a `console.log`. Doing so will generally make rendering the data easier.
 
-## Rendering a list of hoots
+## Render a list of hoots
 
 The next step is to `map()` over `props.hoots`. At this stage, we'll use the `Array.prototype.map()` method to produce an array of `<p>` tags before replacing these with a proper 'card' UI element.
 

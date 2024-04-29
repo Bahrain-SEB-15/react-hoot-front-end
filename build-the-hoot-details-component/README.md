@@ -4,13 +4,17 @@
 
 ## Overview
 
-In this lesson, we’ll build a component that renders the details of a single hoot, including its associated comments. This component will be displayed whenever a user clicks on a hoot from the list page.
+In this lesson, we’ll implement the following user story:
+
+- AAU, clicking on a hoot in the 'List' page should navigate me to a 'Details' page where I can view information about a single hoot post along with its associated comments.
+
+Our 'Details' page will be represented by `src/components/HootDetails/HootDetails.jsx`. This component will be responsible for rendering the details of a single hoot, including its associated comments. This component will be displayed whenever a user clicks on a hoot from the list page.
 
 Rendering details on a specific hoot will require a new service function to `fetch` a single `hoot` from our backend. For the service function to work, we’ll need to provide it with a `hoot._id` so that the appropriate hoot can be retrieved. 
 
 Our details component will differ from `src/components/HootList/HootList.jsx`, in that data will be held within the component's local state, as opposed to being stored in `src/App.jsx` and passed down as props.
 
-## Scaffolding the component
+## Scaffold the component
 
 Let's build out the scaffolding for our component.
 
@@ -54,7 +58,7 @@ And add the following protected route:
 
 With the addition of this client-side route, users should now be able to navigate to the `HootDetails` page by clicking on a hoot from the list page. 
 
-## Adding `show` functionality
+## Add `show` functionality
 
 When a user navigates to the `HootDetails` page, we'll need to `fetch()` details on that hoot. An individual hoot can be identified by its `Objectid`, with this value being accessible through the `hootId` parameter as defined on the `<Route>` above. 
 
@@ -83,7 +87,7 @@ Confirm that you have access to the `hootId` in `src/components/HootDetails/Hoot
 
 Now that we have the `hootId`, we should be able to retrieve details for that hoot from out backend using a new service function.
 
-### Building the service function
+### Build the service function
 
 Once again, our service function will require an Authorization header.
 
@@ -110,7 +114,7 @@ export {
 
 > ❓ Let’s take a moment to connect the dots of our application. Notice the `hootId` in the above service function. Where will this information be used in our backend?
 
-### Calling upon the service
+### Call upon the service
 
 Next up, we'll call upon the service, and store the response from the server in state.
 
@@ -152,7 +156,7 @@ And add the following `useEffect()`:
 
 Take a moment to confirm that `hoot` state is being set correctly. You should notice that the `author` property of a `hoot` is being populated.
 
-## Rendering hoot details
+## Render hoot details
 
 If you included the `console.log()` in the step above, you might notice that the `hoot` state is `null` when the component first mounts. This can cause some issues if we try to render data that is not yet present in the component. Let's add a condition to account for that.
 
@@ -187,7 +191,7 @@ With our condition in place, let's build out the remaining JSX:
 
 Notice the `<section>` tag at the bottom. This will act as our 'Comments' section. The `commentSchema` is embedded within `hootSchema`, so the relevant `comment` data should already exist within this component’s `hoot` state. 
 
-## Displaying comments
+## Display comments
 
 To display a hoot's associated comments, we'll want to `map()` over `hoot.comments` and produce a list of `<article>` tags. 
 
