@@ -154,7 +154,7 @@ And add the following to `src/components/HootDetails/HootDetails.module.css`:
 
 The `src/components/HootDetails/HootDetails.jsx` component is rather complex, as it features several subsections and subcomponents. As a result, we have quite a bit of styling in here.
 
-First off, notice the use of **descendant** and **child** selectors. With this approach, we can cut down on the number of className and id instances in our `JSX`, as all of these elements can be selected through their relationship with the parent `container` element. If you need a refresher, check out the MDN documentation on [CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors)
+First, take note of how we utilize **descendant** and **child** selectors in our CSS. This approach helps us to reduce the number of `className` and `id` attributes in our `JSX` by selecting elements based on their relationship to the parent `container`. This makes our code cleaner and more maintainable. If you need a refresher on how these selectors work, take a look at the MDN documentation on [CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors).
 
 Some other interesting details include:
 
@@ -241,3 +241,5 @@ And now do the same to the `<article>` tag in your comments section like so:
             <p>{comment.text}</p>
           </article>
 ```
+
+Take a look at the newly styled `src/components/HootDetails/HootDetails.jsx` in your browser.

@@ -81,7 +81,7 @@ Next, let's call upon `useParams()` to get access to the `hootId`:
   console.log('hootId', hootId);
 ```
 
-> 💡 Be sure to [**destructure**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the `hootId` when calling upon `useParams()`!
+> 💡 Be sure to [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the `hootId` when calling upon `useParams()`!
 
 Confirm that you have access to the `hootId` in `src/components/HootDetails/HootDetails.jsx`.
 
@@ -152,7 +152,7 @@ And add the following `useEffect()`:
   console.log('hoot state:', hoot);
 ```
 
-> 💡 Remember to include `hootId` in the [**dependency array**](https://beta.reactjs.org/apis/react/useEffect#specifying-reactive-dependencies) of your `useEffect()`. This tells the `useEffect()` to fire off whenever the value of the `hootId` changes.
+> 💡 Remember to include `hootId` in the [dependency array](https://beta.reactjs.org/apis/react/useEffect#specifying-reactive-dependencies) of your `useEffect()`. This tells the `useEffect()` to fire off whenever the value of the `hootId` changes.
 
 Take a moment to confirm that `hoot` state is being set correctly. You should notice that the `author` property of a `hoot` is being populated.
 

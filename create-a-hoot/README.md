@@ -8,9 +8,9 @@ In this lesson, we’ll implement the following user story:
 
 - AAU, I should be able to create a hoot post.
 
-This will require a component that allows users to create new hoots. Upon submitting a new hoot, the user should be redirected back to the hoot list page. 
+This will require a `<form>` component that allows users to create new hoots. Upon submitting a new hoot, the user should be redirected back to the list page. 
 
-Creating a new hoot will require making a `POST` request to our server. When a request is made, we'll use the response to update the `hoots` state held in `src/App.jsx`.
+To create a hoot, we'll make a `POST` request to our server. When a request is made, we'll use the response to update the `hoots` state held in `src/App.jsx`. This data will then flow down to `src/components/HootList/HootList.jsx`, where we will be able to see our newly added hoot.
 
 ## Scaffold the component
 
@@ -23,7 +23,9 @@ Add the following to `src/components/NavBar/NavBar.jsx`:
           <li><Link to="/hoots/new">NEW HOOT</Link></li>
 ```
 
-If you wish to test out your client-side routes before creating the component, you can define the `<Route />` and render a simple `element` like so:
+> 🚨 Make sure you add this to the protected set of links!
+
+If you ever wish to test out your client-side routes *before* creating the component, you can define the `<Route />` and render a simple element, like in the example below:
 
 ```jsx
               <Route
@@ -113,7 +115,7 @@ export default HootForm;
 
 This component should be pretty similar to other forms you’ve seen in React, but let’s touch on one interesting detail. Take a look at the `<select>` tag. This is a good example of how you can handle select menus in React. Notice how we set the default value for this field in the initial state of `formData`. This varies a bit from other `input` fields in that we have a pre-defined `value` attribute on each `<option>` tag. If you are using an `enum` constraint in your `schema`, make sure these values match!
 
-> ❓ Notice our `handleSubmit` function. Why do we need [**e.preventDefault()**](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault) when we submit a `<form>` in React? What default behavior are we preventing [**here**](https://beta.reactjs.org/learn/responding-to-events#preventing-default-behavior)?
+> ❓ Notice our `handleSubmit` function. Why do we need [e.preventDefault()](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault) when we submit a `<form>` in React? What default behavior are we preventing [here](https://react.dev/learn/responding-to-events#preventing-default-behavior)?
 
 Take a moment to verify that you can successfully change `formData` state. When you submit the form, you should only see a `console.log` of state, as we have not yet built out the logic to create a new hoot.
 
@@ -177,7 +179,7 @@ Next we'll build out the `create` service function. This will differ from previo
 
 - **`method`**: The `method` property specifies the method of our request. With the Fetch API, this property is necessary whenever making a request other than the default `GET`.
 
-- **`body`**: The `body` property specifies the form data to include in the request. We'll make use of the `JSON.stringify()` method here. Check out this link for more info on the [**JSON object**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON).
+- **`body`**: The `body` property specifies the form data to include in the request. We'll make use of the `JSON.stringify()` method here. Check out this link for more info on the [JSON object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON).
 
 - **`'Content-Type'`**: Within our `headers` object, we'll also need to specify the data type of the information included in the `body` property. In this case, we'll set it to `'application/json'`.
 

@@ -354,3 +354,5 @@ And apply `styles.container` to the `className` of the outermost element (`<main
 // src/components/SigninForm/SigninForm.jsx
     <main className={styles.container}>
 ```
+
+Try signing in or signing up in your browser!

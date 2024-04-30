@@ -198,7 +198,9 @@ async function update(hootId, hootFormData) {
 
 ### Call upon the service
 
-And next we'll update `handleUpdateHoot` with our service and set state accordingly:
+And next we'll update `handleUpdateHoot` with our service and set state accordingly.
+
+Add the following to `src/App.jsx`:
 
 ```jsx
 // src/App.jsx
@@ -211,12 +213,14 @@ And next we'll update `handleUpdateHoot` with our service and set state accordin
   };
 ```
 
-Let's take a moment to discuss how we are setting state here.
+This implementation of the [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) method is a bit different from the mapping of `JSX` elements you’ve seen in React previously. Let's take a moment to discuss the code above.
 
-The use of the [**map()**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) method is probably a bit different from the mapping of `JSX` elements you’ve seen previously. 
+Remember, `hoots` state is an array of `hoot` objects. Calling upon `hootService.update()` has given us access to an `updatedHoot`. This `updatedHoot` object needs to be added to `hoots` state. To do so, we need to replace the original version of that object with the `updatedHoot`.
 
-Why are we using the map method to [**update Hoot state**](https://beta.reactjs.org/learn/updating-arrays-in-state#updating-arrays-without-mutation)?
+By mapping over the `hoots` array, we are able to check each `hoot` object. If the current element being processed has an `_id` that matches `updatedHoot._id`, we replace it with the `updatedHoot` that was returned from our backend. If the `_id` instances do not match, we simply return the existing element. 
 
-Essentially, we map through the existing `hoots` state, and if the current element being processed has an `_id` that matches `updatedHoot._id`, we replace that element with the `updatedHoot` that was returned from our backend. If the `_id` instances do not match, we simply return the existing element. As a result, we update a single element in `hoots` state, while also maintaining the other elements.
+Through this process we are able to update a single object held in `hoots` state, while also maintaining an accurate record of the remaining elements in the array.
+
+> 💡 If you are curious as to why something like the `splice()` method is not applicable here, check out React documentation on [updating arrays without mutation](https://react.dev/learn/updating-arrays-in-state#updating-arrays-without-mutation).
 
 Try it out! After submitting a hoot for update, you should be directed to the list page with the modified hoot information present.

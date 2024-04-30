@@ -8,7 +8,7 @@ In this lesson, we’ll implement the following user story:
 
 - AAU, I should be able to add a comment on a hoot 'Details' page.
 
-The user story will require a new component called `src/components/CommentForm/CommentForm.jsx`. It will mirror the functionality for creating hoots with one key difference. When creating comments, our `CommentForm` component **will not be a distinct page**, instead it will exist within `src/components/HootDetails/HootDetails.jsx`. Additionally, when updating state with a new comment, we'll need to modify `hoot` state, as this is the object where the `comments` array will reside. 
+The user story will require a new component called `src/components/CommentForm/CommentForm.jsx`. It will mirror the functionality for creating hoots with one key difference. When creating comments, our `CommentForm` component **will not be a distinct page**, instead it will exist as a child component within `src/components/HootDetails/HootDetails.jsx`. Additionally, when updating state with a new comment, we'll need to modify `hoot` state, as this is the object where the `comments` array will reside. 
 
 This lesson will serve as a good example of how to handle creating an embedded resource in a React app.
 
@@ -170,18 +170,18 @@ Take a look at the code block below for a step by step breakdown:
 setHoot({ })
 
 // Set state to an object that includes all properties currently in Hoot state:
-setHoot({ ...Hoot })
+setHoot({ ...hoot })
 
 // Much like the step above, except now the comments property of the object
 // being set to state has its value set to an empty array:
-setHoot({ ...Hoot, comments: [ ] })
+setHoot({ ...hoot, comments: [ ] })
 
-// And now the comments property of the object will include a copy of all 
-// the comment elements that already exist in Hoot state.
-setHoot({ ...Hoot, comments: [...Hoot.comments] })
+// Now the comments property of the object will include a copy of all 
+// the comments that already exist in hoot state.
+setHoot({ ...hoot, comments: [...hoot.comments] })
 
 // And finally, we include the newComment at the end of the array:
-setHoot({ ...Hoot, comments: [...Hoot.comments, newComment] })
+setHoot({ ...hoot, comments: [...hoot.comments, newComment] })
 ```
     
 Try it out in your browser. You should now be able to add comments!

@@ -45,7 +45,7 @@ const HootDetails = (props) => {
 
 Time to add some conditional rendering for our button.
 
-For our conditional rendering, we’ll make use of the [**Logical AND**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND) operator. 
+For our conditional rendering, we’ll make use of the [Logical AND](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND) operator. 
 
 If the `hoot.author._id` matches `user._id`, this piece of UI should be visible. If not, the UI should not be rendered. This means only the author of this particular `hoot` will be able to access the UI for updating or deleting a `Hoot`.
 
@@ -118,17 +118,21 @@ With the `hootId` accessible in `handleDeleteHoot`, let's confirm that we can `f
   const handleDeleteHoot = async (hootId) => {
     console.log('hootId', hootId)
     setHoots(hoots.filter((hoot) => hoot._id !== hootId));
-    navigate('/hoots');
+    navigate('/hoots'); 
   };
 ```
 
-Remember, the [**filter**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method returns a shallow copy of the array, excluding all elements that do not pass the test implemented by the provided callback function.
+Remember, the [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method returns a shallow copy of the array, excluding all elements that do not pass the test implemented by the provided callback function. 
+
+In the code block above, our `filter()` method returns only the `hoot` objects whose `_id` values **do not match** the `hootId`.
 
 Try deleting a hoot. After clicking the delete button, you should be directed to the list page, where the hoot is no longer present. If you refresh your browser, you'll notice that the hoot appears once more. This is occurs because at the moment, **we are only managing our local state**. No change has been made to the database. When the browser is refreshed, our `hootService.index()` runs once again, loading hoots from our database. 
 
 Managing local state is a great practice, in that it provides immediate visual updates for users. But for these changes to persist, state updates must be made in tandem with changes to the database. We'll address this issue in the next step!
 
 ## Add `deleteHoot` functionality
+
+Let's finish up our delete functionality by adding the service.
 
 ### Build the service function
 
@@ -161,13 +165,34 @@ export {
 
 ### Call upon the service
 
-Back in `src/App.jsx`, call upon the service in `handleDeleteHoot`:
+Now that we have our service function, we'll add it to `handleDeleteHoot`, along with one other small change.
+
+In our backend, you might recall that the delete hoot controller function responds with a `deletedHoot`:
+
+```js
+res.status(200).json(deletedHoot);
+```
+
+If we call upon `hootService.deleteHoot()`, what we get back is this `deletedHoot` object:
+
+```jsx
+const deletedHoot = await hootService.deleteHoot(hootId);
+```
+
+The `deletedHoot` contains the ObjectId (`_id`) of the hoot that was removed from our database. Knowing this, when we use the `filter()` method inside `handleDeleteHoot`, we can utilize the value of `deletedHoot._id` instead of the current `hootId`. 
+
+Doing so gives us additional assurance that the deletion was successful on the backend, before we make updates to our frontend.
+
+Back in `src/App.jsx`, update `handleDeleteHoot` with the following:
 
 ```jsx
 // src/App.jsx
   const handleDeleteHoot = async (hootId) => {
+    // Call upon the service function:
     const deletedHoot = await hootService.deleteHoot(hootId);
+    // Filter state using deletedHoot._id:
     setHoots(hoots.filter((hoot) => hoot._id !== deletedHoot._id));
+    // Redirect the user:
     navigate('/hoots');
   };
 ```

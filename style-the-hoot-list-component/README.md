@@ -105,7 +105,7 @@ And add the following to `src/components/HootList/HootList.module.css`:
 
 This styling is mostly concerned with arranging our list view of hoot 'cards' into a grid layout. 
 
-On mobile, the 'cards' are displayed in a single column. Through a series of [**media queries**](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries), we are able to add additional columns to the grid layout based on the width of the browser (`grid-template-columns`).
+On mobile, the 'cards' are displayed in a single column. Through a series of [media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries), we are able to add additional columns to the grid layout based on the width of the browser (`grid-template-columns`).
 
 We also do some work to transform each `<article>` tag into a distinct 'card' element, complete with `box-shadow` and some `padding` for legibility. 
 
@@ -126,3 +126,5 @@ And apply `styles.container` to the `className` of the outermost element (`<main
 // src/components/HootList/HootList.jsx
     <main className={styles.container}>
 ```
+
+And with that, you should now have a styled `src/components/HootList/HootList.jsx` component!

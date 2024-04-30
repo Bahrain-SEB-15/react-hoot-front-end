@@ -269,7 +269,7 @@ const Landing = () => {
               <p>Software Engineer</p>
             </header>
             <p>
-              I found Hoot through a friend of mine, and I'm so glad I did. As a night owl, I have a hard time finding blogging apps that fit my lifestyle. The interface is so easy to use and makes it really convenient for me to write my blogs at night.
+              I found Hoot through a friend of mine, and I'm so glad I did. As a night owl, I have a hard time finding blogging apps that fit my lifestyle. The interface is so easy to use and makes it really convenient for me to write my blog posts at night.
             </p>
             <footer>
               <img src={Stars} alt="Four blue stars" />

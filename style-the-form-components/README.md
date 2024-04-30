@@ -75,6 +75,8 @@ And apply `styles.container` to the `className` of the outermost element (`<main
     <main className={styles.container}>
 ```
 
+Check out `src/components/HootForm/HootForm.jsx` component in your browser!
+
 ## Style the `CommentForm`
 
 We have a unique situation to handle when it comes to `src/components/CommentForm/CommentForm.jsx`. When creating a comment, the form is rendered as a child component inside `src/components/HootDetails/HootDetails.jsx`. When editing a comment, the form is rendered as its own page.
@@ -162,3 +164,5 @@ Add the following above the existing return statement in `src/components/Comment
 ```
 
 > 🚨 Be sure to leave the existing return unchanged! This will still be used when the component is placed inside `src/components/HootForm/HootForm.jsx`.
+
+Check your browser and try out our newly styled forms!

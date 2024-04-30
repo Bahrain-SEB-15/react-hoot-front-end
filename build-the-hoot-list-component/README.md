@@ -10,7 +10,7 @@ In this lesson, we’ll implement the following user story:
 
 Let's walk through some of the logic involved here.
 
-Our app will store `hoots` state in `**src/App.jsx**`. State will be passed down to the `src/components/HootList.jsx` component.
+Our app will store `hoots` state in `src/App.jsx`. State will be passed down to the `src/components/HootList.jsx` component.
 
 Within `HootList`, we’ll map through the `hoots` to produce an array of hoot `<article>` tags. Each `<article>` tag will be responsible for displaying a single `hoot` object.
 
@@ -68,7 +68,9 @@ import HootList from './components/HootList/HootList';
 
 With the component imported, we are ready to build out the `<Route/>`.
 
-This `<Route/>` and others like it will need to be *protected*, meaning they **can only be accessed by logged in users**. Protected routes can be implemented with a ternary, as seen in our application's starter code:
+This `<Route/>` and others like it will need to be *protected*, meaning they **can only be accessed by logged in users**. 
+
+Protected routes can be implemented with a ternary, as seen in our application's starter code:
 
 ```jsx
 // src/App.jsx
