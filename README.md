@@ -22,7 +22,6 @@ tktk Write a short but descriptive summary of the content in this module.
 | [Create a Comment](./create-a-comment/README.md) | -- | -- | Building a component to create comments. |
 | [Delete a Hoot](./delete-a-hoot/README.md) | -- | -- | Building the functionality to delete a hoot. |
 | [Update a Hoot](./update-a-hoot/README.md) | -- | -- | Building the functionality to update a hoot. |
-
 | **Total content**                                        | -- | -- |                                         |
 
 ## Level Up content
