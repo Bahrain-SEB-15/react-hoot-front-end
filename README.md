@@ -1,4 +1,4 @@
-# ![React Hoot](./assets/hero.png)
+# ![React - Hoot Front-End](./assets/hero.png)
 
 ## About
 
@@ -29,7 +29,7 @@ tktk Write a short but descriptive summary of the content in this module.
 | Lesson | Video Time | Video | Skills |
 | ------ |:----------:|:-----:| ------ |
 | [Update and Delete Comments](./update-and-delete-comments/README.md) | -- | -- | Building the functionality to update and delete comments. |
-| [Adding CSS Modules](./adding-css-modules/README.md) | -- | -- | Applying CSS Modules to style an application. |
+| [Add CSS Modules](./add-css-modules/README.md) | -- | -- | Applying CSS Modules to style an application. |
 | [Style the HootList Component](./style-the-hoot-list-component/README.md) | -- | -- | Applying CSS Modules to a list component. |
 | [Style the HootDetails Component](./style-the-hoot-details-component/README.md) | -- | -- | Applying CSS Modules to a details component. |
 | [Style the Form Components](./style-the-form-components/README.md) | -- | -- | Applying CSS Modules to a form component. |

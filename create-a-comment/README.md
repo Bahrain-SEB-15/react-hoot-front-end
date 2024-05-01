@@ -1,4 +1,4 @@
-# ![React Hoot - Create a Comment](./assets/hero.png)
+# ![React - Hoot Front-End - Create a Comment](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be build a component for creating comments embedded within a hoot.
 
@@ -116,11 +116,9 @@ And update `handleSubmit` by calling upon `props.handleAddComment(formData)`:
 
 Confirm you are passing `formData` up to `src/components/HootDetails/HootDetails.jsx`.
 
-## Add `createComment` functionality
+## Build the service function
 
 Time to build out the service function. Despite being another resouce, our comment service functions will live inside `src/services/hootService.js`. This is because all of the endpoints for comments will share the same `BASE_URL` as hoots (`'/hoots'`). We'll append more specific endpoints to each comment service function as necessary.
-
-### Build the service function
 
 Add the following to `src/services/hootService.js`:
 
@@ -143,7 +141,7 @@ const createComment = async (hootId, commentFormData) => {
 }
 ```
 
-### Call upon the service
+## Call upon the service
 
 With the service in place, we can complete the `handleAddComment` function in `src/components/HootDetails/HootDetails.jsx`:
 

@@ -1,4 +1,4 @@
-# ![React Hoot - Deleting Hoots](./assets/hero.png)
+# ![React - Hoot Front-End - Delete a Hoot](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able to implement the functionality for deleting a hoot.
 
@@ -130,11 +130,9 @@ Try deleting a hoot. After clicking the delete button, you should be directed to
 
 Managing local state is a great practice, in that it provides immediate visual updates for users. But for these changes to persist, state updates must be made in tandem with changes to the database. We'll address this issue in the next step!
 
-## Add `deleteHoot` functionality
+## Build the service function
 
 Let's finish up our delete functionality by adding the service.
-
-### Build the service function
 
 Add the following to `src/services/hootService.js`:
 
@@ -163,7 +161,7 @@ export {
 };
 ```
 
-### Call upon the service
+## Call upon the service
 
 Now that we have our service function, we'll add it to `handleDeleteHoot`, along with one other small change.
 

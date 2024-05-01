@@ -1,4 +1,4 @@
-# ![React Hoot - Style the HootDetails Component](./assets/hero.png)
+# ![React - Hoot Front-End - Style the HootDetails Component](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able to style a details component with CSS modules.
 

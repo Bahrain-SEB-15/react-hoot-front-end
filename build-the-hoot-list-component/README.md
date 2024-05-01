@@ -1,4 +1,4 @@
-# ![React Hoot - Build the HootList](./assets/hero.png)
+# ![React - Hoot Front-End - Build the HootList Component](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able to build a component that displays a list of hoots.
 
@@ -10,13 +10,13 @@ In this lesson, we’ll implement the following user story:
 
 Let's walk through some of the logic involved here.
 
-Our app will store `hoots` state in `src/App.jsx`. State will be passed down to the `src/components/HootList.jsx` component.
+Our app will store `hoots` state in `src/App.jsx`. This state will be passed down to the `src/components/HootList.jsx` component. Within `HootList`, we’ll `map()` over `hoots` to produce an array of `<article>` tags. Each `<article>` tag will be responsible for rendering a single `hoot` object.
 
-Within `HootList`, we’ll map through the `hoots` to produce an array of hoot `<article>` tags. Each `<article>` tag will be responsible for displaying a single `hoot` object.
-
-The data held in `hoots` state will come from our backend. Retrieving the data on our frontend will require the use of the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch). We'll group these `fetch()` requests in a dedicated module for each resource in our application. These modules are commonly referred to as **services**. 
+The data held in `hoots` state will originate in our backend. Retrieving that data on the frontend will require the use of the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch). We'll group these `fetch()` requests in a dedicated module for each resource in our application. These modules are commonly referred to as **services**. 
 
 ## Scaffold the component
+
+Let's get started!
 
 Run the following command in your terminal:
 
@@ -106,11 +106,9 @@ Update your protected routes in `**src/App.jsx**` with the following:
 
 With our `<Route>` in place, we should now be able to navigate to the `HootList` component.
 
-## Add `index` functionality
+## Create `hootService.js`
 
-The next step will be fetching data for the `HootList` to render. Utilizing the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch), we'll create an asynchronous `index` service function that retrieves a list of hoots from our backend. 
-
-### Create `hootService.js`
+Next we'll need to fetch data for the `HootList` to render. Utilizing the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch), we'll create an asynchronous `index` service function that retrieves a list of hoots from our backend. 
 
 We'll group all services related to the hoot resource in a dedicated module called `hootService.js`. This pattern works well, as all hoot related service functions will make requests to the same `BASE_URL` endpoint on our server (`'/hoots'`). When a service function needs to make a request to a more precise endpoint, we'll modify the endpoint in the function itself.
 
@@ -119,7 +117,6 @@ Let's create our `hootService` module.
 Run the following command in your terminal:
 
 ```bash
-touch .env
 touch src/services/hootService.js
 ```
 
@@ -129,7 +126,9 @@ And add the following to the top of `src/services/hootService.js`:
 const BASE_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/hoots`
 ```
 
-### Build the service function
+> 💡 If you completed the setup steps, your `.env` should contain a `VITE_EXPRESS_BACKEND_URL` environment variable set to `"http://localhost:3000"`. When running our app locally, the `BASE_URL` will read as `http://localhost:3000/hoots`.
+
+## Build the service function
 
 Next we'll need to build out the `index` functionality. We'll be making a request to `'/hoots'`, so in this instance no modifications to the `BASE_URL` are necessary.
 
@@ -153,7 +152,7 @@ export {
 }
 ```
 
-Notice the inclusion of the `headers` property. The `headers` property is an object with any headers to be sent alongside the request. In this case, we are including an `'Authorization'` header with a bearer token. This token is decoded by the `verifyToken` middleware function on our server, allowing us to indentify the logged in user, and ensuring that only a logged in user can access this functionality.
+Notice the inclusion of the `headers` property. The `headers` property is an object containing any headers that need to be sent along with the request. In this case, we are including an `'Authorization'` header with a **bearer token**. This token is decoded by the `verifyToken` middleware function on our server, allowing us to indentify the logged in user, and ensuring that only a logged in user can access this functionality. 
 
 If you look at the `controllers/hoots.js` file in your backend application, you'll notice that all of our routes for hoots are **protected**, as they follow `verifyToken` in our middleware pipeline.
 
@@ -167,7 +166,7 @@ As a result, all of our hoot service functions will require this `'Authorization
 
 > 🚨 Don't forget to `export` each service function after adding them. Otherwise they will not be accessible in the component where they are called upon.
 
-### Call upon the service
+## Call upon the service
 
 Back in `src/App.jsx`, add an import for our new `hootService` module:
 

@@ -1,4 +1,4 @@
-# ![React Hoot - Displaying Hoot Details](./assets/hero.png)
+# ![React - Hoot Front-End - Build the Hoot Details Component](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able build a component that renders details on a specific hoot.
 
@@ -8,7 +8,7 @@ In this lesson, we’ll implement the following user story:
 
 - AAU, clicking on a hoot in the 'List' page should navigate me to a 'Details' page where I can view information about a single hoot post along with its associated comments.
 
-Our 'Details' page will be represented by `src/components/HootDetails/HootDetails.jsx`. This component will be responsible for rendering the details of a single hoot, including its associated comments. This component will be displayed whenever a user clicks on a hoot from the list page.
+Our 'Details' page will be represented by `src/components/HootDetails/HootDetails.jsx`. This component will be responsible for rendering the details of a single hoot, including its associated comments. This component will be displayed whenever a user clicks on a hoot from the 'List' page.
 
 Rendering details on a specific hoot will require a new service function to `fetch` a single `hoot` from our backend. For the service function to work, we’ll need to provide it with a `hoot._id` so that the appropriate hoot can be retrieved. 
 
@@ -58,11 +58,18 @@ And add the following protected route:
 
 With the addition of this client-side route, users should now be able to navigate to the `HootDetails` page by clicking on a hoot from the list page. 
 
-## Add `show` functionality
+## Add `useParams`
 
 When a user navigates to the `HootDetails` page, we'll need to `fetch()` details on that hoot. An individual hoot can be identified by its `Objectid`, with this value being accessible through the `hootId` parameter as defined on the `<Route>` above. 
 
-If `hootId` is our **parameter**, you might wonder where our **argument** is being passed in. Recall the `<Link>` we wrapped around our hoot cards. We gave it a `to` property set to `/hoots/${hoot._id}`. That is where the actual `_id` data is passed in. 
+If `hootId` is our **parameter**, you might wonder where our **argument** is being passed in. Recall the `<Link>` we wrapped around our hoot cards. We gave it a `to` property set to `/hoots/${hoot._id}`. 
+
+This is where the actual `_id` data is passed in:
+
+```jsx
+// src/components/HootList/HootList.jsx
+<Link key={hoot._id} to={`/hoots/${hoot._id}`}>
+```
 
 To extract this value for use in our component, we'll make use of the `useParams()` hook.
 
@@ -87,7 +94,7 @@ Confirm that you have access to the `hootId` in `src/components/HootDetails/Hoot
 
 Now that we have the `hootId`, we should be able to retrieve details for that hoot from out backend using a new service function.
 
-### Build the service function
+## Build the service function
 
 Once again, our service function will require an Authorization header.
 
@@ -114,7 +121,7 @@ export {
 
 > ❓ Let’s take a moment to connect the dots of our application. Notice the `hootId` in the above service function. Where will this information be used in our backend?
 
-### Call upon the service
+## Call upon the service
 
 Next up, we'll call upon the service, and store the response from the server in state.
 

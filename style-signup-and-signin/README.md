@@ -1,8 +1,18 @@
-# ![React Hoot - Styling Signup and Signin](./assets/hero.png)
+# ![React - Hoot Front-End - Style Signup and Signin](./assets/hero.png)
 
-**Learning objective:** By the end of this lesson, students will be able to style a sign up and sign in components with CSS modules.
+**Learning objective:** By the end of this lesson, students will be able to style sign up and sign in components with CSS modules.
 
-## Refactor `src/components/SignupForm/SignupForm.jsx`
+## Style the SignupForm
+
+![Signup page](./assets/signup.png)
+
+Let's add some styling to our SignupForm!
+
+Signup and Signin Forms pose an interesting design challenge. Generally, the elements of these forms are arranged in a narrow column, which is great for mobile devices, but can result in a lot of unused space on desktop screens. 
+
+To address this, we'll modify our desktop layout by incorporating a large graphic alongside our Signup and Signin Forms. This will help us utilize the horizontal space more effectively. To maintain a clean and functional design on mobile devices, we'll employ media queries to hide the graphic on smaller screens. This will ennsure that our forms are visually appealing and space-efficient across different devices.
+
+### Refactor `src/components/SignupForm/SignupForm.jsx`
 
 Before we add styling to `src/components/SignupForm/SignupForm.jsx`, we'll need to make a few changes to its JSX structure. This will help facilitate a specific `flex` layout we are working towards.
 
@@ -34,8 +44,6 @@ In our desired layout, we want two distinct sections of the page, side by side o
 ```
 
 On the right-hand side of the screen, we'll display our sign up form component, while on the left-hand side, we'll display a decorative image directing the user to sign up with the form.
-
-![tktk Hunter - screenshot ]()
 
 Let's take this step by step.
 
@@ -75,7 +83,7 @@ Next, add the following `<section>` and `<img>` tag. The `<section>` should be p
 
 Now we have two distinct elements that can sit side by side within their shared parent container, a perfect set up for the `flex` layout we will be applying in the next step.
 
-## Add the module
+### Add the module
 
 Run the following command in your terminal:
 
@@ -187,7 +195,7 @@ input:focus {
 }
 ```
 
-The above stylesheet gives us a two column layout on desktop, and through media queries, a single column layout on mobile.
+The above stylesheet gives us a two column layout on desktop, and through media queries, a single column layout on mobile. When we switch to a mobile layout (`max-width: 912px`), we apply `display: none;` to the left-side `section` containing our graphic. This effectively removes the image from our layout when it is no longer necessary as a placeholder.
 
 We also have some interesting CSS selectors here with `:first-child` and `:nth-child(2)`. 
 
@@ -197,7 +205,7 @@ This is just a way of applying variations to the left and right sections of the 
 
 You might also notice the use of `overflow: scroll`. This grants our form section a scrollable overflow. This can be useful when a UI element with a set width or height might contain **more content than can be displayed within the available area**.
 
-## Apply styles
+### Apply styles
 
 Add the following import to `src/components/SignupForm/SignupForm.jsx`:
 
@@ -213,15 +221,22 @@ And apply `styles.container` to the `className` of the outermost element (`<main
     <main className={styles.container}>
 ```
 
-## Refactor `src/components/SigninForm/SigninForm.jsx`
+Checkout the page in your browser!
 
-Let's apply the same changes to `src/components/SigninForm/SigninForm.jsx`.
+## Style the SigninForm
+
+![Signin page](./assets/signin.png)
+
+Let's apply the same changes to `src/components/SigninForm/SigninForm.jsx`. Our layout here will be quite similar to Signup, but we'll include a brand new stylesheet for simplicity. We'll also include a 'Login' specific graphic.
+
+### Refactor `src/components/SigninForm/SigninForm.jsx`
 
 First, we'll refactor the form.
 
 Once again, we move the `<h1>` and `<p>` inside the `<form>` tag, and wrap the `<form>` in a `<section>`:
 
 ```jsx
+// src/components/SigninForm/SigninForm.jsx
       <section>
         <form autoComplete='off' onSubmit={handleSubmit}>
           <h1>Log In</h1>

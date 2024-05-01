@@ -1,1 +1,1 @@
-# ![React Hoot](../assets/tktk-hero.png)
+# ![React - Hoot Front-End](../assets/hero.png)

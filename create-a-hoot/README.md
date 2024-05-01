@@ -1,4 +1,4 @@
-# ![React Hoot - Create a Hoot](./assets/hero.png)
+# ![React - Hoot Front-End - Create a Hoot](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able to build a component for creating new hoots.
 
@@ -8,7 +8,7 @@ In this lesson, we’ll implement the following user story:
 
 - AAU, I should be able to create a hoot post.
 
-This will require a `<form>` component that allows users to create new hoots. Upon submitting a new hoot, the user should be redirected back to the list page. 
+This will require a `<form>` component that allows users to create new hoots. Upon submitting a new hoot, the user should be redirected back to the 'List' page. 
 
 To create a hoot, we'll make a `POST` request to our server. When a request is made, we'll use the response to update the `hoots` state held in `src/App.jsx`. This data will then flow down to `src/components/HootList/HootList.jsx`, where we will be able to see our newly added hoot.
 
@@ -173,7 +173,7 @@ Now that we are passing down `handleAddHoot` as props, we can finish building ou
 
 Verify that our `hootFormData` is being passed up the component tree to `src/App.jsx` correctly. You should also be redirected to the hoot list page upon submitting the form.
 
-## Add `create` functionality
+## Build the service function
 
 Next we'll build out the `create` service function. This will differ from previous service functions in this code-along, as it will require a `POST` request method. When using the Fetch API to make `POST` requests, we'll need to include a few additional properties in our request:
 
@@ -182,8 +182,6 @@ Next we'll build out the `create` service function. This will differ from previo
 - **`body`**: The `body` property specifies the form data to include in the request. We'll make use of the `JSON.stringify()` method here. Check out this link for more info on the [JSON object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON).
 
 - **`'Content-Type'`**: Within our `headers` object, we'll also need to specify the data type of the information included in the `body` property. In this case, we'll set it to `'application/json'`.
-
-### Build the service function
 
 Let's add the service:
 
@@ -212,7 +210,7 @@ export {
 }
 ```
 
-### Call upon the service
+## Call upon the service
 
 Back in `src/App.jsx`, update `handleAddHoot` with the service function:
 

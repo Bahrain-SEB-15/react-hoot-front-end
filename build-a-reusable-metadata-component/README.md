@@ -1,10 +1,12 @@
-# ![React Hoot - Building a Reusable Metadata Component](./assets/hero.png)
+# ![React - Hoot Front-End - Build a Reusable Metadata Component](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able to build a reusable metadata component.
 
 ## Overview
 
-In this lesson we'll build a reusable metadata component. Metadata, in the context of online content such as a blog posts or comments, refers to data that provides information about other data. In regards to authorship, metadata typically includes details like the name of the author and the creation date.
+In this lesson we'll build a reusable metadata component called `AuthorInfo`.
+
+The term 'metadata' refers to data that provides information about other data. In the context of online content such as a blog posts or comments, metadata will often include information on the content's author, such as their name, and the date that the content was created on.
 
 Throughout our application, we are currently rendering this information with a `<p>` tag:
 
@@ -15,13 +17,21 @@ Throughout our application, we are currently rendering this information with a `
         </p>
 ```
 
-Our `AuthorInfo` component will replace this `<p>` tag, with a more refined layout and styling. This makes it a bit easier to display information about an author in a visually consistent manner. 
+Our `AuthorInfo` component will replace this `<p>` tag, with a more refined layout and styling. This will make it easier to display information about an author in a visually consistent manner across the app. 
 
-Both `hoots` and `comments` will be able to make use of the `AuthorInfo` component. As a result, `AuthorInfo` is built to receive a generic `content` prop, so as not to mislabel either of the resources. 
+Both `hoots` and `comments` will be able to make use of the `AuthorInfo` component. As a result, `AuthorInfo` is built to receive a generic `content` prop, so as not to mislabel either of these resources. 
 
-The component will also display the date on which the resource was created, and a `ProfileIcon` representing the author.
+The `AuthorInfo` component will also display the `createdAt` property of a resource, and a `ProfileIcon` image representing the author.
+
+Take a look at the component hierarchy diagram below for context on how `AuthorInfo` fit into our component tree:
+
+![Component hierarchy diagram](./assets/author-info.png)
+
+> 💡 In `src/components/HootList/HootList.jsx`, an instance of `AuthorInfo` will be produced for each `hoot` as we `map()` over the `hoots` array. The same will apply to the `hoot.comments` rendered inside of `src/components/HootDetails/HootDetails.jsx`. A stand-alone instance of `AuthorInfo` will also be rendered at the top of `src/components/HootDetails/HootDetails.jsx`, alongside details of a single `hoot`.
 
 ## Build the component
+
+Let's build the component!
 
 Run the following commands in your terminal:
 
@@ -112,7 +122,7 @@ const AuthorInfo = ({ content }) => {
 export default AuthorInfo;
 ```
 
-> 💡 Because our application does not include photo upload, we'll make use of a generic `ProfileIcon` SVG.
+> 💡 Because our application does not include photo upload, we'll make use of a generic `ProfileIcon` SVG in place of a profile picture.
 
 ## Apply the metadata component
 
@@ -186,7 +196,7 @@ And replace this tag with the `<AuthorInfo />` component, passing down `content=
       </header>
 ```
 
-Notice how we are labelling `hoot` as `content` when passing props to `<AuthorInfo>`. We do this because we'll be reusing `<AuthorInfo>` for our comments as well. Thankfully, the shape of a `hoot` and a `comment` are similar enough that we don't need to adjust any code inside `src/components/AuthorInfo/AuthorInfo.jsx`. By mapping `hoot` and a `comment` to a generic `content` prop, we avoid misrepresenting the data type or source being used in the component.
+Notice how we are labelling `hoot` as `content` when passing props to `<AuthorInfo>`. We do this because we'll be reusing `<AuthorInfo>` for our comments as well. Thankfully, the shape of a `hoot` and a `comment` are similar enough that we don't need to adjust any code inside `src/components/AuthorInfo/AuthorInfo.jsx`. By mapping `hoot` and a `comment` to a generic `content` prop, we avoid misrepresenting the data type or data source being used in the component.
 
 Next, we can add the `<AuthorInfo />` component to our list of comments, replacing the existing `<p>` tag.
 
