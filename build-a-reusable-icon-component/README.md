@@ -1,4 +1,4 @@
-# ![React Hoot - Building a Reusable Icon Component](./assets/hero.png)
+# ![React - Hoot Front-End - Build a Reusable Icon Component](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able to build a reusable icon component.
 
@@ -11,6 +11,9 @@ If you take a look at the `src/assets` directory, you'll notice quite a few icon
 Instead of importing the asset and building out a new `img` tag, we can just provide the `Icon` component with a `category` prop. The `category` prop is just a string. The component uses that `category` string to access an `svg` value stored in the `icons` object, and renders the target `svg` as an image.
 
 Additionally, we'll be able to use the `Icon` component for UI elements, like 'Delete' buttons and 'Edit' links.
+
+tktk
+![Component hierarchy diagram](./assets/icon-chd.png)
 
 ## Build the component
 

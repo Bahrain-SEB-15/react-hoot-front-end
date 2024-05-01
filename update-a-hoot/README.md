@@ -1,4 +1,4 @@
-# ![React Hoot - Updating Hoots](./assets/hero.png)
+# ![React - Hoot Front-End - Update a Hoot](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able to implement the functionality for updating a hoot.
 
@@ -169,11 +169,9 @@ Once again, we are relying on the `hootId` to determine the behavior of our comp
 
 Submit the edit form and confirm that the necessary data is being passed up the component tree.
 
-## Add `update` functionality
+## Build the service function
 
 The following code should mirror much of the functionaltiy you've seen elsewhere in this lesson. Our `update` service function will depart slightly from `create`, in that it issues a `PUT` request and requires `two` parameters. The first parameter will be used to identify the hoot, and the second parameter contains the information that the hoot will be updated with. Additionally, modifying `hoots` state with the updated hoot will be a bit more involved than what you saw with `handleAddHoot`. 
-
-### Build the service function
 
 Time to add the `update` service function:
 
@@ -196,7 +194,7 @@ async function update(hootId, hootFormData) {
 };
 ```
 
-### Call upon the service
+## Call upon the service
 
 And next we'll update `handleUpdateHoot` with our service and set state accordingly.
 

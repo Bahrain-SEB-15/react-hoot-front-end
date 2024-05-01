@@ -1,4 +1,4 @@
-# ![React Hoot - Style the Form Components](./assets/hero.png)
+# ![React - Hoot Front-End - Style the Form Components](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able to style form components with CSS modules.
 

@@ -1,4 +1,4 @@
-# ![React Hoot - Style the HootList Component](./assets/hero.png)
+# ![React - Hoot Front-End - Style the HootList Component](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able to style a list component with CSS modules.
 

@@ -1,4 +1,4 @@
-# ![React Hoot - Setup](./assets/hero.png)
+# ![React - Hoot Front-End - Setup](./assets/hero.png)
 
 ## Setup
 

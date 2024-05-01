@@ -1,4 +1,4 @@
-# ![React Hoot - Adding CSS Modules](./assets/hero.png)
+# ![React - Hoot Front-End - Add CSS Modules](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able to style an application with CSS modules.
 
@@ -34,25 +34,19 @@ Once imported, a specific class can be applied to an element like so:
 
 ## Visual assets
 
-tktk Hunter / tktk David / tktk Lauren how do we want to handle the icons? google drive?
+tktk Hunter / David / Lauren how do we want to handle the icons? google drive?
 
 Next we'll add some visual assets to the app. These assets include a logo, decorative background images, and iconography for UI elements.
 
 The assets can be found in this [Google Drive folder](https://drive.google.com/drive/folders/1BFiJPdr0nUEiKMPnBuryyE7NDRqNj4rM?usp=drive_link).
 
-Once you open Google Drive, click on the following arrow:
+Once you open Google Drive, open up the drop down arrow next to the name of the drive and click on the 'Download' button:
 
-![tktk Hunter]()
-
-Next, click the 'Download' button:
-
-![tktk Hunter]()
+![Google drive download](./assets/google-drive.png)
 
 The contents will be saved to your machine as a `.zip` file. Locate this file and extract its contents. On a Mac and Windows, this can be done by double clicking the file. Doing so should produce a new folder in the same directory as the `.zip` file.
 
 Open up the new folder and drag its contents into the `src/assets` directory of your `react-hoot` application.
-
-![tktk Hunter]()
 
 From here on out, we'll be able to utilize these visuals throughout our app.
 

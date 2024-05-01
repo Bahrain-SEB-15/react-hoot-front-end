@@ -1,4 +1,4 @@
-# ![React Hoot - References](./assets/hero.png)
+# ![React - Hoot Front-End - References](./assets/hero.png)
 
 ## Lesson references
 

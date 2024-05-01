@@ -1,4 +1,4 @@
-# ![React Hoot - Building a Loading Screen](./assets/hero.png)
+# ![React - Hoot Front-End - Build a Loading Screen](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able create a reusable loading screen component.
 
