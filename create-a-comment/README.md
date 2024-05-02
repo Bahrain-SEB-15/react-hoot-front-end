@@ -118,7 +118,7 @@ Confirm you are passing `formData` up to `src/components/HootDetails/HootDetails
 
 ## Build the service function
 
-Time to build out the service function. Despite being another resouce, our comment service functions will live inside `src/services/hootService.js`. This is because all of the endpoints for comments will share the same `BASE_URL` as hoots (`'/hoots'`). We'll append more specific endpoints to each comment service function as necessary.
+Time to build out the service function. Despite being another resource, our comment service functions will live inside `src/services/hootService.js`. This is because all of the endpoints for comments will share the same `BASE_URL` as hoots (`'/hoots'`). We'll append more specific endpoints to each comment service function as necessary.
 
 Add the following to `src/services/hootService.js`:
 
@@ -138,6 +138,14 @@ const createComment = async (hootId, commentFormData) => {
   } catch (error) {
     console.log(error)
   }
+}
+
+export { 
+  index,
+  show,
+  create,
+  // Don't forget to export: 
+  createComment
 }
 ```
 

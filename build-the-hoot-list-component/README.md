@@ -18,10 +18,11 @@ The data held in `hoots` state will originate in our backend. Retrieving that da
 
 Let's get started!
 
-Run the following command in your terminal:
+Run the following commands in your terminal:
 
 ```bash
-touch src/components/HootList.jsx
+mkdir src/components/HootList
+touch src/components/HootList/HootList.jsx
 ```
 
 Let’s add some basic JSX scaffolding to the component. We'll include the component name in our `return` to help us verify that our navigation is working correctly in the next steps.
@@ -51,7 +52,7 @@ Your authenticated `user` links should look like the following:
           <li><Link to='/'>HOME</Link></li>
           <li><Link to='/hoots'>HOOTS</Link></li>
 
-          <li><Link to='' onClick={handleLogout}>LOG OUT</Link></li>
+          <li><Link to='' onClick={handleSignout}>SIGN OUT</Link></li>
         </ul>
 ```
 
@@ -245,10 +246,10 @@ Within `src/components/HootList.jsx`, verify that `hoots` is accessible through 
 
 The next step is to `map()` over `props.hoots`. At this stage, we'll use the `Array.prototype.map()` method to produce an array of `<p>` tags before replacing these with a proper 'card' UI element.
 
-Add the following to `src/components/HootList.jsx`:
+Add the following to `src/components/HootList/HootList.jsx`:
 
 ```jsx
-// src/components/HootList.jsx
+// src/components/HootList/HootList.jsx
 const HootList = (props) => {
   return (
     <main>
