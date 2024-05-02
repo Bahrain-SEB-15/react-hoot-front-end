@@ -34,8 +34,6 @@ Once imported, a specific class can be applied to an element like so:
 
 ## Visual assets
 
-tktk Hunter / David / Lauren how do we want to handle the icons? google drive?
-
 Next we'll add some visual assets to the app. These assets include a logo, decorative background images, and iconography for UI elements.
 
 The assets can be found in this [Google Drive folder](https://drive.google.com/drive/folders/1BFiJPdr0nUEiKMPnBuryyE7NDRqNj4rM?usp=drive_link).
