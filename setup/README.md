@@ -15,7 +15,7 @@ This lecture uses the [React JWT Auth Template](https://git.generalassemb.ly/mod
 Navigate to the [React JWT Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-session-auth-template) and clone the repository to your machine:
 
 ```bash
-git clone git@git.generalassemb.ly:modular-curriculum-all-courses/react-jwt-auth-template.git
+git clone https://git.generalassemb.ly/modular-curriculum-all-courses/react-jwt-auth-template.git
 ```
 
 Once we have the repository on our machines, we can change the name of the directory to `'react-hoot'`:
@@ -73,19 +73,11 @@ Next, you will want to install all of the packages listed in `package.json`
 npm i
 ```
 
-## Create your .gitignore
+## Update your .gitignore
 
-Run the following command in your terminal:
-
-```bash
-touch .gitignore
-```
-
-Once these files are created, add `.env`, `package-lock.json`, and `node_modules` to your `.gitignore` file.  Doing so will prevent those files and directories from being tracked and we can be confident that any data we add there will not be pushed up to GitHub.
+Add `package-lock.json` to your `.gitignore` file.  
 
 ```text
-.env
-node_modules
 package-lock.json
 ```
 
