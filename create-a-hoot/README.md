@@ -125,11 +125,18 @@ To make our form fully functional, we'll need to circle back to `src/App.jsx`. H
 
 First let's import the `useNavigate()` hook from `react-router-dom`. This will allow us to redirect a user back to the hoot list page after submitting a new hoot.
 
-Add the following import to the top of `src/App.jsx`:
+Import `useNavigate` at the top of `src/App.jsx`:
 
 ```jsx
 // src/App.jsx
 import { Routes, Route, useNavigate } from 'react-router-dom';
+```
+
+While we're here, let's also import `HootForm`: 
+
+```jsx
+// src/App.jsx
+import HootForm from './components/HootForm/HootForm';
 ```
 
 Next, create a new instance of the `useNavigate()` hook within the component function:
@@ -151,7 +158,7 @@ Add the following function:
 
 At this point, we'll just confirm that the `hootFormData` is being passed to the function, and that `useNavigate()` is functioning correctly.
 
-With the function in place, update your protected routes with the following:
+With the function in place, update your protected routes by adding the following:
 
 ```jsx
               <Route

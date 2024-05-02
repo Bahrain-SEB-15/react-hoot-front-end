@@ -18,9 +18,10 @@ Our details component will differ from `src/components/HootList/HootList.jsx`, i
 
 Let's build out the scaffolding for our component.
 
-Run the following command in your terminal:
+Run the following commands in your terminal:
 
 ```bash
+mkdir src/components/HootDetails
 touch src/components/HootDetails/HootDetails.jsx
 ```
 
@@ -115,6 +116,7 @@ const show = async (hootId) => {
 
 export { 
   index,
+  // Don't forget to export: 
   show,
 }
 ```
@@ -129,7 +131,7 @@ We'll need a few imports in `src/components/HootDetails/HootDetails.jsx` to proc
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import * as hootService from '../../services/hootService';
 ```
 

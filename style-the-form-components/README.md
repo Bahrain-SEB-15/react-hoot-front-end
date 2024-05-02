@@ -7,7 +7,7 @@
 Run the following command in your terminal:
 
 ```bash
-touch src/components/HootForm/HootForm.module.css`
+touch src/components/HootForm/HootForm.module.css
 ```
 
 Add the following to `src/components/HootForm/HootForm.module.css`:

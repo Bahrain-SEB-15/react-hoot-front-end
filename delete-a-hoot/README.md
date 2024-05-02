@@ -33,7 +33,7 @@ import { AuthedUserContext } from '../../App';
 import { useState, useEffect, useContext } from 'react';
 ```
 
-Within the component function, create the follow `user` constant:
+Within the component function, create the following `user` constant:
 
 ```jsx
 // // src/components/HootDetails/HootDetails.jsx
@@ -64,7 +64,7 @@ Add the following to `src/components/HootDetails/HootDetails.jsx`:
         // Add the following:
         {hoot.author._id === user._id && (
           <>
-            <button onClick={() => props.handleDeleteHoot(hootId)}>
+            <button>
               Delete
             </button>
           </>
@@ -96,7 +96,7 @@ Next, pass `handleDeleteHoot` down to `<HootDetails>`:
               />
 ```
 
-Back in `src/components/HootDetails/HootDetails.jsx`, we can now update the delete button that we added in the previous section. We'll need to update the `onClick` event handler so that it calls upon `props.handleDeleteHoot(hootId)`.
+Back in `src/components/HootDetails/HootDetails.jsx`, we can now update the delete button that we added in the previous section. We'll add an `onClick` event handler that calls upon `props.handleDeleteHoot(hootId)`.
 
 Update your code as shown below:
 
@@ -157,6 +157,7 @@ export {
   show,
   create,
   createComment,
+  // Add export:
   deleteHoot,
 };
 ```

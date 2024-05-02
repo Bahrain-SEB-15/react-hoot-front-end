@@ -66,7 +66,6 @@ Head over to `src/components/HootForm/HootForm.jsx` and import `useParams` from 
 ```jsx
 // src/components/HootForm/HootForm.jsx
 import { useParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
 ```
 
 Within the component, call upon `useParams()` to access the `hootId`:
@@ -121,9 +120,7 @@ Take a moment to confirm that the initial state of `formData` is being set corre
 
 ## Build the `handleUpdateHoot` function
 
-Next we'll add the `handleUpdateHoot` function
-
-In app.jsx, create handleupdatehoot(hootId, formData) function in `src/App.jsx`:
+Next we'll add the `handleUpdateHoot` function in `src/App.jsx`
 
 ```jsx
 // src/App.jsx
@@ -171,7 +168,7 @@ Submit the edit form and confirm that the necessary data is being passed up the 
 
 ## Build the service function
 
-The following code should mirror much of the functionaltiy you've seen elsewhere in this lesson. Our `update` service function will depart slightly from `create`, in that it issues a `PUT` request and requires `two` parameters. The first parameter will be used to identify the hoot, and the second parameter contains the information that the hoot will be updated with. Additionally, modifying `hoots` state with the updated hoot will be a bit more involved than what you saw with `handleAddHoot`. 
+The following code should mirror much of the functionality you've seen elsewhere in this lesson. Our `update` service function will depart slightly from `create`, in that it issues a `PUT` request and requires `two` parameters. The first parameter will be used to identify the hoot, and the second parameter contains the information that the hoot will be updated with. Additionally, modifying `hoots` state with the updated hoot will be a bit more involved than what you saw with `handleAddHoot`. 
 
 Time to add the `update` service function:
 
@@ -185,18 +182,28 @@ async function update(hootId, hootFormData) {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(hootFormData);
+      body: JSON.stringify(hootFormData)
     });
     return res.json();
   } catch (error) {
     console.log(error);
   }
-};
+}
+
+export { 
+  index,
+  show,
+  create,
+  createComment,
+  deleteHoot,
+  // As always, remember to export:
+  update
+}
 ```
 
 ## Call upon the service
 
-And next we'll update `handleUpdateHoot` with our service and set state accordingly.
+Next we'll update `handleUpdateHoot` with our service and set state accordingly.
 
 Add the following to `src/App.jsx`:
 

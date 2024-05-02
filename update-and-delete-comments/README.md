@@ -138,7 +138,7 @@ Take a look at the diagram below for context on how the update comment `CommentF
 
 ### 🎓 You Do: Add the 'Edit' `<Link>` for comments
 
-As always, start out of the UI element. 
+As always, start out with the UI element. 
 
 In `src/components/HootDetails/HootDetails.jsx`, add an 'Edit' `<Link>` that directs a user to the 'Edit Comment' page. The `<Link>` should be placed directly above the 'Delete' comment `<button>`.
 

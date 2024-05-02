@@ -10,7 +10,7 @@ Let's add some styling to our SignupForm!
 
 Signup and Signin Forms pose an interesting design challenge. Generally, the elements of these forms are arranged in a narrow column, which is great for mobile devices, but can result in a lot of unused space on desktop screens. 
 
-To address this, we'll modify our desktop layout by incorporating a large graphic alongside our Signup and Signin Forms. This will help us utilize the horizontal space more effectively. To maintain a clean and functional design on mobile devices, we'll employ media queries to hide the graphic on smaller screens. This will ennsure that our forms are visually appealing and space-efficient across different devices.
+To address this, we'll modify our desktop layout by incorporating a large graphic alongside our Signup and Signin Forms. This will help us utilize the horizontal space more effectively. To maintain a clean and functional design on mobile devices, we'll employ media queries to hide the graphic on smaller screens. This will ensure that our forms are visually appealing and space-efficient across different devices.
 
 ### Refactor `src/components/SignupForm/SignupForm.jsx`
 
