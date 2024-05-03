@@ -36,15 +36,18 @@ Once imported, a specific class can be applied to an element like so:
 
 Next we'll add some visual assets to the app. These assets include a logo, decorative background images, and iconography for UI elements.
 
-The assets can be found in this [Google Drive folder](https://drive.google.com/drive/folders/1BFiJPdr0nUEiKMPnBuryyE7NDRqNj4rM?usp=drive_link).
+The assets can be found in [React Hoot Front-end Assets](https://git.generalassemb.ly/modular-curriculum-all-courses/react-hoot-front-end-assets).
 
-Once you open Google Drive, open up the drop down arrow next to the name of the drive and click on the 'Download' button:
+To add these to your project, first **make sure you are in your project’s root directory**.
 
-![Google drive download](./assets/google-drive.png)
+> 🚨 Check your terminal and make sure you are in your project’s root directory before running the following command!
 
-The contents will be saved to your machine as a `.zip` file. Locate this file and extract its contents. On a Mac and Windows, this can be done by double clicking the file. Doing so should produce a new folder in the same directory as the `.zip` file.
+Next, run the following command in your terminal:
 
-Open up the new folder and drag its contents into the `src/assets` directory of your `react-hoot` application.
+```bash
+git clone https://git.generalassemb.ly/modular-curriculum-all-courses/react-hoot-front-end-assets.git ./src/assets/images
+rm -rf ./src/assets/images/.git
+```
 
 From here on out, we'll be able to utilize these visuals throughout our app.
 
@@ -240,7 +243,7 @@ Add the following import to `src/components/NavBar/NavBar.jsx`:
 
 ```jsx
 // src/components/NavBar/NavBar.jsx
-import Logo from '../../assets/logo.svg';
+import Logo from '../../assets/images/logo.svg';
 ```
 
 And finally, add the following `<Link>` and `<img>` tag right below the opening of the `<nav>`:

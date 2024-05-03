@@ -233,8 +233,8 @@ Now add the following to `src/components/Landing/Landing.jsx`:
 ```jsx
 // src/components/Landing/Landing.jsx
 import styles from './Landing.module.css';
-import Stars from '../../assets/stars.svg';
-import Logotype from '../../assets/logotype.svg';
+import Stars from '../../assets/images/stars.svg';
+import Logotype from '../../assets/images/logotype.svg';
 
 const Landing = () => {
   return (

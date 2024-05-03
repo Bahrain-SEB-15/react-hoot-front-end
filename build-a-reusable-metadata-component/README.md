@@ -101,7 +101,7 @@ Add the following to `src/components/AuthorInfo/AuthorInfo.jsx`:
 ```jsx
 // src/components/AuthorInfo/AuthorInfo.jsx
 import styles from './AuthorInfo.module.css'
-import ProfileIcon from '../../assets/profile.png';
+import ProfileIcon from '../../assets/images/profile.png';
 import Icon from '../Icon/Icon'
 
 const AuthorInfo = ({ content }) => {
