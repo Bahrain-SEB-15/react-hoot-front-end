@@ -49,7 +49,7 @@ git clone https://git.generalassemb.ly/modular-curriculum-all-courses/react-hoot
 rm -rf ./src/assets/images/.git
 ```
 
-From here on out, we'll be able to utilize these visuals throughout our app.
+Now if you look at `src/assets`, you should see a new `images` directory. From here on out, we'll be able to utilize these images throughout our app.
 
 > 💡 You might notice that many of these are `.svg` files. This format works quite well for web applications, as these images are fully scaleable, meaning resizing them will not impact resolution.
 
