@@ -44,4 +44,4 @@ This module requires an existing Express API with JWT Authentication set up.
 
 This module also uses an existing template equip with forms for JWT authentication in a React application.
 
-🟢 [REact JWT Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/react-jwt-auth-template)
+🟢 [React JWT Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/react-jwt-auth-template)
