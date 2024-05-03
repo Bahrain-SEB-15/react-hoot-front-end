@@ -68,7 +68,7 @@ At the top of `src/components/SignupForm/SignupForm.jsx`, import the `SignupIcon
 
 ```jsx
 // src/components/SignupForm/SignupForm.jsx
-import SignupIcon from '../../assets/signup.svg';
+import SignupIcon from '../../assets/images/signup.svg';
 ```
 
 Next, add the following `<section>` and `<img>` tag. The `<section>` should be placed inside `<main>`, **directly above** the `<section>` containing the `<form>`:
@@ -247,7 +247,7 @@ Next, import the `LoginIcon` SVG file:
 
 ```jsx
 // src/components/SigninForm/SigninForm.jsx
-import LoginIcon from '../../assets/login.svg';
+import LoginIcon from '../../assets/images/login.svg';
 ```
 
 And add the following `<section>` and `<img>`:

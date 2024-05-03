@@ -101,7 +101,7 @@ Add the following to `src/components/AuthorInfo/AuthorInfo.jsx`:
 ```jsx
 // src/components/AuthorInfo/AuthorInfo.jsx
 import styles from './AuthorInfo.module.css'
-import ProfileIcon from '../../assets/profile.png';
+import ProfileIcon from '../../assets/images/profile.png';
 import Icon from '../Icon/Icon'
 
 const AuthorInfo = ({ content }) => {
@@ -138,8 +138,7 @@ In `src/components/HootList/HootList.jsx`, locate the following `<p>` tag:
 // src/components/HootList/HootList.jsx
 
               <p>
-                {hoot.author.username}
-                posted on
+                {hoot.author.username} posted on{' '}
                 {new Date(hoot.createdAt).toLocaleDateString()}
               </p>
 

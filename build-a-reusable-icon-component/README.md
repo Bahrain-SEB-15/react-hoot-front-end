@@ -6,13 +6,12 @@
 
 In this lesson, we'll build a reusable icon component. This component should make it easier to access SVG assets across components in our app.
 
-If you take a look at the `src/assets` directory, you'll notice quite a few icons. Most of these will actually be used to visually indicate the `category` of a hoot on the list page. Conditionally rendering each icon based on the value of `hoot.category` would be cumbersome. Thankfully, our `Icon` component will streamline this process.
+If you take a look at the `src/assets/images` directory, you'll notice quite a few icons. Most of these will actually be used to visually indicate the `category` of a hoot on the list page. Conditionally rendering each icon based on the value of `hoot.category` would be cumbersome. Thankfully, our `Icon` component will streamline this process.
 
 Instead of importing the asset and building out a new `img` tag, we can just provide the `Icon` component with a `category` prop. The `category` prop is just a string. The component uses that `category` string to access an `svg` value stored in the `icons` object, and renders the target `svg` as an image.
 
 Additionally, we'll be able to use the `Icon` component for UI elements, like 'Delete' buttons and 'Edit' links.
 
-tktk
 ![Component hierarchy diagram](./assets/icon-chd.png)
 
 ## Build the component
@@ -28,20 +27,20 @@ Add the following to `src/components/Icon/Icon.jsx`:
 
 ```jsx
 // src/components/Icon/Icon.jsx
-import Add from '../../assets/add.svg';
-import Edit from '../../assets/edit.svg';
-import News from '../../assets/news.svg';
-import Like from '../../assets/like.svg';
-import Liked from '../../assets/liked.svg';
-import Music from '../../assets/music.svg';
-import Games from '../../assets/games.svg';
-import Trash from '../../assets/trash.svg';
-import Movies from '../../assets/movies.svg';
-import Sports from '../../assets/sports.svg';
-import Create from '../../assets/create.svg';
-import Comments from '../../assets/comments.svg';
-import Calendar from '../../assets/calendar.svg';
-import Televison from '../../assets/television.svg';
+import Add from '../../assets/images/add.svg';
+import Edit from '../../assets/images/edit.svg';
+import News from '../../assets/images/news.svg';
+import Like from '../../assets/images/like.svg';
+import Liked from '../../assets/images/liked.svg';
+import Music from '../../assets/images/music.svg';
+import Games from '../../assets/images/games.svg';
+import Trash from '../../assets/images/trash.svg';
+import Movies from '../../assets/images/movies.svg';
+import Sports from '../../assets/images/sports.svg';
+import Create from '../../assets/images/create.svg';
+import Comments from '../../assets/images/comments.svg';
+import Calendar from '../../assets/images/calendar.svg';
+import Televison from '../../assets/images/television.svg';
 
 const Icon = ({ category }) => {
   const icons = {

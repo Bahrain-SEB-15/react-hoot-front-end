@@ -55,7 +55,7 @@ Add the following to `src/components/Loading/Loading.jsx`:
 ```jsx
 // src/components/Loading/Loading.jsx
 import styles from './Loading.module.css'
-import LoadingIcon from '../../assets/loading.svg'
+import LoadingIcon from '../../assets/images/loading.svg';
 
 const Loading = () => {
   return (
