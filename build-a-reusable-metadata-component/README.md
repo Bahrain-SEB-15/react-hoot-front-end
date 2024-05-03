@@ -138,8 +138,7 @@ In `src/components/HootList/HootList.jsx`, locate the following `<p>` tag:
 // src/components/HootList/HootList.jsx
 
               <p>
-                {hoot.author.username}
-                posted on
+                {hoot.author.username} posted on{' '}
                 {new Date(hoot.createdAt).toLocaleDateString()}
               </p>
 
