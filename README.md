@@ -45,6 +45,20 @@ In this module, students will build the user interface for "Hoot," a modern full
 
 📖 [Reference Materials](./references/README.md)
 
+## Starter code
+
+This module requires an existing Express API with JWT Authentication set up.
+
+🟢 [Express API starter code](https://git.generalassemb.ly/modular-curriculum-all-courses/express-api-hoot-back-end-solution)
+
+This module also uses an existing template equip with forms for JWT authentication in a React application.
+
+🟢 [REact JWT Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/react-jwt-auth-template)
+
+## Solution code
+
+🏁 [Solution code](https://git.generalassemb.ly/modular-curriculum-all-courses/react-hoot-front-end-solution)
+
 ## Internal resources
 
 ✏️ [Instructor Guide](./internal-resources/instructor-guide.md)
