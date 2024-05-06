@@ -65,6 +65,7 @@ Import the `styles` object at the top of `src/components/HootForm/HootForm.jsx`:
 
 ```jsx
 // src/components/HootForm/HootForm.jsx
+
 import styles from './HootForm.module.css'
 ```
 
@@ -72,7 +73,8 @@ And apply `styles.container` to the `className` of the outermost element (`<main
 
 ```jsx
 // src/components/HootForm/HootForm.jsx
-    <main className={styles.container}>
+
+<main className={styles.container}>
 ```
 
 Check out `src/components/HootForm/HootForm.jsx` component in your browser!
@@ -97,6 +99,7 @@ Add the following to `src/components/CommentForm/CommentForm.module.css`:
 
 ```css
 /* src/components/CommentForm/CommentForm.module.css */
+
 .container {
   height: 100%;
   display: flex;
@@ -129,6 +132,7 @@ Add the following import to the top of `src/components/CommentForm/CommentForm.j
 
 ```jsx
 // src/components/CommentForm/CommentForm.jsx
+
 import styles from './CommentForm.module.css';
 ```
 
@@ -139,28 +143,28 @@ Add the following above the existing return statement in `src/components/Comment
 ```jsx
 // src/components/CommentForm/CommentForm.jsx
 
-  // New code:
-  if (hootId && commentId) return (
-    <main className={styles.container}>
-      <form onSubmit={handleSubmit}>
-        <h1>Edit Comment</h1>
-        <label htmlFor="text-input">Your comment:</label>
-        <textarea
-          required
-          type="text"
-          name="text"
-          id="text-input"
-          value={formData.text}
-          onChange={handleChange}
-        />
-        <button type="submit">SUBMIT</button>
-      </form>
-    </main>
-  );
-
-  // Existing return:
-  return (
+// New code:
+if (hootId && commentId) return (
+  <main className={styles.container}>
     <form onSubmit={handleSubmit}>
+      <h1>Edit Comment</h1>
+      <label htmlFor="text-input">Your comment:</label>
+      <textarea
+        required
+        type="text"
+        name="text"
+        id="text-input"
+        value={formData.text}
+        onChange={handleChange}
+      />
+      <button type="submit">SUBMIT</button>
+    </form>
+  </main>
+);
+
+// Existing return:
+return (
+  <form onSubmit={handleSubmit}>
 ```
 
 > 🚨 Be sure to leave the existing return unchanged! This will still be used when the component is placed inside `src/components/HootForm/HootForm.jsx`.

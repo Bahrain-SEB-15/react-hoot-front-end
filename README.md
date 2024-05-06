@@ -4,6 +4,8 @@
 
 In this module, students will build the user interface for "Hoot," a modern full-stack blogging application using the **MERN** stack (MongoDB, Express.js, React.js, and Node.js). They will learn how to display and manage posts, create forms for posts and comments, and develop functionality for updating and deleting content. Students will also gain skills in applying CSS Modules for styling and building reusable components such as icons and metadata displays. By the end of this module, students will have crafted a visually appealing and interactive frontend for "Hoot," completing the second part of the full stack application development.
 
+![Landing](./assets/landing.png)
+
 ## Prerequisites
 
 - React State Management

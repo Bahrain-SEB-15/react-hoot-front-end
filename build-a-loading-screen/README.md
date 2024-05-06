@@ -22,6 +22,7 @@ Add the following to `src/components/Loading/Loading.module.css`:
 
 ```css
 /* src/components/Loading/Loading.module.css */
+
 .container {
   width: 100%;
   height: 100%;
@@ -54,6 +55,7 @@ Add the following to `src/components/Loading/Loading.jsx`:
 
 ```jsx
 // src/components/Loading/Loading.jsx
+
 import styles from './Loading.module.css'
 import LoadingIcon from '../../assets/images/loading.svg';
 
@@ -74,6 +76,7 @@ Add the following import to the top of `src/components/HootDetails/HootDetails.j
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
+
 import Loading from '../Loading/Loading';
 ```
 
@@ -84,12 +87,12 @@ Replace the existing `<main>` tag with the `<Loading />` component:
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-  // Replace 
-  if (!hoot) return <Loading />
+// Replace 
+if (!hoot) return <Loading />
 
-  return (
-    ...
-  );
+return (
+  ...
+);
 ```
 
 Navigate to the details page and refresh your browser. For a split second, you should see a loading image! 

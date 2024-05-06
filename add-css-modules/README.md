@@ -51,7 +51,7 @@ rm -rf ./src/assets/images/.git
 
 Now if you look at `src/assets`, you should see a new `images` directory. From here on out, we'll be able to utilize these images throughout our app.
 
-> 💡 You might notice that many of these are `.svg` files. This format works quite well for web applications, as these images are fully scaleable, meaning resizing them will not impact resolution.
+> 💡 You might notice that many of these are `.svg` files. This format works quite well for web applications, as these images are fully scalable, meaning resizing them will not impact resolution.
 
 ## Base styling
 
@@ -63,6 +63,7 @@ Once you have removed `src/App.css`, replace the existing contents of `src/index
 
 ```css
 /* src/index.css */
+
 * {
   box-sizing: border-box;
 }
@@ -176,6 +177,7 @@ Add the following to `src/components/NavBar/NavBar.module.css`:
 
 ```css
 /* src/components/NavBar/NavBar.module.css */
+
 .container {
   top: 0; 
   z-index: 1;
@@ -228,13 +230,14 @@ Add the following import to `src/components/NavBar/NavBar.jsx`:
 
 ```jsx
 // src/components/NavBar/NavBar.jsx
+
 import styles from './NavBar.module.css';
 ```
 
 And apply `styles.container` as a `className` to the outermost element (`<nav>`):
 
 ```jsx
-    <nav className={styles.container}>
+<nav className={styles.container}>
 ```
 
 Much better! Let's make one more change by adding a **logo** to our app. This SVG file is included in the visual assets we downloaded earlier.
@@ -243,6 +246,7 @@ Add the following import to `src/components/NavBar/NavBar.jsx`:
 
 ```jsx
 // src/components/NavBar/NavBar.jsx
+
 import Logo from '../../assets/images/logo.svg';
 ```
 
@@ -250,6 +254,7 @@ And finally, add the following `<Link>` and `<img>` tag right below the opening 
 
 ```jsx
 // src/components/NavBar/NavBar.jsx
-    <nav className={styles.container}>
-      <Link to='/'><img src={Logo} alt="A cute owl" /></Link>
+
+<nav className={styles.container}>
+  <Link to='/'><img src={Logo} alt="A cute owl" /></Link>
 ```

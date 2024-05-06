@@ -22,6 +22,7 @@ Add the following to `src/components/Landing/Landing.module.css`:
 
 ```css
 /* src/components/Landing/Landing.module.css */
+
 .container {
   display: flex;
   align-items: center;
@@ -54,9 +55,9 @@ Add the following to `src/components/Landing/Landing.module.css`:
 .about {
   height: 430px;
   background-color: white;
-  box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.15);
-  -moz-box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.15);
-  -webkit-box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.15);
+  box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.15);
 }
 
 .testimonial {
@@ -120,9 +121,9 @@ Add the following to `src/components/Landing/Landing.module.css`:
   background-color: #f2f5f7;
   padding: 12px 28px 14px 28px;
   border: 1px solid rgb(220, 220, 220);
-  box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.25);
-  -moz-box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.25);
-  -webkit-box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.25);
+  box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.25);
 }
 
 .container article header {
@@ -148,7 +149,7 @@ Add the following to `src/components/Landing/Landing.module.css`:
 
 .testimonial header p {
   margin: 0;
-  opacity: .4;
+  opacity: 0.4;
   font-size: 14px;
   font-weight: 400;
 }
@@ -168,7 +169,7 @@ Add the following to `src/components/Landing/Landing.module.css`:
   background: white;
   background: #131415;
   justify-content: center;
-  color:  rgb(220, 220, 220);
+  color: rgb(220, 220, 220);
   border-top: 1px solid rgb(220, 220, 220);
 }
 
@@ -176,7 +177,7 @@ Add the following to `src/components/Landing/Landing.module.css`:
   .testimonial {
     height: 680px;
   }
-} 
+}
 
 @media only screen and (max-width: 1024px) {
   .about {
@@ -185,7 +186,7 @@ Add the following to `src/components/Landing/Landing.module.css`:
   .testimonial {
     height: 580px;
   }
-} 
+}
 
 @media only screen and (max-width: 912px) {
   .about {
@@ -194,7 +195,7 @@ Add the following to `src/components/Landing/Landing.module.css`:
   .testimonial {
     height: 600px;
   }
-} 
+}
 
 @media only screen and (max-width: 540px) {
   .about {
@@ -203,7 +204,7 @@ Add the following to `src/components/Landing/Landing.module.css`:
   .testimonial {
     height: 700px;
   }
-} 
+}
 
 @media only screen and (max-width: 414px) {
   .about {
@@ -212,7 +213,7 @@ Add the following to `src/components/Landing/Landing.module.css`:
   .container section > img {
     min-width: 340px;
   }
-} 
+}
 
 @media only screen and (max-width: 300px) {
   .about {
@@ -221,7 +222,7 @@ Add the following to `src/components/Landing/Landing.module.css`:
   .container section > img {
     min-width: 340px;
   }
-} 
+}
 ```
 
 Most of this styling concerns sizing sizing different elements and sections correctly. We also have a handful of media queries that adjust the layout for given screen sizes.
@@ -232,6 +233,7 @@ Now add the following to `src/components/Landing/Landing.jsx`:
 
 ```jsx
 // src/components/Landing/Landing.jsx
+
 import styles from './Landing.module.css';
 import Stars from '../../assets/images/stars.svg';
 import Logotype from '../../assets/images/logotype.svg';
@@ -240,7 +242,6 @@ const Landing = () => {
   return (
     <>
       <main className={styles.container}>
-
         <section className={styles.splash}>
           <img src={Logotype} alt="A cute owl" />
         </section>
@@ -252,8 +253,16 @@ const Landing = () => {
           </header>
           <article>
             <p>
-              Not everyone is a morning person. That's why we're building Hoot, an open and inclusive place for night owls to share their ideas, thoughts, and knowledge with one another. We provide a platform for people to share ideas in the early hours of the morning when owl brains work best.
-              Hoot is a community of self-identifying owls like you, that wants to make sure you always have something interesting to say no matter what time of day it is. You no longer have to worry about your troubles keeping you up during the day. You can now blog about your favorite topics and connect with other owls at night. With Hoot, it's never too late to post.
+              Not everyone is a morning person. That's why we're building Hoot,
+              an open and inclusive place for night owls to share their ideas,
+              thoughts, and knowledge with one another. We provide a platform
+              for people to share ideas in the early hours of the morning when
+              owl brains work best. Hoot is a community of self-identifying owls
+              like you, that wants to make sure you always have something
+              interesting to say no matter what time of day it is. You no longer
+              have to worry about your troubles keeping you up during the day.
+              You can now blog about your favorite topics and connect with other
+              owls at night. With Hoot, it's never too late to post.
             </p>
           </article>
         </section>
@@ -269,7 +278,10 @@ const Landing = () => {
               <p>Software Engineer</p>
             </header>
             <p>
-              I found Hoot through a friend of mine, and I'm so glad I did. As a night owl, I have a hard time finding blogging apps that fit my lifestyle. The interface is so easy to use and makes it really convenient for me to write my blog posts at night.
+              I found Hoot through a friend of mine, and I'm so glad I did. As a
+              night owl, I have a hard time finding blogging apps that fit my
+              lifestyle. The interface is so easy to use and makes it really
+              convenient for me to write my blog posts at night.
             </p>
             <footer>
               <img src={Stars} alt="Four blue stars" />
@@ -279,7 +291,7 @@ const Landing = () => {
       </main>
 
       <footer className={styles.footer}>
-        © 2022 HOOT INC. OWL RIGHTS RESERVED
+        © 2024 HOOT INC. OWL RIGHTS RESERVED
       </footer>
     </>
   );
@@ -292,15 +304,16 @@ Take a look at the structure of our new landing page. Here we have three distinc
 
 Finally, let's make sure users can see this new landing page whether they are logged in or not. You might have noticed our application doesn't make use of the `<Dashboard />` component inherited from our auth template. Let's fix that now.
 
-In `src/App.jsx`, locate `<Route />` to the `<Dashboard />` component. 
+In `src/App.jsx`, locate `<Route />` to the `<Dashboard />` component.
 
 Replace `<Dashboard />` with the `<Landing />` component:
 
 ```jsx
 // src/App.jsx
-        <Routes>
-          {user ?
-          // Protected Routes:
-            <>
-              <Route path="/" element={<Landing />} />
+
+<Routes>
+  {user ?
+  // Protected Routes:
+    <>
+      <Route path="/" element={<Landing />} />
 ```
