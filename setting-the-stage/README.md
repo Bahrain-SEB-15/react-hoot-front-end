@@ -1,12 +1,12 @@
 # ![React - Hoot Front-End - Setting the Stage](./assets/hero.png)
 
-**Learning objective:** By the end of this lesson, students will be able to conceptualize the required features and high level architecture of this application.
+**Learning objective:** By the end of this lesson, students will be able to conceptualize the features and high level architecture of this application.
 
 ## What we're building - Hoot: Blogging for night owls
 
 ![Landing](./assets/landing.png)
 
-In this module, we are going to create a frontend blogging application using React and JWT Authentication. Pairing this frontend app with an Express API backend and MongoDB database will yield a complete MERN Stack application.
+In this module, we are going to create a frontend blogging application using React and JWT Authentication. Pairing this frontend app with an Express API backend and MongoDB database will yield a complete **MERN** Stack application.
 
 With JWT Authentication, users will be able to sign up, sign in, and logout of our application.
 
@@ -24,7 +24,7 @@ Take a look at the screenshots below for a sense of the core components that wil
 
 > 💡 Note, the screenshots above depict the application after completing all provided level ups.
 
-##  User stories
+## User stories
 
 Below are the user stories we will implement within Hoot:
 
@@ -37,11 +37,11 @@ Below are the user stories we will implement within Hoot:
 - As the author of a hoot, I should see a link to 'Edit' a hoot on the 'Details' page. Clicking on the link should direct me to an 'Edit' page where I can modify the hoot. Upon submitting the update, I should be redirected back the the 'Details' page.
 - As the author of a hoot, I should see a button to 'Delete' a hoot on the 'Details' page. Clicking on the button should delete the hoot, and redirect me back to the 'List' page.
 
-You might notice that the above user stories give us a good idea of what CRUD operations a user might want to perform in our app.  
+You might notice that the above user stories give us a good idea of what CRUD operations a user might want to perform in our app.
 
 ## Component hierarchy diagram
 
-After reviewing the user stories, our next step is to map out the component structure of our React app. For this, we'll utilize a **Component Hierarchy Diagram**. This visual tool will act as an outline of the tree structure in our client-side app. 
+After reviewing the user stories, our next step is to map out the component structure of our React app. For this, we'll utilize a **Component Hierarchy Diagram**. This visual tool will act as an outline of the tree structure in our client-side app.
 
 Below is the component hierarchy diagram for the MVP build of Hoot:
 

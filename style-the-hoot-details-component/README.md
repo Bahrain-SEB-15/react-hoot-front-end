@@ -14,6 +14,7 @@ And add the following to `src/components/HootDetails/HootDetails.module.css`:
 
 ```css
 /* Details and comments */
+
 .container {
   height: 100%;
   display: flex;
@@ -64,13 +65,14 @@ And add the following to `src/components/HootDetails/HootDetails.module.css`:
   margin: 7px 0px 14px 0px;
 }
 
-.container header button, .container header a {
+.container header button,
+.container header a {
   width: 30px;
   height: 30px;
 
   font-size: 14px;
   font-weight: 500;
-  
+
   background: none;
   border-radius: 50%;
   border: 1px solid var(--border);
@@ -86,17 +88,20 @@ And add the following to `src/components/HootDetails/HootDetails.module.css`:
 /* Button icon styling */
 /* This styling will be used when we add in our reusable icon component */
 
-.container header button img, .container header a img {
+.container header button img,
+.container header a img {
   width: 24px;
   height: 24px;
-  opacity: .25;
+  opacity: 0.25;
 }
 
-.container header button:hover, .container header a:hover {
+.container header button:hover,
+.container header a:hover {
   background-color: var(--border);
 }
 
-.container header button:hover img, .container header a:hover img {
+.container header button:hover img,
+.container header a:hover img {
   filter: invert(1);
   opacity: 1;
 }
@@ -119,7 +124,8 @@ And add the following to `src/components/HootDetails/HootDetails.module.css`:
   -webkit-box-shadow: none;
 }
 
-.container form input, .container form textarea { 
+.container form input,
+.container form textarea {
   width: 100%;
   padding: 14px;
   font-size: 14px;
@@ -170,6 +176,7 @@ Add the following import to the top of `src/components/HootDetails/HootDetails.j
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
+
 import styles from './HootDetails.module.css';
 ```
 
@@ -177,7 +184,8 @@ And add apply `styles.container` to the `className` of the outermost element(`<m
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
-    <main className={styles.container}>
+
+<main className={styles.container}>
 ```
 
 Next we'll need to make a small change to **authorship** and **interactive elements** of our hoot `<section>`.
@@ -188,58 +196,57 @@ Apply the following changes to `src/components/HootDetails/HootDetails.jsx`:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
-      <section>
-        <header>
-          <p>{hoot.category.toUpperCase()}</p>
-          <h1>{hoot.title}</h1>
 
-          // New div element:
-          <div>
-            <p>
-              {hoot.author.username} posted on{' '}
-              {new Date(hoot.createdAt).toLocaleDateString()}
-            </p>
-            {hoot.author._id === user._id && (
-              <>
-                <Link to={`/hoots/${hootId}/edit`}>Edit</Link>
-                <button onClick={() => props.handleDeleteHoot(hootId)}>
-                  Delete
-                </button>
-              </>
-            )}
-          </div>
+<section>
+  <header>
+    <p>{hoot.category.toUpperCase()}</p>
+    <h1>{hoot.title}</h1>
 
-        </header>
-        <p>{hoot.text}</p>
-      </section>
-      <section>
+    // New div element:
+    <div>
+      <p>
+        {hoot.author.username} posted on
+        {new Date(hoot.createdAt).toLocaleDateString()}
+      </p>
+      {hoot.author._id === user._id && (
+        <>
+          <Link to={`/hoots/${hootId}/edit`}>Edit</Link>
+          <button onClick={() => props.handleDeleteHoot(hootId)}>
+            Delete
+          </button>
+        </>
+      )}
+    </div>
+
+  </header>
+  <p>{hoot.text}</p>
+</section>
 ```
 
 And now do the same to the `<article>` tag in your comments section like so:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
-          <article key={comment._id}>
-            <header>
-              <div>
-                <p>
-                  {comment.author.username} posted on{' '}
-                  {new Date(comment.createdAt).toLocaleDateString()}
-                </p>
-                {comment.author._id === user._id && (
-                  <>
-                    <Link to={`/hoots/${hootId}/comments/${comment._id}/edit`}>
-                      Edit
-                    </Link>
-                    <button onClick={() => handleDeleteComment(comment._id)}>
-                      Delete
-                    </button>
-                  </>
-                )}
-              </div>
-            </header>
-            <p>{comment.text}</p>
-          </article>
+
+<article key={comment._id}>
+  <header>
+    <div>
+      <p>
+        {comment.author.username} posted on
+        {new Date(comment.createdAt).toLocaleDateString()}
+      </p>
+      {comment.author._id === user._id && (
+        <>
+          <Link to={`/hoots/${hootId}/comments/${comment._id}/edit`}>Edit</Link>
+          <button onClick={() => handleDeleteComment(comment._id)}>
+            Delete
+          </button>
+        </>
+      )}
+    </div>
+  </header>
+  <p>{comment.text}</p>
+</article>
 ```
 
 Take a look at the newly styled `src/components/HootDetails/HootDetails.jsx` in your browser.

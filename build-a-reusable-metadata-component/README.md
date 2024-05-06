@@ -11,15 +11,15 @@ The term 'metadata' refers to data that provides information about other data. I
 Throughout our application, we are currently rendering this information with a `<p>` tag:
 
 ```jsx
-        <p>
-          {hoot.author.username} posted on{' '}
-          {new Date(hoot.createdAt).toLocaleDateString()}
-        </p>
+<p>
+  {hoot.author.username} posted on
+  {new Date(hoot.createdAt).toLocaleDateString()}
+</p>
 ```
 
-Our `AuthorInfo` component will replace this `<p>` tag, with a more refined layout and styling. This will make it easier to display information about an author in a visually consistent manner across the app. 
+Our `AuthorInfo` component will replace this `<p>` tag, with a more refined layout and styling. This will make it easier to display information about an author in a visually consistent manner across the app.
 
-Both `hoots` and `comments` will be able to make use of the `AuthorInfo` component. As a result, `AuthorInfo` is built to receive a generic `content` prop, so as not to mislabel either of these resources. 
+Both `hoots` and `comments` will be able to make use of the `AuthorInfo` component. As a result, `AuthorInfo` is built to receive a generic `content` prop, so as not to mislabel either of these resources.
 
 The `AuthorInfo` component will also display the `createdAt` property of a resource, and a `ProfileIcon` image representing the author.
 
@@ -55,7 +55,7 @@ Add the following to `src/components/AuthorInfo/AuthorInfo.module.css`:
 }
 
 .container div {
-  margin: 0 !important; 
+  margin: 0 !important;
 }
 
 .container > img {
@@ -68,7 +68,7 @@ Add the following to `src/components/AuthorInfo/AuthorInfo.module.css`:
 }
 
 .container section > p {
-  opacity: .75;
+  opacity: 0.75;
   line-height: 1;
   font-size: 14px;
   font-weight: bold;
@@ -76,7 +76,7 @@ Add the following to `src/components/AuthorInfo/AuthorInfo.module.css`:
 }
 
 .container div p {
-  line-height: .8;
+  line-height: 0.8;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 1px;
@@ -88,7 +88,7 @@ Add the following to `src/components/AuthorInfo/AuthorInfo.module.css`:
 }
 
 .container section img {
-  opacity: .5;
+  opacity: 0.5;
   width: 14px;
   height: 14px;
   background: none;
@@ -100,9 +100,10 @@ Add the following to `src/components/AuthorInfo/AuthorInfo.jsx`:
 
 ```jsx
 // src/components/AuthorInfo/AuthorInfo.jsx
-import styles from './AuthorInfo.module.css'
+
+import styles from './AuthorInfo.module.css';
 import ProfileIcon from '../../assets/images/profile.png';
-import Icon from '../Icon/Icon'
+import Icon from '../Icon/Icon';
 
 const AuthorInfo = ({ content }) => {
   return (
@@ -137,13 +138,13 @@ In `src/components/HootList/HootList.jsx`, locate the following `<p>` tag:
 ```jsx
 // src/components/HootList/HootList.jsx
 
-              <p>
-                {hoot.author.username} posted on{' '}
-                {new Date(hoot.createdAt).toLocaleDateString()}
-              </p>
+<p>
+  {hoot.author.username} posted on
+  {new Date(hoot.createdAt).toLocaleDateString()}
+</p>
 
-            </header>
-            <p>{hoot.text}</p>
+</header>
+<p>{hoot.text}</p>
 ```
 
 Replace this tag with the `<AuthorInfo />` component, passing down `content={hoot}`:
@@ -151,15 +152,16 @@ Replace this tag with the `<AuthorInfo />` component, passing down `content={hoo
 ```jsx
 // src/components/HootList/HootList.jsx
 
-              <AuthorInfo content={hoot} />
-            </header>
-            <p>{hoot.text}</p>
+<AuthorInfo content={hoot} />
+</header>
+<p>{hoot.text}</p>
 ```
 
 Add the following import to `src/components/HootDetails/HootDetails.jsx`:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
+
 import AuthorInfo from '../../components/AuthorInfo/AuthorInfo';
 ```
 
@@ -167,32 +169,35 @@ Locate the existing `<p>` tag in `src/components/HootDetails/HootDetails.jsx`:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
-        <p>
-          {hoot.author.username} posted on{' '}
-          {new Date(hoot.createdAt).toLocaleDateString()}
-        </p>
+
+<p>
+  {hoot.author.username} posted on
+  {new Date(hoot.createdAt).toLocaleDateString()}
+</p>
 ```
 
 And replace this tag with the `<AuthorInfo />` component, passing down `content={hoot}`:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
-      <header>
-        <p>{hoot.category.toUpperCase()}</p>
-        <h1>{hoot.title}</h1>
 
-        <AuthorInfo content={hoot} />
+<header>
+  <p>{hoot.category.toUpperCase()}</p>
+  <h1>{hoot.title}</h1>
 
-        {hoot.author._id === user._id && (
-          <>
-            <Link to={`/hoots/${hootId}/edit`}>Edit</Link>
-            <button onClick={() => props.handleDeleteHoot(hootId)}>
-              Delete
-            </button>
-          </>
-        )}
+  <AuthorInfo content={hoot} />
 
-      </header>
+  {hoot.author._id === user._id && (
+    <>
+      <Link to={`/hoots/${hootId}/edit`}>
+        <Icon category="Edit" />
+      </Link>
+      <button onClick={() => props.handleDeleteHoot(hootId)}>
+        <Icon category="Trash" />
+      </button>
+    </>
+  )}
+</header>
 ```
 
 Notice how we are labelling `hoot` as `content` when passing props to `<AuthorInfo>`. We do this because we'll be reusing `<AuthorInfo>` for our comments as well. Thankfully, the shape of a `hoot` and a `comment` are similar enough that we don't need to adjust any code inside `src/components/AuthorInfo/AuthorInfo.jsx`. By mapping `hoot` and a `comment` to a generic `content` prop, we avoid misrepresenting the data type or data source being used in the component.
@@ -203,26 +208,28 @@ Update `src/components/HootDetails/HootDetails.jsx` as shown below:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
-        {hoot.comments.map((comment) => (
-          <article key={comment._id}>
-            <header>
 
-              <AuthorInfo content={comment} />
+{
+  hoot.comments.map((comment) => (
+    <article key={comment._id}>
+      <header>
+        <AuthorInfo content={comment} />
 
-              {comment.author._id === user._id && (
-                <>
-                  <button onClick={() => handleDeleteComment(comment._id)}>
-                    DELETE
-                  </button>
-                  <Link to={`/hoots/${hootId}/comments/${comment._id}/edit`}>
-                    EDIT
-                  </Link>
-                </>
-              )}
-            </header>
-            <p>{comment.text}</p>
-          </article>
-        ))}
+        {comment.author._id === user._id && (
+          <>
+            <Link to={`/hoots/${hootId}/comments/${comment._id}/edit`}>
+              <Icon category="Edit" />
+            </Link>
+            <button onClick={() => handleDeleteComment(comment._id)}>
+              <Icon category="Trash" />
+            </button>
+          </>
+        )}
+      </header>
+      <p>{comment.text}</p>
+    </article>
+  ));
+}
 ```
 
 Checkout the changes we made in your browser. You should now have a fully developed application.

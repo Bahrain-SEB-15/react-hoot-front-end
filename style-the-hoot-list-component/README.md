@@ -117,6 +117,7 @@ Add the following import to `src/components/HootList/HootList.jsx`:
 
 ```jsx
 // src/components/HootList/HootList.jsx
+
 import styles from './HootList.module.css'; // Import styles
 ```
 
@@ -124,7 +125,8 @@ And apply `styles.container` to the `className` of the outermost element (`<main
 
 ```jsx
 // src/components/HootList/HootList.jsx
-    <main className={styles.container}>
+
+<main className={styles.container}>
 ```
 
 And with that, you should now have a styled `src/components/HootList/HootList.jsx` component!
