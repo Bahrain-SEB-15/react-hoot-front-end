@@ -109,7 +109,7 @@ npm run dev
 
 ## Running the Express backend
 
-Before diving into our React app development, you'll need to ensure that the Express backend server is operational. This backend will handle requests from your React app. You will be using the back-end server you created in the [`Express API - Hoot Back-End`](https://git.generalassemb.ly/modular-curriculum-all-courses/express-api-hoot-back-end) lesson as the API for this lesson.
+Before diving into our React app development, you'll need to ensure that the Express backend server is operational. This backend will handle requests from your React app. You will be using the back-end server you created in the `Express API - Hoot Back-End` lesson as the API for this lesson.
 
 Follow these steps to set up the server:
 
