@@ -81,7 +81,7 @@ We can also confirm this visually by adding an `<h1>` and a **ternary** to our `
 ```jsx
 // src/components/HootForm/HootForm.jsx
 
-<main className={styles.container}>
+<main>
   <form onSubmit={handleSubmit}>
     <h1>{hootId ? 'Edit Hoot' : 'New Hoot'}</h1>
 ```
@@ -94,7 +94,7 @@ This example demonstrates how we can modify other elements and behaviors of the 
 
 The first modification we'll make to the functionality of the component relates to its initial state. If the user is updating a hoot, the inputs of our form should be prefilled with any existing hoot details. This will require calling upon the `hootService.show()` service within `src/components/HootForm/HootForm.jsx`.
 
-At the top of ``src/components/HootForm/HootForm.jsx`, add imports for `hootService` and `useEffect`:
+At the top of `src/components/HootForm/HootForm.jsx`, add imports for `hootService` and `useEffect`:
 
 ```jsx
 import { useState, useEffect } from 'react';
