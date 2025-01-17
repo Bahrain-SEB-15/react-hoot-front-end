@@ -112,7 +112,7 @@ In `src/components/HootDetails/HootDetails.jsx`, let’s update the delete butto
 
 > 🚨 Be sure to pass in `hootId` as an argument when you call the function.
 
-4. In your browser, try deleting a hoot. You should see that the `hootId` is being passed up the component tree.
+4. In your browser, try deleting a hoot. You should see a `console.log` originating from `App.jsx` confirming that the `hootId` is being passed up the component tree.
 
 5. With the `hootId` accessible in `handleDeleteHoot`, let's confirm that we can `filter()` state using this value:
 
