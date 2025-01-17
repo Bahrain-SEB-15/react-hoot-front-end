@@ -14,32 +14,36 @@ To create a hoot, we'll make a `POST` request to our server. When a request is m
 
 ## Scaffold the component
 
-First let's add a new link to our navigation bar. It should direct users to `/hoots/new`.
+1. First let's add a new link to our navigation bar. It should direct users to `/hoots/new`.
 
 Add the following to `src/components/NavBar/NavBar.jsx`:
 
 ```jsx
 // src/components/NavBar/NavBar.jsx
 
-<li>
-  <Link to="/hoots/new">NEW HOOT</Link>
-</li>
+{ user ? (
+  <ul>
+    <li><Link to='/'>HOME</Link></li>
+    <li><Link to='/hoots'>HOOTS</Link></li>
+    <li><Link to="/hoots/new">NEW HOOT</Link></li>
+    <li><Link to='' onClick={handleSignOut}>SIGN OUT</Link></li>
+  </ul>
+  ) : (
 ```
 
 > 🚨 Make sure you add this to the protected set of links!
 
+2. Next add your Route to `App.jsx`, we dont have a component to render yet, but that's ok.
+
 If you ever wish to test out your client-side routes _before_ creating the component, you can define the `<Route />` and render a simple element, like in the example below:
 
 ```jsx
-<Route
-  path="/hoots/new"
-  element={<h1>New Hoot</h1>/>}
-/>
+<Route path="/hoots/new" element={<h1>New Hoot</h1>} />
 ```
 
-> 💡 Notice how we are adopting [RESTful/Resourceful Routing Conventions](https://www.notion.so/RESTful-Resourceful-Routing-Conventions-a54d1ddc99ee4a0cbda331addc6d1f97?pvs=21) in our client side routes. This isn’t a requirement, but sticking to familiar conventions can be helpful when collaborating with other developers.
+> 💡 Notice how we are using [RESTful/Resourceful Routing Conventions](https://www.notion.so/RESTful-Resourceful-Routing-Conventions-a54d1ddc99ee4a0cbda331addc6d1f97?pvs=21) in our client side routes. This isn’t a requirement, but sticking to familiar conventions can be helpful when collaborating with other developers.
 
-Next, let's create the component.
+3. Next, let's create the component.
 
 Run the following commands in your terminal:
 
@@ -117,15 +121,33 @@ const HootForm = (props) => {
 export default HootForm;
 ```
 
-This component should be pretty similar to other forms you’ve seen in React, but let’s touch on one interesting detail. Take a look at the `<select>` tag. This is a good example of how you can handle select menus in React. Notice how we set the default value for this field in the initial state of `formData`. This varies a bit from other `input` fields in that we have a pre-defined `value` attribute on each `<option>` tag. If you are using an `enum` constraint in your `schema`, make sure these values match!
+This component is similar to other forms you’ve seen in React, but let’s take a closer look at the `<select>` tag:
+
+- The `<select>` element is used to handle dropdown menus in React. Its `value` is controlled by the `formData.category` state, meaning it updates automatically when the state changes.
+- Each `<option>` tag has a predefined `value` attribute (e.g., "News," "Games"). The initial value of the dropdown is set by the default `category` value in the `formData` state.
+- If your backend uses an `enum` constraint in the database schema for this field, ensure the `value` attributes on the `<option>` tags match the values defined in your schema. This consistency prevents errors when submitting the form.
 
 > ❓ Notice our `handleSubmit` function. Why do we need [e.preventDefault()](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault) when we submit a `<form>` in React? What default behavior are we preventing [here](https://react.dev/learn/responding-to-events#preventing-default-behavior)?
+
+5. Now that we have a component, let's import `HootForm` into `App.jsx`:
+
+```jsx
+// src/App.jsx
+
+import HootForm from "./components/HootForm/HootForm";
+```
+
+4. Update your route in `App.jsx` to render the new `HootForm` component.
+
+```jsx
+<Route path="/hoots/new" element={<HootForm />} />
+```
 
 Take a moment to verify that you can successfully change `formData` state. When you submit the form, you should only see a `console.log` of state, as we have not yet built out the logic to create a new hoot.
 
 ## Build the `handleAddHoot` function
 
-To make our form fully functional, we'll need to circle back to `src/App.jsx`. Here, we'll build out a `handleAddHoot` function.
+To make our form fully functional, we'll need to build out a `handleAddHoot` function.
 
 First let's import the `useNavigate()` hook from `react-router-dom`. This will allow us to redirect a user back to the hoot list page after submitting a new hoot.
 
@@ -134,15 +156,7 @@ Import `useNavigate` at the top of `src/App.jsx`:
 ```jsx
 // src/App.jsx
 
-import { Routes, Route, useNavigate } from "react-router-dom";
-```
-
-While we're here, let's also import `HootForm`:
-
-```jsx
-// src/App.jsx
-
-import HootForm from "./components/HootForm/HootForm";
+import { Routes, Route, useNavigate } from "react-router";
 ```
 
 Next, create a new instance of the `useNavigate()` hook within the component function:
@@ -166,13 +180,13 @@ const handleAddHoot = async (hootFormData) => {
 
 At this point, we'll just confirm that the `hootFormData` is being passed to the function, and that `useNavigate()` is functioning correctly.
 
-With the function in place, update your protected routes by adding the following:
+With the function in place, update your `Route` by adding the following:
 
 ```jsx
 <Route path="/hoots/new" element={<HootForm handleAddHoot={handleAddHoot} />} />
 ```
 
-Now that we are passing down `handleAddHoot` as props, we can finish building out the `handleSubmit` function in `src/components/HootForm/HootForm.jsx`:
+Now that we are passing down `handleAddHoot` as props, we can finish building out the `handleSubmit` function in `HootForm.jsx`:
 
 ```jsx
 // src/components/HootForm/HootForm.jsx
@@ -183,21 +197,21 @@ const handleSubmit = (evt) => {
 };
 ```
 
-> 🚨 Be sure to pass in `formData` state when calling upon `handleAddHoot`.
+> 🚨 Be sure to pass in `formData` state when calling `handleAddHoot`.
 
-Verify that our `hootFormData` is being passed up the component tree to `src/App.jsx` correctly. You should also be redirected to the hoot list page upon submitting the form.
+### Test the form
+
+Verify that the `hootFormData` is being passed up the component tree to `src/App.jsx` correctly. When you submit the form, you should see a `console.log` coming from the `handleAddHoot` function in `App.jsx`, and be redirected to the hoot list page.
 
 ## Build the service function
 
-Next we'll build out the `create` service function. This will differ from previous service functions in this code-along, as it will require a `POST` request method. When using the Fetch API to make `POST` requests, we'll need to include a few additional properties in our request:
+Now, let's create the `create` service function, which uses a `POST` request. Unlike `GET` requests, `POST` requests with the Fetch API require additional properties:
 
-- **`method`**: The `method` property specifies the method of our request. With the Fetch API, this property is necessary whenever making a request other than the default `GET`.
+- **`method`**: Specifies the HTTP method. For `POST` requests, this must be explicitly set.
+- **`body`**: Contains the form data, converted to JSON using `JSON.stringify()`. Learn more about the [JSON object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON).
+- **`'Content-Type'`**: Specifies the data type in the `headers` as `'application/json'`, making sure the server correctly interprets the request body.
 
-- **`body`**: The `body` property specifies the form data to include in the request. We'll make use of the `JSON.stringify()` method here. Check out this link for more info on the [JSON object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON).
-
-- **`'Content-Type'`**: Within our `headers` object, we'll also need to specify the data type of the information included in the `body` property. In this case, we'll set it to `'application/json'`.
-
-Let's add the service:
+1. Let's add the service:
 
 ```js
 // src/services/hootService.js
@@ -221,7 +235,7 @@ const create = async (hootFormData) => {
 export { index, show, create };
 ```
 
-## Call upon the service
+## Call the service
 
 Back in `src/App.jsx`, update `handleAddHoot` with the service function:
 
@@ -235,6 +249,6 @@ const handleAddHoot = async (hootFormData) => {
 };
 ```
 
-Notice how we `setHoots` state. The `newHoot` is being added to the **front of the array**, followed by a copy of the existing `hoots` in state. This means that on submit, the newest `hoot` entry will appear at the top of the page. This will match the behavior of our `index` functionality, which returns `hoots` in descending order, meaning the most recent `hoots` are ordered ahead of older ones. If we added `newHoot` to the end of the array when we `setHoots` state, the order of elements would shift whenever the page refreshed, as this would trigger the `index` service once again.
+Notice how when we `setHoots`, the `newHoot` is added to the **front of the array**, ensuring it appears at the top of the page. This matches the behavior of our `index` function, which retrieves `hoots` in descending order (newest first). Adding `newHoot` to the end would disrupt this order when the page refreshes, as the `index` service re-fetches the data.
 
-Try it out in your browser. You should now be able to add new hoots.
+Test the form in your browser. You should now be able to add new hoots!
