@@ -1,4 +1,7 @@
-# ![React - Hoot Front-End - Style the HootList Component](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Front-End</span>
+  <span class="subhead">Style the Hoot List Component</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able to style a list component with CSS modules.
 

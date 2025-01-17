@@ -1,4 +1,7 @@
-# ![React - Hoot Front-End - Style the Form Components](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Front-End</span>
+  <span class="subhead">Style the Form Components</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able to style form components with CSS modules.
 

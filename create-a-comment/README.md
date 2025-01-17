@@ -1,4 +1,7 @@
-# ![React - Hoot Front-End - Create a Comment](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Front-End</span>
+  <span class="subhead">Create a Comment</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be build a component for creating comments embedded within a hoot.
 

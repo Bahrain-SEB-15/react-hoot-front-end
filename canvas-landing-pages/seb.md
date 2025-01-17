@@ -1,4 +1,7 @@
-# ![React - Hoot Front-End](../assets/hero.png)
+<h1>
+  <span class="prefix">React</span>
+  <span class="headline">Hoot Front-End</span>
+</h1>
 
 ## About
 

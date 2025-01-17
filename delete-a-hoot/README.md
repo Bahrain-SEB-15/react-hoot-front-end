@@ -1,4 +1,7 @@
-# ![React - Hoot Front-End - Delete a Hoot](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Front-End</span>
+  <span class="subhead">Delete a Hoot</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able to implement the functionality for deleting a hoot.
 

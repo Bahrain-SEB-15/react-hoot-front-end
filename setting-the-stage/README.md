@@ -1,4 +1,7 @@
-# ![React - Hoot Front-End - Setting the Stage](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Front-End</span>
+  <span class="subhead">Setting the Stage</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able to conceptualize the features and high level architecture of this application.
 

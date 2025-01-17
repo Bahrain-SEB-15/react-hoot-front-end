@@ -1,4 +1,7 @@
-# ![React - Hoot Front-End - Build a Landing Page](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Front-End</span>
+  <span class="subhead">Build a Landing Page</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able to create a landing page.
 

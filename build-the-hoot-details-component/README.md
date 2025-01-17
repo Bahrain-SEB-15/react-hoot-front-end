@@ -1,4 +1,7 @@
-# ![React - Hoot Front-End - Build the Hoot Details Component](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Front-End</span>
+  <span class="subhead">Build the Hoot Details Component</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able build a component that renders details on a specific hoot.
 

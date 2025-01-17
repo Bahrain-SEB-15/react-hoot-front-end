@@ -1,4 +1,7 @@
-# ![React - Hoot Front-End - Setup](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Front-End</span>
+  <span class="subhead">Setup</span>
+</h1>
 
 ## Setup
 

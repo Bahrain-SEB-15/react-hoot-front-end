@@ -1,4 +1,7 @@
-# ![React - Hoot Front-End - Style Signup and Signin](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Front-End</span>
+  <span class="subhead">Style Signup and Signin</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able to style sign up and sign in components with CSS modules.
 

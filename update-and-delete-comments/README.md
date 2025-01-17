@@ -1,4 +1,7 @@
-# ![React - Hoot Front-End - Update and Delete Comments](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Front-End</span>
+  <span class="subhead">Update and Delete Comments</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able to build functionality for updating and deleting comments.
 

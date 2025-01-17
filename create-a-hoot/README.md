@@ -1,4 +1,7 @@
-# ![React - Hoot Front-End - Create a Hoot](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Front-End</span>
+  <span class="subhead">Create a Hoot</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able to build a component for creating new hoots.
 
