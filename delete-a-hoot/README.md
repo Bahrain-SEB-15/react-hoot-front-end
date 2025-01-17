@@ -26,7 +26,7 @@ Based on our user story, we'll need to **conditionally render the delete button 
 
 ## Build the UI
 
-At the top of `src/components/HootDetails/HootDetails.jsx`, import `AuthedUserContext` and `useContext`:
+1. At the top of `src/components/HootDetails/HootDetails.jsx`, import `AuthedUserContext` and `useContext`:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
@@ -35,7 +35,7 @@ import { UserContext } from '../../contexts/UserContext';
 import { useState, useEffect, useContext } from 'react';
 ```
 
-Within the component function, create the following `user` constant:
+2. Within the component function, create the following `user` constant:
 
 ```jsx
 // // src/components/HootDetails/HootDetails.jsx
@@ -52,7 +52,7 @@ For our conditional rendering, we’ll make use of the [Logical AND ( && )](http
 
 If the `hoot.author._id` matches `user._id`, this piece of UI should be visible. If not, the UI should not be rendered. This means only the author of this particular `hoot` will be able to access the UI for updating or deleting a `Hoot`.
 
-Add the following to `src/components/HootDetails/HootDetails.jsx`:
+3. Add the following to `src/components/HootDetails/HootDetails.jsx`:
 
 ```jsx
 // // src/components/HootDetails/HootDetails.jsx
@@ -102,7 +102,7 @@ const handleDeleteHoot = async (hootId) => {
 
 In `src/components/HootDetails/HootDetails.jsx`, let’s update the delete button we added earlier. We’ll attach an `onClick` event handler that triggers the `props.handleDeleteHoot(hootId)` function when the button is clicked.
 
-1. Update your button with the following:
+3. Update your button with the following:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
@@ -112,9 +112,9 @@ In `src/components/HootDetails/HootDetails.jsx`, let’s update the delete butto
 
 > 🚨 Be sure to pass in `hootId` as an argument when you call the function.
 
-2. In your browser, try deleting a hoot. You should see that the `hootId` is being passed up the component tree.
+4. In your browser, try deleting a hoot. You should see that the `hootId` is being passed up the component tree.
 
-3. With the `hootId` accessible in `handleDeleteHoot`, let's confirm that we can `filter()` state using this value:
+5. With the `hootId` accessible in `handleDeleteHoot`, let's confirm that we can `filter()` state using this value:
 
 ```jsx
 // src/App.jsx
