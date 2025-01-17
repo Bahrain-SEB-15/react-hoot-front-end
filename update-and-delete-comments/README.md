@@ -68,7 +68,7 @@ Next, you'll want to add a `handleDeleteComment` function to `src/components/Hoo
 
 The function should accept a `commentId`, call a `deleteComment` service function, and filter `hoot` state accordingly. Don't worry about the `deleteComment` service function for now, we'll address that in the next step.
 
-Start by building the scaffolding for the function, updating the 'Delete' button's event handler, and confirming that you have access to the `commentId` within `handleDeleteComment`:
+1. Start by building the scaffolding for the function, updating the 'Delete' button's event handler, and confirming that you have access to the `commentId` within `handleDeleteComment`:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
@@ -78,14 +78,14 @@ const handleDeleteComment = async (commentId) => {
 };
 ```
 
-With access to the `commentId`, you should be able to `filter()` local state:
+2. With access to the `commentId`, you should be able to `filter()` local state:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
 const handleDeleteComment = async (commentId) => {
   console.log('commentId:', commentId);
-  // Eventually the service function will be called upon here
+  // Eventually the service function will be called here
   setHoot({
     ...hoot,
     comments: hoot.comments.filter((comment) => comment._id !== commentId),
@@ -140,7 +140,7 @@ Take a look at the diagram below for context on how the update comment `CommentF
 
 ### 🎓 You Do: Add the 'Edit' `<Link>` for comments
 
-As always, start out with the UI element.
+As always, start with the UI element.
 
 In `src/components/HootDetails/HootDetails.jsx`, add an 'Edit' `<Link>` that directs a user to the 'Edit Comment' page. The `<Link>` should be placed directly above the 'Delete' comment `<button>`.
 
@@ -152,7 +152,7 @@ The `to` prop of your `<Link>` should have the following value:
 
 After you add the `<Link>`, head over to `src/App.jsx` to build out the **corresponding client-side route**.
 
-Remember to import the component inside `src/App.jsx`:
+1. Remember to import the component inside `src/App.jsx`:
 
 ```jsx
 // src/App.jsx
@@ -160,7 +160,7 @@ Remember to import the component inside `src/App.jsx`:
 import CommentForm from './components/CommentForm/CommentForm';
 ```
 
-And add the following protected route:
+2. And add the following protected route:
 
 ```jsx
 // src/App.jsx
@@ -175,27 +175,28 @@ And add the following protected route:
 
 In the next section, we'll access the value of this `hootId` parameter with the `useParams()` hook.
 
-### Modify the `CommentForm`
+## Modify the `CommentForm`
 
 Next we'll need to modify `src/components/CommentForm/CommentForm.jsx` so that it can be used in two different contexts (creating comments and updating comments).
 
-Open up `src/components/CommentForm/CommentForm.jsx` and import `useParams` and from `'react-router'`:
+1. Open up `src/components/CommentForm/CommentForm.jsx` and import `useParams` and `useNavigate()` from `'react-router'`:
 
 ```jsx
 // src/components/CommentForm/CommentForm.jsx
 
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 ```
 
-Within the component, call `useParams()` to access the `hootId` **and** the `commentId`:
+2. Within the component, call `useParams()` to access the `hootId` **and** the `commentId`:
 
 ```jsx
-// // src/components/HootForm/HootForm.jsx
+// src/components/HootForm/CommentForm.jsx
 
 const { hootId, commentId } = useParams();
+consol.log(hootId, commentId);
 ```
 
-With a `console.log()`, verify that you can access the params.
+3. With a `console.log()`, verify that you can access the params using the new `Edit` link.
 
 ### Set `formData` state
 
@@ -205,14 +206,16 @@ Our backend does not have a dedicated controller for retrieving a specific comme
 
 Within a `useEffect`, we can call `hootService.show()`. The `hoot` object issued as a response will contain the comment we need, which can be located by calling `Array.prototype.find()` on `hoot.comments`. The resulting comment data can be stored in `formData` state.
 
-At the top of `src/components/CommentForm/CommentForm.jsx`, add imports for `hootService` and `useEffect`:
+1. At the top of `src/components/CommentForm/CommentForm.jsx`, add imports for `hootService` and `useEffect`:
 
 ```jsx
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
+
 import * as hootService from '../../services/hootService';
 ```
 
-Add the following `useEffect()`:
+2. Add the following `useEffect()`:
 
 ```jsx
 // src/components/CommentForm/CommentForm.jsx
@@ -227,7 +230,7 @@ useEffect(() => {
 }, [hootId, commentId]);
 ```
 
-Take a moment to confirm that the initial state of `formData` is being set correctly when editing a comment.
+3. Take a moment to confirm that the initial state of `formData` is being set correctly when navigating to the edit comment link.
 
 > 💡 Note the above `if` condition and inclusion of `hootId` and `commentId` in our effect's dependency array. Our effect will only call `fetchHoot` if both of these pieces of data are present. Otherwise, we can assume the component is being used to create a brand new comment, in which case `formData` state should maintain its initial value.
 
@@ -237,11 +240,11 @@ Next we'll build the `updateComment` service function.
 
 Our `updateComment` service function will accept three parameters:
 
-1. A `hootId` for locating the parent document.
-2. A `commentId` for locating the embedded subdocument.
-3. And `commentFormData` for updating properties of the embedded subdocument.
+- A `hootId` for locating the parent document.
+- A `commentId` for locating the embedded subdocument.
+- And `commentFormData` for updating properties of the embedded subdocument.
 
-Add the following to `src/services/hootService.js`:
+1. Add the following to `src/services/hootService.js`:
 
 ```js
 // src/services/hootService.js
@@ -261,21 +264,42 @@ const updateComment = async (hootId, commentId, commentFormData) => {
     console.log(error);
   }
 };
+
+export {
+  index,
+  show,
+  create,
+  createComment,
+  deleteHoot,
+  update,
+  deleteComment,
+  // export
+  updateComment,
+};
 ```
 
 ### Call the service
 
-The final step is to modify your `handleSubmit` function by calling `hootService.updateComment`.
+This function handles both adding and updating comments, so we’ll need an `if...else` block to decide which action to take:
 
-Remember, this function is also responsible for adding comments, so we'll require an `if...else` block to switch between two services.
+- The `if` condition should check if both `hootId` and `commentId` are present:
 
-Our `if` condition should check for both a `hootId` and a `commentId`. If both pieces of data are present, we can call `hootService.updateComment` and `navigate()` the user back to `/hoots/${hootId}`. Otherwise, we should call `props.handleAddComment(formData)`, with no redirect.
+  - If both are available, call `hootService.updateComment` to update the comment and `navigate()` to redirect the user back to `/hoots/${hootId}`.
+  - If either `hootId` or `commentId` is missing, call `props.handleAddComment(formData)` to add a new comment without redirecting.
 
-Note, after updating a comment, the user will be redirected back to the hoot 'Details' page. This will cause the `hootService.show(hootId)` function to fire off again, thus updating state with whatever changes were made to our backend.
+When a comment is updated, the user is redirected to the hoot’s 'Details' page. This triggers the `hootService.show(hootId)` function to run again, updating the state with the latest data from the backend.
 
-As a result, **we don't need to worry about state management when updating a comment**. Additionally, our `updateComment` service function can be called upon directly inside `handleSubmit` function of `src/components/CommentForm/CommentForm.jsx`.
+Because of this automatic state update, **you don’t need to manually update the state when a comment is edited**. Additionally, the `updateComment` service can be called directly inside the `handleSubmit` function in `src/components/CommentForm/CommentForm.jsx`.
 
-In `src/components/CommentForm/CommentForm.jsx`, update `handleSubmit` with the following:
+1. First let's import the `useNavigate()` hook from `react-router`. This will allow us to redirect a user back to the `hootDetails` page. Within the component add:
+
+```jsx
+// src/components/HootForm/CommentForm.jsx
+
+const navigate = useNavigate();
+```
+
+2. In `src/components/CommentForm/CommentForm.jsx`, update `handleSubmit` with the following:
 
 ```jsx
 // src/components/CommentForm/CommentForm.jsx
