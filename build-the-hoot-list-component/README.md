@@ -1,18 +1,32 @@
-# ![React - Hoot Front-End - Build the HootList Component](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Front-End</span>
+  <span class="subhead">Build the Hoot List Component</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able to build a component that displays a list of hoots.
 
-## Overview
+## Sign into the application
+
+Before we begin building the "Hoot" pages for our application, let’s confirm that the authentication system is working properly. This will ensure that the React Auth Template is correctly connected to the Hoot Back-End API.
+
+1. Open the application in your browser.
+2. Use the sign-up form to create a new user account or sign in as an existing user (preferably with existing hoots!).
+
+If everything is set up correctly you’ll be signed in and redirected to the `Dashboard` page.
+
+## Building the HootList component
 
 In this lesson, we’ll implement the following user story:
 
-- AAU, I should be able to see a list of all hoots on a 'List' page.
+- As a User, I should be able to see a list of all hoots on a 'List' page.
 
-Let's walk through some of the logic involved here.
+Let's walk through some of the logic involved here:
 
-Our app will store `hoots` state in `src/App.jsx`. This state will be passed down to the `src/components/HootList.jsx` component. Within `HootList`, we’ll `map()` over `hoots` to produce an array of `<article>` tags. Each `<article>` tag will be responsible for rendering a single `hoot` object.
+- Our app will store `hoots` state in `src/App.jsx`. This state will be passed down to the `src/components/HootList.jsx` component.
 
-The data held in `hoots` state will originate in our backend. Retrieving that data on the frontend will require the use of the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch). We'll group these `fetch()` requests in a dedicated module for each resource in our application. These modules are commonly referred to as **services**.
+- Within `HootList`, we’ll `map()` over `hoots` to produce an array of `<article>` tags. Each `<article>` tag will be responsible for rendering a single `hoot` object.
+
+- The data held in `hoots` state will originate in our backend. Retrieving that data on the frontend will require the use of the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch). We'll group these `fetch()` requests in a dedicated module for each resource in our application. These modules are commonly referred to as **services**.
 
 ## Scaffold the component
 
@@ -39,27 +53,30 @@ const HootList = (props) => {
 export default HootList;
 ```
 
-Head over to `src/components/NavBar/NavBar.jsx`. We'll need to build the UI that allows a user to navigate to this component. While we are here, let's remove the welcome message, and update the text content of our dashboard `<Link>`.
+Head over to `src/components/NavBar/NavBar.jsx`. We'll need to add a new link that allows a user to navigate to this component.
+
+1. Add a link to the new `HootList` component at `/hoots`.
+
+2. While we are here, let's remove the welcome message, and update the text content of our `Dashboard` `<Link>` to `HOME`.
 
 Your authenticated `user` links should look like the following:
 
 ```jsx
 // src/components/NavBar/NavBar.jsx
 
-{ user ?
+{user ? (
   <ul>
-    <li><Link to='/'>HOME</Link></li>
-    <li><Link to='/hoots'>HOOTS</Link></li>
-
-    <li><Link to='' onClick={handleSignout}>SIGN OUT</Link></li>
+    <li><Link to="/">HOME</Link></li>
+    <li><Link to="/hoots">HOOTS</Link></li>
+    <li><Link to="/" onClick={handleSignOut}>Sign Out</Link></li>
   </ul>
 ```
 
-In your browser, clicking on the 'HOOTS' link should now direct you to `/hoots`. Try it out. You might notice that the user interface remains unchanged.
+Next we need to add a new `<Route>` to match this new `<Link>` in `src/App.jsx`.
 
-To resolve this issue, we'll need to add a new `<Route>` in `src/App.jsx`.
+## Add a Route for `HootList`
 
-First let's import the `HootList` component at the top of `src/App.jsx`:
+First navigate to `src/App.jsx` and import the `HootList` component near the top of the file:
 
 ```jsx
 // src/App.jsx
@@ -67,23 +84,30 @@ First let's import the `HootList` component at the top of `src/App.jsx`:
 import HootList from './components/HootList/HootList';
 ```
 
-With the component imported, we are ready to build out the `<Route/>`.
+With the component imported, we are ready to add the `<Route/>`.
 
-This `<Route/>` and others like it will need to be _protected_, meaning they **can only be accessed by logged in users**.
+Certain routes in our application, like the `HootList` page, should only be accessible to **logged-in users**. These are called **protected routes**.
 
-Protected routes can be implemented with a ternary, as seen in our application's starter code:
+We can implement protected routes using a ternary operator to check if a user is logged in. If the user exists, they gain access to the protected routes; otherwise, they are redirected or shown a placeholder (like a `404`).
 
 ```jsx
-// src/App.jsx
-
-{user ? (
-    <Route path="/" element={<Dashboard user={user} />} />
+{
+  user ? (
+    // Protected Routes:
+    <>
+      <Route
+        path='/hoots'
+        element={<HootList />}
+      />
+    </>
   ) : (
-    <Route path="/" element={<Landing />} />
-  )}
+    // If no user is logged in, render an empty placeholder:
+    <></>
+  );
+}
 ```
 
-With the code snippet above, logged in users can access the protected `Dashboard` route. Users who are not logged in can only access the publicly available `Landing` page route. Our application will require several protected routes, so we'll need to make use of a React fragment (`<></>`) to group them together.
+Our application will require several protected routes, so we'll need to make use of a React fragment (`<> </>`) to group them together.
 
 Update your protected routes in `src/App.jsx` with the following:
 
@@ -91,30 +115,51 @@ Update your protected routes in `src/App.jsx` with the following:
 // src/App.jsx
 
 <Routes>
+  <Route
+    path='/'
+    element={user ? <Dashboard /> : <Landing />}
+  />
   {user ? (
-    // Protected Routes:
     <>
-      <Route path="/" element={<Dashboard user={user} />} />
-      <Route path="/hoots" element={<HootList />} />
+      <Route
+        path='/hoots'
+        element={<HootList />}
+      />
     </>
   ) : (
-    // Public Route:
-    <Route path="/" element={<Landing />} />
+    <></>
   )}
-  <Route path="/signup" element={<SignupForm setUser={setUser} />} />
-  <Route path="/signin" element={<SigninForm setUser={setUser} />} />
+  <Route
+    path='/sign-up'
+    element={<SignUpForm />}
+  />
+  <Route
+    path='/sign-in'
+    element={<SignInForm />}
+  />
 </Routes>
 ```
+
+> 💡 In React, ternary operators allow you to conditionally display different components or groups of components based on a specific condition. In the code snippet above, we can use a ternary to both conditionally render a specific element for the same path "/" or protect groups of routes based logged in user.
 
 With our `<Route>` in place, we should now be able to navigate to the `HootList` component.
 
 ## Create `hootService.js`
 
-Next we'll need to fetch data for the `HootList` to render. Utilizing the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch), we'll create an asynchronous `index` service function that retrieves a list of hoots from our backend.
+To display the list of hoots, we need to fetch the data from our backend. Here's an overiew of how we'll retrive our hoot data:
 
-We'll group all services related to the hoot resource in a dedicated module called `hootService.js`. This pattern works well, as all hoot related service functions will make requests to the same `BASE_URL` endpoint on our server (`'/hoots'`). When a service function needs to make a request to a more precise endpoint, we'll modify the endpoint in the function itself.
+1. First, we'll set up a service module.
 
-Let's create our `hootService` module.
+   - We'll group all services related to the hoot resource in a dedicated module called `hootService.js`.
+   - This keeps our code organized and makes it easy to manage similar API calls.
+   - All hoot-related service functions will use the same base URL `('/hoots')` for the server.
+   - If a function needs a more specific endpoint like `'/hoots/:id'`, we’ll handle it directly within that function.
+
+2. Next we'll need to fetch data for the `HootList` to render.
+
+   - Utilizing the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch), we'll create an asynchronous `index` service function that retrieves a list of hoots from our backend.
+
+### Let's create our `hootService` module!
 
 Run the following command in your terminal:
 
@@ -125,10 +170,10 @@ touch src/services/hootService.js
 And add the following to the top of `src/services/hootService.js`:
 
 ```js
-const BASE_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/hoots`;
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/hoots`;
 ```
 
-> 💡 If you completed the setup steps, your `.env` should contain a `VITE_EXPRESS_BACKEND_URL` environment variable set to `"http://localhost:3000"`. When running our app locally, the `BASE_URL` will read as `http://localhost:3000/hoots`.
+> 💡 If you completed the setup steps, your `.env` should contain a `VITE_BACK_END_SERVER_URL` environment variable set to `"http://localhost:3000"`. When running our app locally, the `BASE_URL` will read as `http://localhost:3000/hoots`.
 
 ## Build the service function
 
@@ -153,23 +198,19 @@ const index = async () => {
 export { index };
 ```
 
+> 🚨 Don't forget to `export` each service function after adding them. Otherwise they will not be accessible in the component where they are called upon.
+
 Notice the inclusion of the `headers` property. The `headers` property is an object containing any headers that need to be sent along with the request. In this case, we are including an `'Authorization'` header with a **bearer token**. This token is decoded by the `verifyToken` middleware function on our server, allowing us to indentify the logged in user, and ensuring that only a logged in user can access this functionality.
 
-If you look at the `controllers/hoots.js` file in your backend application, you'll notice that all of our routes for hoots are **protected**, as they follow `verifyToken` in our middleware pipeline.
+If you look at the `controllers/hoots.js` file in your backend application, you'll notice that all of our routes for hoots are **protected** by the `verifyToken` middleware..
 
 ```js
-// ========= Protected Routes =========
-
-router.use(verifyToken);
-
-// ... hoot routes/controllers
+router.get('/', verifyToken, async (req, res) => {...}
 ```
 
 As a result, all of our hoot service functions will require this `'Authorization'` header.
 
-> 🚨 Don't forget to `export` each service function after adding them. Otherwise they will not be accessible in the component where they are called upon.
-
-## Call upon the service
+## Call the service
 
 Back in `src/App.jsx`, add an import for our new `hootService` module:
 
@@ -186,7 +227,7 @@ While we are here, let's import the `useEffect` hook as well:
 ```jsx
 // src/App.jsx
 
-import { useState, createContext, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 ```
 
 Before we retrieve a list of hoots from our backend, we'll need a state variable to store them in.
@@ -209,6 +250,8 @@ Add the following:
 useEffect(() => {
   const fetchAllHoots = async () => {
     const hootsData = await hootService.index();
+
+    // console log to verify
     console.log('hootsData:', hootsData);
   };
   if (user) fetchAllHoots();
@@ -217,11 +260,11 @@ useEffect(() => {
 
 Notice the inclusion of `user` in our dependency array and the `if` condition placed around the invocation of `fetchAllHoots()`.
 
-Placing `user` in the dependency array causes the effect to fire off when the page loads or `user` state changes. Within our `useEffect`, we invoke `fetchAllHoots`, which in turn calls upon the `index` service. On the backend, our hoots `index` route is protected, which means **the request won’t go through until a user is logged in**. Including this `if` condition prevents the request from being made if a user is not logged in.
+> Placing `user` in the dependency array causes the effect to fire off when the page loads or `user` state changes. Within our `useEffect`, we invoke `fetchAllHoots`, which in turn calls upon the `index` service. On the backend, our hoots `index` route is protected, which means **the request won’t go through until a user is logged in**. Including this `if` condition prevents the request from being made if a user is not logged in.
 
-Check your browser console and verify that you are receiving `hootsData` from the backend.
+1. Check your browser console and verify that you are receiving `hootsData` from the backend.
 
-After verifying the data, we should be ready to `setHoots` state:
+2. After verifying the data, we should be ready to `setHoots` state:
 
 ```jsx
 // src/App.jsx
@@ -230,7 +273,7 @@ useEffect(() => {
   const fetchAllHoots = async () => {
     const hootsData = await hootService.index();
 
-    // Set state:
+    // update to set state:
     setHoots(hootsData);
   };
   if (user) fetchAllHoots();
@@ -242,7 +285,10 @@ Once state is set, we can pass `hoots` down to the `<HootList/>` component:
 ```jsx
 // src/App.jsx
 
-<Route path="/hoots" element={<HootList hoots={hoots} />} />
+<Route
+  path='/hoots'
+  element={<HootList hoots={hoots} />}
+/>
 ```
 
 Within `src/components/HootList.jsx`, verify that `hoots` is accessible through `props`.
@@ -273,14 +319,14 @@ Check your browser and click on the **Hoots** link. If you have existing hoots i
 
 > 🚨 If you deleted all of the hoots in the database at the end of the Express REST API lesson, open up Postman and add a few new hoots so that you'll have data for this section of the lesson.
 
-Time to touch up our JSX. We'll replace the existing `<p>` tags with clickable links that eventually navigate a user to an details page. First we'll need the `<Link>` component from `'react-router-dom'`.
+Time to touch up our JSX. We'll replace the existing `<p>` tags with clickable links that eventually navigate a user to an details page. First we'll need the `<Link>` component from `'react-router'`.
 
 Add the following import to `src/components/HootList/HootList.jsx`:
 
 ```jsx
 // src/components/HootList/HootList.jsx
 
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 ```
 
 And update the `return` with the following:
@@ -291,12 +337,15 @@ And update the `return` with the following:
 return (
   <main>
     {props.hoots.map((hoot) => (
-      <Link key={hoot._id} to={`/hoots/${hoot._id}`}>
+      <Link
+        key={hoot._id}
+        to={`/hoots/${hoot._id}`}
+      >
         <article>
           <header>
             <h2>{hoot.title}</h2>
             <p>
-              {hoot.author.username} posted on 
+              {hoot.author.username} posted on
               {new Date(hoot.createdAt).toLocaleDateString()}
             </p>
           </header>

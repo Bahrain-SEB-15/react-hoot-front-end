@@ -1,4 +1,7 @@
-# ![React - Hoot Front-End - Style the HootDetails Component](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Front-End</span>
+  <span class="subhead">Style the Hoot Details Component</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able to style a details component with CSS modules.
 
@@ -197,30 +200,32 @@ Apply the following changes to `src/components/HootDetails/HootDetails.jsx`:
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-<section>
-  <header>
-    <p>{hoot.category.toUpperCase()}</p>
-    <h1>{hoot.title}</h1>
+<main className={styles.container}>
+  <section>
+    <header>
+      <p>{hoot.category.toUpperCase()}</p>
+      <h1>{hoot.title}</h1>
 
-    // New div element:
-    <div>
-      <p>
-        {hoot.author.username} posted on
-        {new Date(hoot.createdAt).toLocaleDateString()}
-      </p>
-      {hoot.author._id === user._id && (
-        <>
-          <Link to={`/hoots/${hootId}/edit`}>Edit</Link>
-          <button onClick={() => props.handleDeleteHoot(hootId)}>
-            Delete
-          </button>
-        </>
-      )}
-    </div>
+      <div>
+        <p>
+          {hoot.author.username} posted on
+          {new Date(hoot.createdAt).toLocaleDateString()}
+        </p>
+        {hoot.author._id === user._id && (
+          <>
+            <Link to={`/hoots/${hootId}/edit`}>Edit</Link>
+            <button onClick={() => props.handleDeleteHoot(hootId)}>
+              Delete
+            </button>
+          </>
+        )}
+      </div>
 
-  </header>
-  <p>{hoot.text}</p>
-</section>
+    </header>
+    <p>{hoot.text}</p>
+  </section>
+
+  ...
 ```
 
 And now do the same to the `<article>` tag in your comments section like so:

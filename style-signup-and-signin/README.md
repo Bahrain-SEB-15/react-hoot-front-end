@@ -1,4 +1,7 @@
-# ![React - Hoot Front-End - Style Signup and Signin](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Front-End</span>
+  <span class="subhead">Style Signup and Signin</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able to style sign up and sign in components with CSS modules.
 
@@ -245,7 +248,7 @@ Once again, we move the `<h1>` and `<p>` inside the `<form>` tag, and wrap the `
 
 <section>
   <form autoComplete='off' onSubmit={handleSubmit}>
-    <h1>Log In</h1>
+    <h1>Sign In</h1>            
     <p>{message}</p>
 ```
 
@@ -262,7 +265,7 @@ And add the following `<section>` and `<img>`:
 ```jsx
 // src/components/SigninForm/SigninForm.jsx
 
-<main className={styles.container}>
+<main>
   <section>
     <img src={LoginIcon} alt="An owl sitting on a sign" />
   </section>

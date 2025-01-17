@@ -1,4 +1,7 @@
-# ![React - Hoot Front-End - Build the Hoot Details Component](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Front-End</span>
+  <span class="subhead">Build the Hoot Details Component</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able build a component that renders details on a specific hoot.
 
@@ -6,7 +9,7 @@
 
 In this lesson, we’ll implement the following user story:
 
-- AAU, clicking on a hoot in the 'List' page should navigate me to a 'Details' page where I can view information about a single hoot post along with its associated comments.
+- As a User, clicking on a hoot in the 'List' page should navigate me to a 'Details' page where I can view information about a single hoot post along with its associated comments.
 
 Our 'Details' page will be represented by `src/components/HootDetails/HootDetails.jsx`. This component will be responsible for rendering the details of a single hoot, including its associated comments. This component will be displayed whenever a user clicks on a hoot from the 'List' page.
 
@@ -45,12 +48,15 @@ Next, `import` the component in `src/App.jsx`:
 import HootDetails from './components/HootDetails/HootDetails';
 ```
 
-And add the following protected route:
+And add the following **protected** route:
 
 ```jsx
 // src/App.jsx
 
-<Route path="/hoots/:hootId" element={<HootDetails />} />
+<Route
+  path='/hoots/:hootId'
+  element={<HootDetails />}
+/>
 ```
 
 With the addition of this client-side route, users should now be able to navigate to the `HootDetails` page by clicking on a hoot from the list page.
@@ -76,19 +82,23 @@ Add the following import to `src/components/HootDetails/HootDetails.jsx`:
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 ```
 
-Next, let's call upon `useParams()` to get access to the `hootId`:
+Next, let's call `useParams()` to get access to the `hootId`:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-const { hootId } = useParams();
-console.log('hootId', hootId);
+const HootDetails = (props) => {
+  const { hootId } = useParams();
+  console.log('hootId', hootId);
+
+  return <main>Hoot Details</main>;
+};
 ```
 
-> 💡 Be sure to [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the `hootId` when calling upon `useParams()`!
+> 💡 Be sure to [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the `hootId` when calling `useParams()`!
 
 Confirm that you have access to the `hootId` in `src/components/HootDetails/HootDetails.jsx`.
 
@@ -123,9 +133,9 @@ export {
 
 > ❓ Let’s take a moment to connect the dots of our application. Notice the `hootId` in the above service function. Where will this information be used in our backend?
 
-## Call upon the service
+## Call the service
 
-Next up, we'll call upon the service, and store the response from the server in state.
+Next up, we'll Call the service, and store the response from the server in state.
 
 We'll need a few imports in `src/components/HootDetails/HootDetails.jsx` to proceed:
 
@@ -154,7 +164,6 @@ And add the following `useEffect()`:
 useEffect(() => {
   const fetchHoot = async () => {
     const hootData = await hootService.show(hootId);
-    console.log('hootData', hootData);
     setHoot(hootData);
   };
   fetchHoot();

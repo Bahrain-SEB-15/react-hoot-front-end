@@ -1,3 +1,4 @@
+<!-- ! Do not delete or rename this file! -->
 <h1>
   <span class="prefix">React</span>
   <span class="headline">Hoot Front-End</span>
@@ -7,7 +8,7 @@
 
 In this module, students will build the user interface for "Hoot," a modern full-stack blogging application using the **MERN** stack (MongoDB, Express.js, React.js, and Node.js). They will learn how to display and manage posts, create forms for posts and comments, and develop functionality for updating and deleting content. Students will also gain skills in applying CSS Modules for styling and building reusable components such as icons and metadata displays. By the end of this module, students will have crafted a visually appealing and interactive frontend for "Hoot," completing the second part of the full stack application development.
 
-![Landing](./assets/landing.png)
+![Landing](../assets/landing.png)
 
 ## Content
 
@@ -35,45 +36,3 @@ In this module, students will build the user interface for "Hoot," a modern full
 ## References
 
 📖 [Reference Materials](./references/README.md)
-
-## Internal
-
-### Prerequisites
-
-- React State Management
-- Controlled Forms in React
-- Lifting State in React Components
-- Fetching Data in React
-- React Router DOM
-- JWT Authentication in React
-
-### Starter code
-
-This module requires an existing Express API with JWT Authentication set up.
-
-🟢 [Express API starter code](https://git.generalassemb.ly/modular-curriculum-all-courses/express-api-hoot-back-end-solution)
-
-This module also uses an existing template equip with forms for JWT authentication in a React application.
-
-🟢 [React JWT Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/react-jwt-auth-template)
-
-### Solution code
-
-🏁 [Solution code](https://git.generalassemb.ly/modular-curriculum-all-courses/react-hoot-front-end-solution)
-
-### Course landing pages
-
-- [SEB - Software Engineering Bootcamp](https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-hoot-front-end/canvas-landing-pages/seb.html)
-- [Fallback](https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-hoot-front-end/canvas-landing-pages/fallback.html)
-
-### Resources
-
-✏️ [Instructor Guide](./internal-resources/instructor-guide.md)
-
-🎥 [Video Hub](./internal-resources/video-hub.md)
-
-🏗️ [Release Notes](./internal-resources/release-notes.md)
-
----
-
-**Find a 👾 bug 👾 or have suggestions? [Let us know](https://pages.git.generalassemb.ly/modular-curriculum-all-courses/universal-resources-internal/module-feedback.html)!**
