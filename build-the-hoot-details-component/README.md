@@ -6,7 +6,7 @@
 
 In this lesson, we’ll implement the following user story:
 
-- AAU, clicking on a hoot in the 'List' page should navigate me to a 'Details' page where I can view information about a single hoot post along with its associated comments.
+- As a User, clicking on a hoot in the 'List' page should navigate me to a 'Details' page where I can view information about a single hoot post along with its associated comments.
 
 Our 'Details' page will be represented by `src/components/HootDetails/HootDetails.jsx`. This component will be responsible for rendering the details of a single hoot, including its associated comments. This component will be displayed whenever a user clicks on a hoot from the 'List' page.
 
@@ -30,7 +30,7 @@ Add the following to `src/components/HootDetails/HootDetails.jsx`:
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-const HootDetails = (props) => {
+const HootDetails = () => {
   return <main>Hoot Details</main>;
 };
 
@@ -42,7 +42,7 @@ Next, `import` the component in `src/App.jsx`:
 ```jsx
 // src/App.jsx
 
-import HootDetails from './components/HootDetails/HootDetails';
+import HootDetails from "./components/HootDetails/HootDetails";
 ```
 
 And add the following protected route:
@@ -76,7 +76,7 @@ Add the following import to `src/components/HootDetails/HootDetails.jsx`:
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router";
 ```
 
 Next, let's call upon `useParams()` to get access to the `hootId`:
@@ -84,8 +84,13 @@ Next, let's call upon `useParams()` to get access to the `hootId`:
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-const { hootId } = useParams();
-console.log('hootId', hootId);
+const HootDetails = () => {
+
+  const { hootId } = useParams();
+  console.log("hootId", hootId);
+
+  return <main>Hoot Details</main>;
+};
 ```
 
 > 💡 Be sure to [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the `hootId` when calling upon `useParams()`!
@@ -106,7 +111,7 @@ Add the following to `src/services/hootService.js`:
 const show = async (hootId) => {
   try {
     const res = await fetch(`${BASE_URL}/${hootId}`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
     return res.json();
   } catch (error) {
@@ -132,8 +137,8 @@ We'll need a few imports in `src/components/HootDetails/HootDetails.jsx` to proc
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-import { useState, useEffect } from 'react';
-import * as hootService from '../../services/hootService';
+import { useState, useEffect } from "react";
+import * as hootService from "../../services/hootService";
 ```
 
 Create a new `useState()` variable called `hoot` with an initial value of `null`:
@@ -154,14 +159,14 @@ And add the following `useEffect()`:
 useEffect(() => {
   const fetchHoot = async () => {
     const hootData = await hootService.show(hootId);
-    console.log('hootData', hootData);
+    console.log("hootData", hootData);
     setHoot(hootData);
   };
   fetchHoot();
 }, [hootId]);
 
 // Verify that hoot state is being set correctly:
-console.log('hoot state:', hoot);
+console.log("hoot state:", hoot);
 ```
 
 > 💡 Remember to include `hootId` in the [dependency array](https://beta.reactjs.org/apis/react/useEffect#specifying-reactive-dependencies) of your `useEffect()`. This tells the `useEffect()` to fire off whenever the value of the `hootId` changes.
@@ -221,8 +226,8 @@ Regarding the `author` property of a `comment`, you might recall that our `show`
 // controllers/hoots.js
 
 const hoot = await Hoot.findById(req.params.hootId).populate([
-  'author',
-  'comments.author',
+  "author",
+  "comments.author",
 ]);
 ```
 

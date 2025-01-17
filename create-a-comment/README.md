@@ -6,7 +6,7 @@
 
 In this lesson, we’ll implement the following user story:
 
-- AAU, I should be able to add a comment on a hoot 'Details' page.
+- As a User, I should be able to add a comment on a hoot 'Details' page.
 
 The user story will require a new component called `src/components/CommentForm/CommentForm.jsx`. It will mirror the functionality for creating hoots with one key difference. When creating comments, our `CommentForm` component **will not be a distinct page**, instead it will exist as a child component within `src/components/HootDetails/HootDetails.jsx`. Additionally, when updating state with a new comment, we'll need to modify `hoot` state, as this is the object where the `comments` array will reside.
 
@@ -28,12 +28,12 @@ Add the following to `src/components/CommentForm/CommentForm.jsx`:
 ```jsx
 // src/components/CommentForm/CommentForm.jsx
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import * as hootService from '../../services/hootService';
+import * as hootService from "../../services/hootService";
 
 const CommentForm = (props) => {
-  const [formData, setFormData] = useState({ text: '' });
+  const [formData, setFormData] = useState({ text: "" });
 
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
@@ -42,7 +42,7 @@ const CommentForm = (props) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     // handleAddComment
-    setFormData({ text: '' });
+    setFormData({ text: "" });
   };
 
   return (
@@ -71,7 +71,7 @@ Next, import the component at the top of `src/components/HootDetails/HootDetails
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-import CommentForm from '../CommentForm/CommentForm';
+import CommentForm from "../CommentForm/CommentForm";
 ```
 
 Add the component to the comments section as shown below:
@@ -95,7 +95,7 @@ Add the following to `src/components/HootDetails/HootDetails.jsx`:
 // src/components/HootDetails/HootDetails.jsx
 
 const handleAddComment = async (commentFormData) => {
-  console.log('commentFormData', commentFormData);
+  console.log("commentFormData", commentFormData);
 };
 ```
 
@@ -115,7 +115,7 @@ And update `handleSubmit` by calling upon `props.handleAddComment(formData)`:
 const handleSubmit = (evt) => {
   evt.preventDefault();
   props.handleAddComment(formData);
-  setFormData({ text: '' });
+  setFormData({ text: "" });
 };
 ```
 
@@ -133,10 +133,10 @@ Add the following to `src/services/hootService.js`:
 const createComment = async (hootId, commentFormData) => {
   try {
     const res = await fetch(`${BASE_URL}/${hootId}/comments`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(commentFormData),
     });

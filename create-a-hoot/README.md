@@ -6,7 +6,7 @@
 
 In this lesson, we’ll implement the following user story:
 
-- AAU, I should be able to create a hoot post.
+- As a User, I should be able to create a hoot post.
 
 This will require a `<form>` component that allows users to create new hoots. Upon submitting a new hoot, the user should be redirected back to the 'List' page.
 
@@ -53,13 +53,13 @@ Add the following to `src/components/HootForm/HootForm.jsx`:
 ```jsx
 // src/components/HootForm/HootForm.jsx
 
-import { useState } from 'react';
+import { useState } from "react";
 
 const HootForm = (props) => {
   const [formData, setFormData] = useState({
-    title: '',
-    text: '',
-    category: 'News',
+    title: "",
+    text: "",
+    category: "News",
   });
 
   const handleChange = (evt) => {
@@ -68,7 +68,7 @@ const HootForm = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log('formData', formData);
+    console.log("formData", formData);
     // We'll update this function shortly...
   };
 
@@ -134,7 +134,7 @@ Import `useNavigate` at the top of `src/App.jsx`:
 ```jsx
 // src/App.jsx
 
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from "react-router-dom";
 ```
 
 While we're here, let's also import `HootForm`:
@@ -142,7 +142,7 @@ While we're here, let's also import `HootForm`:
 ```jsx
 // src/App.jsx
 
-import HootForm from './components/HootForm/HootForm';
+import HootForm from "./components/HootForm/HootForm";
 ```
 
 Next, create a new instance of the `useNavigate()` hook within the component function:
@@ -159,8 +159,8 @@ Add the following function:
 // src/App.jsx
 
 const handleAddHoot = async (hootFormData) => {
-  console.log('hootFormData', hootFormData);
-  navigate('/hoots');
+  console.log("hootFormData", hootFormData);
+  navigate("/hoots");
 };
 ```
 
@@ -205,10 +205,10 @@ Let's add the service:
 const create = async (hootFormData) => {
   try {
     const res = await fetch(BASE_URL, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(hootFormData),
     });
@@ -231,7 +231,7 @@ Back in `src/App.jsx`, update `handleAddHoot` with the service function:
 const handleAddHoot = async (hootFormData) => {
   const newHoot = await hootService.create(hootFormData);
   setHoots([newHoot, ...hoots]);
-  navigate('/hoots');
+  navigate("/hoots");
 };
 ```
 
