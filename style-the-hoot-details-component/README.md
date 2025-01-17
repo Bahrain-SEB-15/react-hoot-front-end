@@ -197,30 +197,32 @@ Apply the following changes to `src/components/HootDetails/HootDetails.jsx`:
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-<section>
-  <header>
-    <p>{hoot.category.toUpperCase()}</p>
-    <h1>{hoot.title}</h1>
+<main className={styles.container}>
+  <section>
+    <header>
+      <p>{hoot.category.toUpperCase()}</p>
+      <h1>{hoot.title}</h1>
 
-    // New div element:
-    <div>
-      <p>
-        {hoot.author.username} posted on
-        {new Date(hoot.createdAt).toLocaleDateString()}
-      </p>
-      {hoot.author._id === user._id && (
-        <>
-          <Link to={`/hoots/${hootId}/edit`}>Edit</Link>
-          <button onClick={() => props.handleDeleteHoot(hootId)}>
-            Delete
-          </button>
-        </>
-      )}
-    </div>
+      <div>
+        <p>
+          {hoot.author.username} posted on
+          {new Date(hoot.createdAt).toLocaleDateString()}
+        </p>
+        {hoot.author._id === user._id && (
+          <>
+            <Link to={`/hoots/${hootId}/edit`}>Edit</Link>
+            <button onClick={() => props.handleDeleteHoot(hootId)}>
+              Delete
+            </button>
+          </>
+        )}
+      </div>
 
-  </header>
-  <p>{hoot.text}</p>
-</section>
+    </header>
+    <p>{hoot.text}</p>
+  </section>
+
+  ...
 ```
 
 And now do the same to the `<article>` tag in your comments section like so:

@@ -52,9 +52,9 @@ And add the following to `src/components/HootList/HootList.module.css`:
   border-radius: 5px;
   border: 1px solid var(--border);
   background-color: var(--card-background);
-  box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.25);
-  -moz-box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.25);
-  -webkit-box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.25);
+  box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.25);
 }
 
 .container article header {
@@ -90,24 +90,24 @@ And add the following to `src/components/HootList/HootList.module.css`:
   align-items: center;
   margin: 7px 0px 12px 0px;
   justify-content: space-between;
-} 
+}
 
 .container header div:first-child img {
   margin: 0;
   width: 32px;
   height: 32px;
-  opacity: .8;
+  opacity: 0.8;
   padding: 3px;
   border-radius: 50%;
   border: 1px solid var(--border);
 }
 ```
 
-This styling is mostly concerned with arranging our list view of hoot 'cards' into a grid layout. 
+This styling is mostly concerned with arranging our list view of hoot 'cards' into a grid layout.
 
 On mobile, the 'cards' are displayed in a single column. Through a series of [media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries), we are able to add additional columns to the grid layout based on the width of the browser (`grid-template-columns`).
 
-We also do some work to transform each `<article>` tag into a distinct 'card' element, complete with `box-shadow` and some `padding` for legibility. 
+We also do some work to transform each `<article>` tag into a distinct 'card' element, complete with `box-shadow` and some `padding` for legibility.
 
 The interesting bit is how we handle `overflow` text. When the characters in a hoot’s title or text property can’t fit within the confines of an `<article>`, we hide the overflow and replace it with an ellipsis. After we apply the `styles` object to the component, try adding a new hoot with a large amount of text to test this out!
 
@@ -118,7 +118,7 @@ Add the following import to `src/components/HootList/HootList.jsx`:
 ```jsx
 // src/components/HootList/HootList.jsx
 
-import styles from './HootList.module.css'; // Import styles
+import styles from './HootList.module.css';
 ```
 
 And apply `styles.container` to the `className` of the outermost element (`<main>`):

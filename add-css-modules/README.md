@@ -68,7 +68,8 @@ Once you have removed `src/App.css`, replace the existing contents of `src/index
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   height: 100%;
   overflow: hidden;
@@ -97,7 +98,10 @@ article img {
   width: 80px;
 }
 
-h1, h3 { margin: 7px 0px 14px 0px; }
+h1,
+h3 {
+  margin: 7px 0px 14px 0px;
+}
 
 h1 {
   font-size: 28px;
@@ -117,7 +121,7 @@ h4 {
 
 p {
   margin: 0;
-  opacity: .4;
+  opacity: 0.4;
   width: 100%;
   font-size: 16px;
   text-align: justify;
@@ -139,12 +143,13 @@ form {
   background-color: white;
   padding: 21px 21px 28px 21px;
   border: 1px solid rgb(220, 220, 220);
-  box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.25);
-  -moz-box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.25);
-  -webkit-box-shadow: -1px 5px 19px -5px rgba(0,0,0,0.25);
+  box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.25);
 }
 
-button, a {
+button,
+a {
   cursor: pointer;
 }
 ```
@@ -179,12 +184,12 @@ Add the following to `src/components/NavBar/NavBar.module.css`:
 /* src/components/NavBar/NavBar.module.css */
 
 .container {
-  top: 0; 
+  top: 0;
   z-index: 1;
   width: 100%;
   height: 80px;
   display: flex;
-  position: fixed; 
+  position: fixed;
   padding: 14px 21px;
   align-items: center;
   background: white;

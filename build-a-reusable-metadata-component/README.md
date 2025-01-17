@@ -108,11 +108,14 @@ import Icon from '../Icon/Icon';
 const AuthorInfo = ({ content }) => {
   return (
     <div className={styles.container}>
-      <img src={ProfileIcon} alt="The user's avatar" />
+      <img
+        src={ProfileIcon}
+        alt="The user's avatar"
+      />
       <section>
         <p>{content.author.username}</p>
         <div className={styles.container}>
-          <Icon category="Calendar" />
+          <Icon category='Calendar' />
           <p>{new Date(content.createdAt).toLocaleDateString()}</p>
         </div>
       </section>
@@ -184,19 +187,19 @@ And replace this tag with the `<AuthorInfo />` component, passing down `content=
 <header>
   <p>{hoot.category.toUpperCase()}</p>
   <h1>{hoot.title}</h1>
-
-  <AuthorInfo content={hoot} />
-
-  {hoot.author._id === user._id && (
-    <>
-      <Link to={`/hoots/${hootId}/edit`}>
-        <Icon category="Edit" />
-      </Link>
-      <button onClick={() => props.handleDeleteHoot(hootId)}>
-        <Icon category="Trash" />
-      </button>
-    </>
-  )}
+  <div>
+    <AuthorInfo content={hoot} />
+    {hoot.author._id === user._id && (
+      <>
+        <Link to={`/hoots/${hootId}/edit`}>
+          <Icon category='Edit' />
+        </Link>
+        <button onClick={() => props.handleDeleteHoot(hootId)}>
+          <Icon category='Trash' />
+        </button>
+      </>
+    )}
+  </div>
 </header>
 ```
 
@@ -213,18 +216,19 @@ Update `src/components/HootDetails/HootDetails.jsx` as shown below:
   hoot.comments.map((comment) => (
     <article key={comment._id}>
       <header>
-        <AuthorInfo content={comment} />
-
-        {comment.author._id === user._id && (
-          <>
-            <Link to={`/hoots/${hootId}/comments/${comment._id}/edit`}>
-              <Icon category="Edit" />
-            </Link>
-            <button onClick={() => handleDeleteComment(comment._id)}>
-              <Icon category="Trash" />
-            </button>
-          </>
-        )}
+        <div>
+          <AuthorInfo content={comment} />
+          {comment.author._id === user._id && (
+            <>
+              <Link to={`/hoots/${hootId}/comments/${comment._id}/edit`}>
+                <Icon category='Edit' />
+              </Link>
+              <button onClick={() => handleDeleteComment(comment._id)}>
+                <Icon category='Trash' />
+              </button>
+            </>
+          )}
+        </div>
       </header>
       <p>{comment.text}</p>
     </article>

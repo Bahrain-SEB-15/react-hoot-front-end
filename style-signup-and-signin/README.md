@@ -245,7 +245,7 @@ Once again, we move the `<h1>` and `<p>` inside the `<form>` tag, and wrap the `
 
 <section>
   <form autoComplete='off' onSubmit={handleSubmit}>
-    <h1>Log In</h1>
+    <h1>Sign In</h1>            
     <p>{message}</p>
 ```
 
@@ -262,7 +262,7 @@ And add the following `<section>` and `<img>`:
 ```jsx
 // src/components/SigninForm/SigninForm.jsx
 
-<main className={styles.container}>
+<main>
   <section>
     <img src={LoginIcon} alt="An owl sitting on a sign" />
   </section>
