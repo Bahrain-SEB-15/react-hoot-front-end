@@ -93,7 +93,7 @@ Next, pass `handleDeleteHoot` down to `<HootDetails>`:
 // src/App.jsx
 
 <Route
-  path="/hoots/:hootId"
+  path='/hoots/:hootId'
   element={<HootDetails handleDeleteHoot={handleDeleteHoot} />}
 />
 ```
@@ -165,7 +165,7 @@ export {
 };
 ```
 
-## Call upon the service
+## Call the service
 
 Now that we have our service function, we'll add it to `handleDeleteHoot`, along with one other small change.
 
@@ -191,7 +191,7 @@ Back in `src/App.jsx`, update `handleDeleteHoot` with the following:
 // src/App.jsx
 
 const handleDeleteHoot = async (hootId) => {
-  // Call upon the service function:
+  // Call the service function:
   const deletedHoot = await hootService.deleteHoot(hootId);
   // Filter state using deletedHoot._id:
   setHoots(hoots.filter((hoot) => hoot._id !== deletedHoot._id));

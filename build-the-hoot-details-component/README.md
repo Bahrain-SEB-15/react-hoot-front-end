@@ -42,7 +42,7 @@ Next, `import` the component in `src/App.jsx`:
 ```jsx
 // src/App.jsx
 
-import HootDetails from "./components/HootDetails/HootDetails";
+import HootDetails from './components/HootDetails/HootDetails';
 ```
 
 And add the following **protected** route:
@@ -50,7 +50,10 @@ And add the following **protected** route:
 ```jsx
 // src/App.jsx
 
-<Route path="/hoots/:hootId" element={<HootDetails />} />
+<Route
+  path='/hoots/:hootId'
+  element={<HootDetails />}
+/>
 ```
 
 With the addition of this client-side route, users should now be able to navigate to the `HootDetails` page by clicking on a hoot from the list page.
@@ -76,7 +79,7 @@ Add the following import to `src/components/HootDetails/HootDetails.jsx`:
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-import { useParams } from "react-router";
+import { useParams } from 'react-router';
 ```
 
 Next, let's call upon `useParams()` to get access to the `hootId`:
@@ -86,7 +89,7 @@ Next, let's call upon `useParams()` to get access to the `hootId`:
 
 const HootDetails = () => {
   const { hootId } = useParams();
-  console.log("hootId", hootId);
+  console.log('hootId', hootId);
 
   return <main>Hoot Details</main>;
 };
@@ -110,7 +113,7 @@ Add the following to `src/services/hootService.js`:
 const show = async (hootId) => {
   try {
     const res = await fetch(`${BASE_URL}/${hootId}`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     });
     return res.json();
   } catch (error) {
@@ -127,17 +130,17 @@ export {
 
 > ❓ Let’s take a moment to connect the dots of our application. Notice the `hootId` in the above service function. Where will this information be used in our backend?
 
-## Call upon the service
+## Call the service
 
-Next up, we'll call upon the service, and store the response from the server in state.
+Next up, we'll Call the service, and store the response from the server in state.
 
 We'll need a few imports in `src/components/HootDetails/HootDetails.jsx` to proceed:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-import { useState, useEffect } from "react";
-import * as hootService from "../../services/hootService";
+import { useState, useEffect } from 'react';
+import * as hootService from '../../services/hootService';
 ```
 
 Create a new `useState()` variable called `hoot` with an initial value of `null`:
@@ -164,7 +167,7 @@ useEffect(() => {
 }, [hootId]);
 
 // Verify that hoot state is being set correctly:
-console.log("hoot state:", hoot);
+console.log('hoot state:', hoot);
 ```
 
 > 💡 Remember to include `hootId` in the [dependency array](https://beta.reactjs.org/apis/react/useEffect#specifying-reactive-dependencies) of your `useEffect()`. This tells the `useEffect()` to fire off whenever the value of the `hootId` changes.
@@ -224,8 +227,8 @@ Regarding the `author` property of a `comment`, you might recall that our `show`
 // controllers/hoots.js
 
 const hoot = await Hoot.findById(req.params.hootId).populate([
-  "author",
-  "comments.author",
+  'author',
+  'comments.author',
 ]);
 ```
 

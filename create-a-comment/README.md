@@ -8,7 +8,11 @@ In this lesson, we’ll implement the following user story:
 
 - As a User, I should be able to add a comment on a hoot 'Details' page.
 
-The user story will require a new component called `src/components/CommentForm/CommentForm.jsx`. It will mirror the functionality for creating hoots with one key difference. When creating comments, our `CommentForm` component **will not be a distinct page**, instead it will exist as a child component within `src/components/HootDetails/HootDetails.jsx`. Additionally, when updating state with a new comment, we'll need to modify `hoot` state, as this is the object where the `comments` array will reside.
+To do this, we’ll create a new component: `src/components/CommentForm/CommentForm.jsx`. This component will work similarly to the one used for creating hoots, but with one key difference:
+
+- `CommentForm` **will not be a standalone page**. Instead, it will be embedded as a child component inside `src/components/HootDetails/HootDetails.jsx`.
+
+When adding a new comment, we’ll update the `hoot` state directly, since the `comments` array will be stored within the `hoot` object.
 
 This lesson will serve as a good example of how to handle creating an embedded resource in a React app.
 
@@ -16,24 +20,22 @@ This lesson will serve as a good example of how to handle creating an embedded r
 
 Let's build out the scaffolding for our component.
 
-Run the following commands in your terminal:
+1. Run the following commands in your terminal:
 
 ```bash
 mkdir src/components/CommentForm
 touch src/components/CommentForm/CommentForm.jsx
 ```
 
-Add the following to `src/components/CommentForm/CommentForm.jsx`:
+2. Add the following to `src/components/CommentForm/CommentForm.jsx`:
 
 ```jsx
 // src/components/CommentForm/CommentForm.jsx
 
-import { useState, useEffect } from "react";
-
-import * as hootService from "../../services/hootService";
+import { useState } from 'react';
 
 const CommentForm = (props) => {
-  const [formData, setFormData] = useState({ text: "" });
+  const [formData, setFormData] = useState({ text: '' });
 
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
@@ -41,22 +43,22 @@ const CommentForm = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // handleAddComment
-    setFormData({ text: "" });
+    // add handleAddComment
+    setFormData({ text: '' });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="text-input">Your comment:</label>
+      <label htmlFor='text-input'>Your comment:</label>
       <textarea
         required
-        type="text"
-        name="text"
-        id="text-input"
+        type='text'
+        name='text'
+        id='text-input'
         value={formData.text}
         onChange={handleChange}
       />
-      <button type="submit">SUBMIT COMMENT</button>
+      <button type='submit'>SUBMIT COMMENT</button>
     </form>
   );
 };
@@ -66,48 +68,55 @@ export default CommentForm;
 
 > 💡 Notice how we reset `formData` in our `handleSubmit` function. This is an important step, as we aren't navigating the user away from this page when a new comment is submitted.
 
-Next, import the component at the top of `src/components/HootDetails/HootDetails.jsx`:
+3. Next, import the component at the top of `src/components/HootDetails/HootDetails.jsx`:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-import CommentForm from "../CommentForm/CommentForm";
+import CommentForm from '../CommentForm/CommentForm';
 ```
 
-Add the component to the comments section as shown below:
+4. Add the component to the comments section as shown below:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-<h2>Comments</h2>
-<CommentForm />
+<section>
+  <h2>Comments</h2>
+  <CommentForm />
+
+  ...
 ```
 
-In your browser, verify that typing in the `CommentForm` updates `formData` correctly.
+5. In your browser, verify that typing in the `CommentForm` updates `formData` correctly.
 
 ## Build the `handleAddComment` function
 
 Next, let's create a `handleAddComment` function.
 
-Add the following to `src/components/HootDetails/HootDetails.jsx`:
+1. Add the following to `src/components/HootDetails/HootDetails.jsx`:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
 const handleAddComment = async (commentFormData) => {
-  console.log("commentFormData", commentFormData);
+  console.log('commentFormData', commentFormData);
 };
 ```
 
-With the function in place, pass it down to the `<CommentForm />`:
+2. With the function in place, pass it down to the `<CommentForm />`:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-<CommentForm handleAddComment={handleAddComment} />
+<section>
+  <h2>Comments</h2>
+  <CommentForm handleAddComment={handleAddComment} />
+
+  ...
 ```
 
-And update `handleSubmit` by calling upon `props.handleAddComment(formData)`:
+3. And update `handleSubmit` by calling `props.handleAddComment(formData)`:
 
 ```jsx
 // src/components/CommentForm/CommentForm.jsx
@@ -115,11 +124,11 @@ And update `handleSubmit` by calling upon `props.handleAddComment(formData)`:
 const handleSubmit = (evt) => {
   evt.preventDefault();
   props.handleAddComment(formData);
-  setFormData({ text: "" });
+  setFormData({ text: '' });
 };
 ```
 
-Confirm you are passing `formData` up to `src/components/HootDetails/HootDetails.jsx`.
+4. Confirm you are passing `formData` up to `src/components/HootDetails/HootDetails.jsx`. When you submit the comment form, you should see a `console.log` originating from the `HootDetails` component.
 
 ## Build the service function
 
@@ -133,10 +142,10 @@ Add the following to `src/services/hootService.js`:
 const createComment = async (hootId, commentFormData) => {
   try {
     const res = await fetch(`${BASE_URL}/${hootId}/comments`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(commentFormData),
     });
@@ -155,9 +164,9 @@ export {
 };
 ```
 
-## Call upon the service
+## Call the service
 
-With the service in place, we can complete the `handleAddComment` function in `src/components/HootDetails/HootDetails.jsx`:
+With the service in place, we can update the `handleAddComment` function in `src/components/HootDetails/HootDetails.jsx` to call the service and set state::
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
@@ -168,33 +177,37 @@ const handleAddComment = async (commentFormData) => {
 };
 ```
 
-There is a lot going on in this example of `setHoot`. Let’s break it down.
+There is a lot going on in the last line of this function with `setHoot()`.
 
-We are storing a single `hoot` object in `hoot` state, but we need to update a particular property of this object (`hoot.comments`).
+Let’s break it down:
 
-First, we use the [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) to copy all existing properties of the `hoot` object.
+- The `hoot` state stores a single `hoot` object. When we update it, we only want to modify the `comments` property, leaving the rest of the object unchanged.
 
-Within the `hoot` object, there is a `comments` property containing an array of `comment` objects. This array is the property we need to add our `newComment` to. To do so, we copy the existing `hoot.comments` array (again, using the spread operator), include the `newComment` at the end of the array, and finally assign this array to the `comments` property of the `hoot`.
+- Using the [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax), we copy all existing properties of the `hoot` object: `{ ...hoot }`.
 
-Take a look at the code block below for a step by step breakdown:
+- Inside the `hoot` object, the `comments` property is an array of `comment` objects.
+
+- To update it, we create a new array: `[...hoot.comments, newComment]`. This combines the existing `hoot.comments` array with the new comment at the end.
+
+- Finally, we assign this updated array to the `comments` property in the new `hoot` object and update the state.
+
+Let's look at it another way, with a step-by-step breakdown in code:
 
 ```jsx
-// Set state to an empty object:
+// reset state: sets hoot to an empty object
 setHoot({});
 
-// Set state to an object that includes all properties currently in Hoot state:
+// update state: keeps all current properties of hoot state unchanged
 setHoot({ ...hoot });
 
-// Much like the step above, except now the comments property of the object
-// being set to state has its value set to an empty array:
+// update state: keeps all current properties and sets comments to an empty array
 setHoot({ ...hoot, comments: [] });
 
-// Now the comments property of the object will include a copy of all
-// the comments that already exist in hoot state.
+// update state: keeps all current properties and copies the existing comments array
 setHoot({ ...hoot, comments: [...hoot.comments] });
 
-// And finally, we include the newComment at the end of the array:
+// update state: copies the existing comments and adds newComment at the end
 setHoot({ ...hoot, comments: [...hoot.comments, newComment] });
 ```
 
-Try it out in your browser. You should now be able to add comments!
+Try it out in your browser. You should now be able to add comments with the form!

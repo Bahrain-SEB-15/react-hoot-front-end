@@ -78,7 +78,7 @@ First navigate to `src/App.jsx` and import the `HootList` component near the top
 ```jsx
 // src/App.jsx
 
-import HootList from "./components/HootList/HootList";
+import HootList from './components/HootList/HootList';
 ```
 
 With the component imported, we are ready to add the `<Route/>`.
@@ -92,7 +92,10 @@ We can implement protected routes using a ternary operator to check if a user is
   user ? (
     // Protected Routes:
     <>
-      <Route path="/hoots" element={<HootList />} />
+      <Route
+        path='/hoots'
+        element={<HootList />}
+      />
     </>
   ) : (
     // If no user is logged in, render an empty placeholder:
@@ -109,16 +112,28 @@ Update your protected routes in `src/App.jsx` with the following:
 // src/App.jsx
 
 <Routes>
-  <Route path="/" element={user ? <Dashboard /> : <Landing />} />
+  <Route
+    path='/'
+    element={user ? <Dashboard /> : <Landing />}
+  />
   {user ? (
     <>
-      <Route path="/hoots" element={<HootList />} />
+      <Route
+        path='/hoots'
+        element={<HootList />}
+      />
     </>
   ) : (
     <></>
   )}
-  <Route path="/sign-up" element={<SignUpForm />} />
-  <Route path="/sign-in" element={<SignInForm />} />
+  <Route
+    path='/sign-up'
+    element={<SignUpForm />}
+  />
+  <Route
+    path='/sign-in'
+    element={<SignInForm />}
+  />
 </Routes>
 ```
 
@@ -169,7 +184,7 @@ Add the following to `src/services/hootService.js`:
 const index = async () => {
   try {
     const res = await fetch(BASE_URL, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     });
     return res.json();
   } catch (error) {
@@ -192,14 +207,14 @@ router.get('/', verifyToken, async (req, res) => {...}
 
 As a result, all of our hoot service functions will require this `'Authorization'` header.
 
-## Call upon the service
+## Call the service
 
 Back in `src/App.jsx`, add an import for our new `hootService` module:
 
 ```jsx
 // src/App.jsx
 
-import * as hootService from "./services/hootService";
+import * as hootService from './services/hootService';
 ```
 
 > 💡 The syntax above is a great way to import everything (`*`) from the module. Within `src/App.jsx`, individual functions can be called upon with _dot notation_ through the `hootService` object.
@@ -209,7 +224,7 @@ While we are here, let's import the `useEffect` hook as well:
 ```jsx
 // src/App.jsx
 
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from 'react';
 ```
 
 Before we retrieve a list of hoots from our backend, we'll need a state variable to store them in.
@@ -234,7 +249,7 @@ useEffect(() => {
     const hootsData = await hootService.index();
 
     // console log to verify
-    console.log("hootsData:", hootsData);
+    console.log('hootsData:', hootsData);
   };
   if (user) fetchAllHoots();
 }, [user]);
@@ -267,7 +282,10 @@ Once state is set, we can pass `hoots` down to the `<HootList/>` component:
 ```jsx
 // src/App.jsx
 
-<Route path="/hoots" element={<HootList hoots={hoots} />} />
+<Route
+  path='/hoots'
+  element={<HootList hoots={hoots} />}
+/>
 ```
 
 Within `src/components/HootList.jsx`, verify that `hoots` is accessible through `props`.
@@ -305,7 +323,7 @@ Add the following import to `src/components/HootList/HootList.jsx`:
 ```jsx
 // src/components/HootList/HootList.jsx
 
-import { Link } from "react-router";
+import { Link } from 'react-router';
 ```
 
 And update the `return` with the following:
@@ -316,7 +334,10 @@ And update the `return` with the following:
 return (
   <main>
     {props.hoots.map((hoot) => (
-      <Link key={hoot._id} to={`/hoots/${hoot._id}`}>
+      <Link
+        key={hoot._id}
+        to={`/hoots/${hoot._id}`}
+      >
         <article>
           <header>
             <h2>{hoot.title}</h2>

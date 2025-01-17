@@ -21,7 +21,7 @@ Add the following import to the top of `src/components/HootDetails/HootDetails.j
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-import { Link } from "react-router";
+import { Link } from 'react-router';
 ```
 
 Next, add the `<Link>` directly above the 'Delete' `<button>`:
@@ -53,7 +53,10 @@ Add the following to your protected routes in `src/App.jsx`:
 ```jsx
 // src/App.jsx
 
-<Route path="/hoots/:hootId/edit" element={<HootForm />} />
+<Route
+  path='/hoots/:hootId/edit'
+  element={<HootForm />}
+/>
 ```
 
 In the next section, we'll access the value of this `hootId` parameter with the `useParams()` hook.
@@ -65,7 +68,7 @@ Head over to `src/components/HootForm/HootForm.jsx` and import `useParams` from 
 ```jsx
 // src/components/HootForm/HootForm.jsx
 
-import { useParams } from "react-router";
+import { useParams } from 'react-router';
 ```
 
 Within the component, call upon `useParams()` to access the `hootId`:
@@ -99,8 +102,8 @@ The first modification we'll make to the functionality of the component relates 
 At the top of `src/components/HootForm/HootForm.jsx`, add imports for `hootService` and `useEffect`:
 
 ```jsx
-import { useState, useEffect } from "react";
-import * as hootService from "../../services/hootService";
+import { useState, useEffect } from 'react';
+import * as hootService from '../../services/hootService';
 ```
 
 Add the following `useEffect()`
@@ -129,7 +132,7 @@ Next we'll add the `handleUpdateHoot` function in `src/App.jsx`
 // src/App.jsx
 
 const handleUpdateHoot = async (hootId, hootFormData) => {
-  console.log("hootId:", hootId, "hootFormData:", hootFormData);
+  console.log('hootId:', hootId, 'hootFormData:', hootFormData);
   navigate(`/hoots/${hootId}`);
 };
 ```
@@ -146,7 +149,7 @@ Next, pass the function down to the `<HootForm>`:
 // // src/App.jsx
 
 <Route
-  path="/hoots/:hootId/edit"
+  path='/hoots/:hootId/edit'
   element={<HootForm handleUpdateHoot={handleUpdateHoot} />}
 />
 ```
@@ -184,10 +187,10 @@ Time to add the `update` service function:
 async function update(hootId, hootFormData) {
   try {
     const res = await fetch(`${BASE_URL}/${hootId}`, {
-      method: "PUT",
+      method: 'PUT',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(hootFormData),
     });
@@ -208,7 +211,7 @@ export {
 };
 ```
 
-## Call upon the service
+## Call the service
 
 Next we'll update `handleUpdateHoot` with our service and set state accordingly.
 
