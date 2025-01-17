@@ -78,7 +78,7 @@ const { hootId } = useParams();
 consol.log(hootId);
 ```
 
-> When we add a `console.log`, we see that `hootId` is undefined when navigating to the form via the `NEW HOOT` link, but it gets populated when we navigate to the form using the "Edit" link from the `HootDetails` page.
+> 💡 When we add a `console.log`, we see that `hootId` is undefined when navigating to the form via the `NEW HOOT` link, but it gets populated when we navigate to the form using the "Edit" link from the `HootDetails` page.
 
 3. We can also confirm this visually by adding an `<h1>` and a **ternary** to our `<form>` to dynamically change the title:
 
@@ -96,7 +96,7 @@ This example demonstrates how we can modify other elements and behaviors of the 
 
 ## Set `formData` state
 
-The first modification we'll make to the functionality of the component relates to its initial state. If the user is updating a hoot, the inputs of our form should be prefilled with any existing hoot details. This will require calling upon the `hootService.show()` service within `src/components/HootForm/HootForm.jsx`.
+The first modification we'll make to the functionality of the component relates to its initial state. If the user is updating a hoot, the inputs of our form should be prefilled with any existing hoot details. This will require calling the `hootService.show()` service within `src/components/HootForm/HootForm.jsx`.
 
 1. At the top of `src/components/HootForm/HootForm.jsx`, add imports for `hootService` and `useEffect`:
 
@@ -121,13 +121,13 @@ useEffect(() => {
 }, [hootId]);
 ```
 
-Notice the `if` condition and the inclusion of `hootId` in the dependency array. If a `hootId` is present, we make a request to our server, and use the `hootData` response to `setFormData` state. If there is no `hootId`, we leave the initial state of `formData` unchanged.
+> 💡 Notice the `if` condition and the inclusion of `hootId` in the dependency array. If a `hootId` is present, we make a request to our server, and use the `hootData` response to `setFormData` state. If there is no `hootId`, we leave the initial state of `formData` unchanged.
 
 3. Take a moment to confirm that the initial state of `formData` is being set correctly when editing a hoot.
 
 ## Build the `handleUpdateHoot` function
 
-Next we'll add the `handleUpdateHoot` function in `src/App.jsx`
+1. Next we'll add the `handleUpdateHoot` function in `src/App.jsx`
 
 ```jsx
 // src/App.jsx
@@ -144,7 +144,7 @@ For now, we'll confirm that the function is receiving two pieces of data:
 
 - `hootFormData`
 
-4. Next, pass the function down to the `<HootForm>`:
+2. Next, pass the function down to the `<HootForm>`:
 
 ```jsx
 // // src/App.jsx
@@ -157,7 +157,7 @@ For now, we'll confirm that the function is receiving two pieces of data:
 
 > 🚨 There are currently **two** routes rendering the `<HootForm>` in `src/App.jsx`. Be sure to pass `handleUpdateHoot` to the component being rendered for the `/hoots/:hootId/edit` route!
 
-5. Back in `src/components/HootForm/HootForm.jsx`, make the following change to `handleSubmit`:
+3. Back in `src/components/HootForm/HootForm.jsx`, make the following change to `handleSubmit`:
 
 ```jsx
 // src/components/HootForm/HootForm.jsx
@@ -172,9 +172,9 @@ const handleSubmit = (evt) => {
 };
 ```
 
-Once again, we are relying on the `hootId` to determine the behavior of our component. If a `hootId` is present, we call `props.handleUpdateHoot(hootId, formData)`. Otherwise, we call `props.handleAddHoot(formData)`
+> 💡 Once again, we are relying on the `hootId` to determine the behavior of our component. If a `hootId` is present, we call `props.handleUpdateHoot(hootId, formData)`. Otherwise, we call `props.handleAddHoot(formData)`
 
-6. Submit the `edit` form and confirm that the necessary data is being passed up the component tree. On submit you should see a `console.log` originating from `App.jsx`.
+4. Submit the `edit` form and confirm that the necessary data is being passed up the component tree. On submit you should see a `console.log` originating from `App.jsx`.
 
 ## Build the service function
 

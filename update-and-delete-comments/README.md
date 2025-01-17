@@ -124,7 +124,7 @@ const handleDeleteComment = async (commentId) => {
 };
 ```
 
-> 💡 When calling upon `hootService.deleteComment()`, remember to pass in `hootId` and `commentId`.
+> 💡 When calling `hootService.deleteComment()`, remember to pass in `hootId` and `commentId`.
 
 ## Updating comments
 
@@ -265,7 +265,7 @@ const updateComment = async (hootId, commentId, commentFormData) => {
 
 ### Call the service
 
-The final step is to modify your `handleSubmit` function by calling upon `hootService.updateComment`.
+The final step is to modify your `handleSubmit` function by calling `hootService.updateComment`.
 
 Remember, this function is also responsible for adding comments, so we'll require an `if...else` block to switch between two services.
 

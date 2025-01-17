@@ -95,7 +95,7 @@ const HootDetails = (props) => {
 };
 ```
 
-> 💡 Be sure to [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the `hootId` when calling upon `useParams()`!
+> 💡 Be sure to [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the `hootId` when calling `useParams()`!
 
 Confirm that you have access to the `hootId` in `src/components/HootDetails/HootDetails.jsx`.
 
