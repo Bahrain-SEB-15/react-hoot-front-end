@@ -210,7 +210,7 @@ Within a `useEffect`, we can call `hootService.show()`. The `hoot` object issued
 
 ```jsx
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 
 import * as hootService from '../../services/hootService';
 ```
