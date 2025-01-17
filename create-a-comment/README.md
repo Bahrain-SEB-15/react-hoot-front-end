@@ -189,7 +189,6 @@ Let’s break it down:
 
 - To update it, we create a new array: `[...hoot.comments, newComment]`. This combines the existing `hoot.comments` array with the new comment at the end.
 
-- Finally, we assign this updated array to the `comments` property in the new `hoot` object and update the state.
 
 Let's look at it another way, with a step-by-step breakdown in code:
 
