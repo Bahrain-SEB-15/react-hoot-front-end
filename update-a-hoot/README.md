@@ -21,7 +21,7 @@ Add the following import to the top of `src/components/HootDetails/HootDetails.j
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router";
 ```
 
 Next, add the `<Link>` directly above the 'Delete' `<button>`:
@@ -29,13 +29,15 @@ Next, add the `<Link>` directly above the 'Delete' `<button>`:
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-{hoot.author._id === user._id && (
+{
+  hoot.author._id === user._id && (
     <>
       <Link to={`/hoots/${hootId}/edit`}>Edit</Link>
 
       <button onClick={() => props.handleDeleteHoot(hootId)}>Delete</button>
     </>
-  )}
+  );
+}
 ```
 
 > ❓ Why are we wrapping the `Link` and `button` elements in a [fragment](https://beta.reactjs.org/apis/react/Fragment#fragment)?
@@ -63,7 +65,7 @@ Head over to `src/components/HootForm/HootForm.jsx` and import `useParams` from 
 ```jsx
 // src/components/HootForm/HootForm.jsx
 
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router";
 ```
 
 Within the component, call upon `useParams()` to access the `hootId`:
@@ -97,8 +99,8 @@ The first modification we'll make to the functionality of the component relates 
 At the top of `src/components/HootForm/HootForm.jsx`, add imports for `hootService` and `useEffect`:
 
 ```jsx
-import { useState, useEffect } from 'react';
-import * as hootService from '../../services/hootService';
+import { useState, useEffect } from "react";
+import * as hootService from "../../services/hootService";
 ```
 
 Add the following `useEffect()`
@@ -127,7 +129,7 @@ Next we'll add the `handleUpdateHoot` function in `src/App.jsx`
 // src/App.jsx
 
 const handleUpdateHoot = async (hootId, hootFormData) => {
-  console.log('hootId:', hootId, 'hootFormData:', hootFormData);
+  console.log("hootId:", hootId, "hootFormData:", hootFormData);
   navigate(`/hoots/${hootId}`);
 };
 ```
@@ -182,10 +184,10 @@ Time to add the `update` service function:
 async function update(hootId, hootFormData) {
   try {
     const res = await fetch(`${BASE_URL}/${hootId}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(hootFormData),
     });

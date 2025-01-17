@@ -44,7 +44,8 @@ Take a look at the code block below for reference on where these elements should
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-{hoot.comments.map((comment) => (
+{
+  hoot.comments.map((comment) => (
     <article key={comment._id}>
       <header>
         <p>
@@ -73,7 +74,7 @@ Start by building the scaffolding for the function, updating the 'Delete' button
 // src/components/HootDetails/HootDetails.jsx
 
 const handleDeleteComment = async (commentId) => {
-  console.log('commentId:', commentId);
+  console.log("commentId:", commentId);
 };
 ```
 
@@ -83,7 +84,7 @@ With access to the `commentId`, you should be able to `filter()` local state:
 // src/components/HootDetails/HootDetails.jsx
 
 const handleDeleteComment = async (commentId) => {
-  console.log('commentId:', commentId);
+  console.log("commentId:", commentId);
   // Eventually the service function will be called upon here
   setHoot({
     ...hoot,
@@ -114,7 +115,7 @@ With the service in place, return to `src/components/HootDetails/HootDetails.jsx
 
 ```jsx
 const handleDeleteComment = async (commentId) => {
-  console.log('commentId:', commentId);
+  console.log("commentId:", commentId);
   // Call upon hootService.deleteComment here!
   setHoot({
     ...hoot,
@@ -156,7 +157,7 @@ Remember to import the component inside `src/App.jsx`:
 ```jsx
 // src/App.jsx
 
-import CommentForm from './components/CommentForm/CommentForm';
+import CommentForm from "./components/CommentForm/CommentForm";
 ```
 
 And add the following protected route:
@@ -178,12 +179,12 @@ In the next section, we'll access the value of this `hootId` parameter with the 
 
 Next we'll need to modify `src/components/CommentForm/CommentForm.jsx` so that it can be used in two different contexts (creating comments and updating comments).
 
-Open up `src/components/CommentForm/CommentForm.jsx` and import `useParams` and from `'react-router-dom'`:
+Open up `src/components/CommentForm/CommentForm.jsx` and import `useParams` and from `'react-router'`:
 
 ```jsx
 // src/components/CommentForm/CommentForm.jsx
 
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router";
 ```
 
 Within the component, call upon `useParams()` to access the `hootId` **and** the `commentId`:
@@ -207,8 +208,8 @@ Within a `useEffect`, we can call upon `hootService.show()`. The `hoot` object i
 At the top of `src/components/CommentForm/CommentForm.jsx`, add imports for `hootService` and `useEffect`:
 
 ```jsx
-import { useState, useEffect } from 'react';
-import * as hootService from '../../services/hootService';
+import { useState, useEffect } from "react";
+import * as hootService from "../../services/hootService";
 ```
 
 Add the following `useEffect()`:
@@ -248,10 +249,10 @@ Add the following to `src/services/hootService.js`:
 const updateComment = async (hootId, commentId, commentFormData) => {
   try {
     const res = await fetch(`${BASE_URL}/${hootId}/comments/${commentId}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(commentFormData),
     });
@@ -287,6 +288,6 @@ const handleSubmit = (evt) => {
   } else {
     props.handleAddComment(formData);
   }
-  setFormData({ text: '' });
+  setFormData({ text: "" });
 };
 ```

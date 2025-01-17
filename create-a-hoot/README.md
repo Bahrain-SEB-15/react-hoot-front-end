@@ -149,7 +149,7 @@ Take a moment to verify that you can successfully change `formData` state. When 
 
 To make our form fully functional, we'll need to build out a `handleAddHoot` function.
 
-First let's import the `useNavigate()` hook from `react-router-dom`. This will allow us to redirect a user back to the hoot list page after submitting a new hoot.
+First let's import the `useNavigate()` hook from `react-router`. This will allow us to redirect a user back to the hoot list page after submitting a new hoot.
 
 Import `useNavigate` at the top of `src/App.jsx`:
 
@@ -249,6 +249,6 @@ const handleAddHoot = async (hootFormData) => {
 };
 ```
 
-Notice how when we `setHoots`, the `newHoot` is added to the **front of the array**, ensuring it appears at the top of the page. This matches the behavior of our `index` function, which retrieves `hoots` in descending order (newest first). Adding `newHoot` to the end would disrupt this order when the page refreshes, as the `index` service re-fetches the data.
+> Notice how when we `setHoots`, the `newHoot` is added to the **front of the array**, ensuring it appears at the top of the page. This matches the behavior of our `index` function, which retrieves `hoots` in descending order (newest first). Adding `newHoot` to the end would disrupt this order when the page refreshes, as the `index` service re-fetches the data.
 
 Test the form in your browser. You should now be able to add new hoots!

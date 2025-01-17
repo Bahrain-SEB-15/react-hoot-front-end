@@ -88,7 +88,8 @@ Certain routes in our application, like the `HootList` page, should only be acce
 We can implement protected routes using a ternary operator to check if a user is logged in. If the user exists, they gain access to the protected routes; otherwise, they are redirected or shown a placeholder (like a `404`).
 
 ```jsx
-{ user ? (
+{
+  user ? (
     // Protected Routes:
     <>
       <Route path="/hoots" element={<HootList />} />
@@ -121,7 +122,7 @@ Update your protected routes in `src/App.jsx` with the following:
 </Routes>
 ```
 
-> 💡 In React, ternary operators allow you to conditionally display different components or groups of components based on a specific condition. In the code snippet above, we can use a ternary to both conditionally render a specific element for the same path "/" or protect groups of routes based logged in user. 
+> 💡 In React, ternary operators allow you to conditionally display different components or groups of components based on a specific condition. In the code snippet above, we can use a ternary to both conditionally render a specific element for the same path "/" or protect groups of routes based logged in user.
 
 With our `<Route>` in place, we should now be able to navigate to the `HootList` component.
 
@@ -297,7 +298,7 @@ Check your browser and click on the **Hoots** link. If you have existing hoots i
 
 > 🚨 If you deleted all of the hoots in the database at the end of the Express REST API lesson, open up Postman and add a few new hoots so that you'll have data for this section of the lesson.
 
-Time to touch up our JSX. We'll replace the existing `<p>` tags with clickable links that eventually navigate a user to an details page. First we'll need the `<Link>` component from `'react-router-dom'`.
+Time to touch up our JSX. We'll replace the existing `<p>` tags with clickable links that eventually navigate a user to an details page. First we'll need the `<Link>` component from `'react-router'`.
 
 Add the following import to `src/components/HootList/HootList.jsx`:
 
