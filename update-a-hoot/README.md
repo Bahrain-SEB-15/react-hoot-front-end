@@ -16,15 +16,15 @@ To accomplish this, we'll make use of the `useParams()` hook. The `useParams()` 
 
 Before we modify our form, we'll add the 'Edit' `<Link>` that directs a user to that page.
 
-Add the following import to the top of `src/components/HootDetails/HootDetails.jsx`:
+1. Add `Link` to the following import to the top of `src/components/HootDetails/HootDetails.jsx`:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-import { Link } from 'react-router';
+import { useParams, Link } from 'react-router';
 ```
 
-Next, add the `<Link>` directly above the 'Delete' `<button>`:
+2. Next, add the edit `<Link>` directly above the 'Delete' `<button>`:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
@@ -40,15 +40,13 @@ Next, add the `<Link>` directly above the 'Delete' `<button>`:
 }
 ```
 
-> ❓ Why are we wrapping the `Link` and `button` elements in a [fragment](https://beta.reactjs.org/apis/react/Fragment#fragment)?
-
 Take note of the value given to the `to` prop, it will be important in the following steps:
 
 ```js
 `/hoots/${hootId}/edit`;
 ```
 
-Add the following to your protected routes in `src/App.jsx`:
+3. Add the following to your **protected** routes in `src/App.jsx`:
 
 ```jsx
 // src/App.jsx
@@ -63,7 +61,7 @@ In the next section, we'll access the value of this `hootId` parameter with the 
 
 ## Modify the `HootForm`
 
-Head over to `src/components/HootForm/HootForm.jsx` and import `useParams` from `'react-route-dom'`:
+1. Head over to `src/components/HootForm/HootForm.jsx` and import `useParams` from `'react-router'`:
 
 ```jsx
 // src/components/HootForm/HootForm.jsx
@@ -71,17 +69,18 @@ Head over to `src/components/HootForm/HootForm.jsx` and import `useParams` from 
 import { useParams } from 'react-router';
 ```
 
-Within the component, call `useParams()` to access the `hootId`:
+2. Within the component, call `useParams()` to access the `hootId`:
 
 ```jsx
-// // src/components/HootForm/HootForm.jsx
+// src/components/HootForm/HootForm.jsx
 
 const { hootId } = useParams();
+consol.log(hootId);
 ```
 
-With a `console.log`, verify that you can access the `hootId`.
+> When we add a `console.log`, we see that `hootId` is undefined when navigating to the form via the `NEW HOOT` link, but it gets populated when we navigate to the form using the "Edit" link from the `HootDetails` page.
 
-We can also confirm this visually by adding an `<h1>` and a **ternary** to our `<form>`:
+3. We can also confirm this visually by adding an `<h1>` and a **ternary** to our `<form>` to dynamically change the title:
 
 ```jsx
 // src/components/HootForm/HootForm.jsx
@@ -99,14 +98,16 @@ This example demonstrates how we can modify other elements and behaviors of the 
 
 The first modification we'll make to the functionality of the component relates to its initial state. If the user is updating a hoot, the inputs of our form should be prefilled with any existing hoot details. This will require calling upon the `hootService.show()` service within `src/components/HootForm/HootForm.jsx`.
 
-At the top of `src/components/HootForm/HootForm.jsx`, add imports for `hootService` and `useEffect`:
+1. At the top of `src/components/HootForm/HootForm.jsx`, add imports for `hootService` and `useEffect`:
 
 ```jsx
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
+
 import * as hootService from '../../services/hootService';
 ```
 
-Add the following `useEffect()`
+2. Add the following `useEffect()`
 
 ```jsx
 // src/components/HootForm/HootForm.jsx
@@ -122,7 +123,7 @@ useEffect(() => {
 
 Notice the `if` condition and the inclusion of `hootId` in the dependency array. If a `hootId` is present, we make a request to our server, and use the `hootData` response to `setFormData` state. If there is no `hootId`, we leave the initial state of `formData` unchanged.
 
-Take a moment to confirm that the initial state of `formData` is being set correctly when editing a hoot.
+3. Take a moment to confirm that the initial state of `formData` is being set correctly when editing a hoot.
 
 ## Build the `handleUpdateHoot` function
 
@@ -139,11 +140,11 @@ const handleUpdateHoot = async (hootId, hootFormData) => {
 
 For now, we'll confirm that the function is receiving two pieces of data:
 
-1. `hootId`
+- `hootId`
 
-2. `hootFormData`
+- `hootFormData`
 
-Next, pass the function down to the `<HootForm>`:
+4. Next, pass the function down to the `<HootForm>`:
 
 ```jsx
 // // src/App.jsx
@@ -156,7 +157,7 @@ Next, pass the function down to the `<HootForm>`:
 
 > 🚨 There are currently **two** routes rendering the `<HootForm>` in `src/App.jsx`. Be sure to pass `handleUpdateHoot` to the component being rendered for the `/hoots/:hootId/edit` route!
 
-Back in `src/components/HootForm/HootForm.jsx`, make the following change to `handleSubmit`:
+5. Back in `src/components/HootForm/HootForm.jsx`, make the following change to `handleSubmit`:
 
 ```jsx
 // src/components/HootForm/HootForm.jsx
@@ -173,13 +174,16 @@ const handleSubmit = (evt) => {
 
 Once again, we are relying on the `hootId` to determine the behavior of our component. If a `hootId` is present, we call `props.handleUpdateHoot(hootId, formData)`. Otherwise, we call `props.handleAddHoot(formData)`
 
-Submit the edit form and confirm that the necessary data is being passed up the component tree.
+6. Submit the `edit` form and confirm that the necessary data is being passed up the component tree. On submit you should see a `console.log` originating from `App.jsx`.
 
 ## Build the service function
 
-The following code should mirror much of the functionality you've seen elsewhere in this lesson. Our `update` service function will depart slightly from `create`, in that it issues a `PUT` request and requires `two` parameters. The first parameter will be used to identify the hoot, and the second parameter contains the information that the hoot will be updated with. Additionally, modifying `hoots` state with the updated hoot will be a bit more involved than what you saw with `handleAddHoot`.
+The following code is similar to what you’ve seen in previous parts of the lesson. However, our update service function will differ slightly from create. It uses a PUT request and takes two parameters:
 
-Time to add the `update` service function:
+- The first parameter is `hootId` used to identify the hoot to update.
+- The second parameter contains the updated `hootFormData` for the hoot.
+
+1. Time to add the `update` service function:
 
 ```jsx
 // src/services/hootService.js
@@ -215,25 +219,29 @@ export {
 
 Next we'll update `handleUpdateHoot` with our service and set state accordingly.
 
-Add the following to `src/App.jsx`:
+1. Update the following in `src/App.jsx`:
 
 ```jsx
 // src/App.jsx
 
 const handleUpdateHoot = async (hootId, hootFormData) => {
   const updatedHoot = await hootService.update(hootId, hootFormData);
-
   setHoots(hoots.map((hoot) => (hootId === hoot._id ? updatedHoot : hoot)));
-
   navigate(`/hoots/${hootId}`);
 };
 ```
 
-This implementation of the [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) method is a bit different from the mapping of `JSX` elements you’ve seen in React previously. Let's take a moment to discuss the code above.
+> This implementation of the [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) method is a bit different from the mapping of `JSX` elements you’ve seen in React previously.
 
-Remember, `hoots` state is an array of `hoot` objects. Calling upon `hootService.update()` has given us access to an `updatedHoot`. This `updatedHoot` object needs to be added to `hoots` state. To do so, we need to replace the original version of that object with the `updatedHoot`.
+This `map()` function is used to update a specific `hoot` in the `hoots` state array. Here's a breakdown of what is happening:
 
-By mapping over the `hoots` array, we are able to check each `hoot` object. If the current element being processed has an `_id` that matches `updatedHoot._id`, we replace it with the `updatedHoot` that was returned from our backend. If the `_id` instances do not match, we simply return the existing element.
+- `hootService.update()` returns the `updatedHoot` after sending the update request to the backend.
+
+- We use `map()` to iterate over the `hoots` array and check each `hoot` object.
+
+- If the `_id` of the current `hoot` matches the `hootId`, we replace it with the `updatedHoot`.
+
+- If the `_id` doesn’t match, we return the original `hoot` object.
 
 Through this process we are able to update a single object held in `hoots` state, while also maintaining an accurate record of the remaining elements in the array.
 
