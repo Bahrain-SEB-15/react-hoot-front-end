@@ -12,27 +12,27 @@ In this module, students will build the user interface for "Hoot," a modern full
 
 ## Content
 
-| Lesson                                                                                 | Skills                                                                       |
-| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| [Setup](./setup/README.md)                                                             | Setting up the development environment                                       |
-| [Setting the Stage](./setting-the-stage/README.md)                                     | Review the required features and high level architecture of this application |
-| [Build the HootList component](./build-the-hoot-list-component/README.md)              | Displaying a list of hoots.                                                  |
-| [Build the HootDetails component](./build-the-hoot-details-component/README.md)        | Displaying hoot details.                                                     |
-| [Create a Hoot](./create-a-hoot/README.md)                                             | Building a component to create hoots.                                        |
-| [Create a Comment](./create-a-comment/README.md)                                       | Building a component to create comments.                                     |
-| [Delete a Hoot](./delete-a-hoot/README.md)                                             | Building the functionality to delete a hoot.                                 |
-| [Update a Hoot](./update-a-hoot/README.md)                                             | Building the functionality to update a hoot.                                 |
-| [Update and Delete Comments](./update-and-delete-comments/README.md)                   | Building the functionality to update and delete comments.                    |
-| [Add CSS Modules](./add-css-modules/README.md)                                         | Applying CSS Modules to style an application.                                |
-| [Style the HootList Component](./style-the-hoot-list-component/README.md)              | Applying CSS Modules to a list component.                                    |
-| [Style the HootDetails Component](./style-the-hoot-details-component/README.md)        | Applying CSS Modules to a details component.                                 |
-| [Style the Form Components](./style-the-form-components/README.md)                     | Applying CSS Modules to a form component.                                    |
-| [Style Signup and Signin](./style-signup-and-signin/README.md)                         | Applying styles to signup and sign in pages.                                 |
-| [Build a Loading Screen](./build-a-loading-screen/README.md)                           | Building a reusable loading component.                                       |
-| [Build a Landing Page](./build-a-landing-page/README.md)                               | Building a landing page component.                                           |
-| [Build a Reusable Icon Component](./build-a-reusable-icon-component/README.md)         | Building a reusable icon component.                                          |
-| [Build a Reusable Metadata Component](./build-a-reusable-metadata-component/README.md) | Building a reusable metadata component.                                      |
+| Lesson                                                                                  | Skills                                                                       |
+| --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| [Setup](../setup/README.md)                                                             | Setting up the development environment                                       |
+| [Setting the Stage](../setting-the-stage/README.md)                                     | Review the required features and high level architecture of this application |
+| [Build the HootList component](../build-the-hoot-list-component/README.md)              | Displaying a list of hoots.                                                  |
+| [Build the HootDetails component](../build-the-hoot-details-component/README.md)        | Displaying hoot details.                                                     |
+| [Create a Hoot](../create-a-hoot/README.md)                                             | Building a component to create hoots.                                        |
+| [Create a Comment](../create-a-comment/README.md)                                       | Building a component to create comments.                                     |
+| [Delete a Hoot](../delete-a-hoot/README.md)                                             | Building the functionality to delete a hoot.                                 |
+| [Update a Hoot](../update-a-hoot/README.md)                                             | Building the functionality to update a hoot.                                 |
+| [Update and Delete Comments](../update-and-delete-comments/README.md)                   | Building the functionality to update and delete comments.                    |
+| [Add CSS Modules](../add-css-modules/README.md)                                         | Applying CSS Modules to style an application.                                |
+| [Style the HootList Component](../style-the-hoot-list-component/README.md)              | Applying CSS Modules to a list component.                                    |
+| [Style the HootDetails Component](../style-the-hoot-details-component/README.md)        | Applying CSS Modules to a details component.                                 |
+| [Style the Form Components](../style-the-form-components/README.md)                     | Applying CSS Modules to a form component.                                    |
+| [Style Signup and Signin](../style-signup-and-signin/README.md)                         | Applying styles to signup and sign in pages.                                 |
+| [Build a Loading Screen](../build-a-loading-screen/README.md)                           | Building a reusable loading component.                                       |
+| [Build a Landing Page](../build-a-landing-page/README.md)                               | Building a landing page component.                                           |
+| [Build a Reusable Icon Component](../build-a-reusable-icon-component/README.md)         | Building a reusable icon component.                                          |
+| [Build a Reusable Metadata Component](../build-a-reusable-metadata-component/README.md) | Building a reusable metadata component.                                      |
 
 ## References
 
-📖 [Reference Materials](./references/README.md)
+📖 [Reference Materials](../references/README.md)
