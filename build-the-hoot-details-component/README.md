@@ -30,7 +30,7 @@ Add the following to `src/components/HootDetails/HootDetails.jsx`:
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-const HootDetails = () => {
+const HootDetails = (props) => {
   return <main>Hoot Details</main>;
 };
 
@@ -82,12 +82,12 @@ Add the following import to `src/components/HootDetails/HootDetails.jsx`:
 import { useParams } from 'react-router';
 ```
 
-Next, let's call upon `useParams()` to get access to the `hootId`:
+Next, let's call `useParams()` to get access to the `hootId`:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-const HootDetails = () => {
+const HootDetails = (props) => {
   const { hootId } = useParams();
   console.log('hootId', hootId);
 

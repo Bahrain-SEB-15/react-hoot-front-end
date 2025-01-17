@@ -66,7 +66,7 @@ Take a look at the code block below for reference on where these elements should
 
 Next, you'll want to add a `handleDeleteComment` function to `src/components/HootDetails/HootDetails.jsx`.
 
-The function should accept a `commentId`, call upon a `deleteComment` service function, and filter `hoot` state accordingly. Don't worry about the `deleteComment` service function for now, we'll address that in the next step.
+The function should accept a `commentId`, call a `deleteComment` service function, and filter `hoot` state accordingly. Don't worry about the `deleteComment` service function for now, we'll address that in the next step.
 
 Start by building the scaffolding for the function, updating the 'Delete' button's event handler, and confirming that you have access to the `commentId` within `handleDeleteComment`:
 
@@ -116,7 +116,7 @@ With the service in place, return to `src/components/HootDetails/HootDetails.jsx
 ```jsx
 const handleDeleteComment = async (commentId) => {
   console.log('commentId:', commentId);
-  // Call upon hootService.deleteComment here!
+  // call  hootService.deleteComment here!
   setHoot({
     ...hoot,
     comments: hoot.comments.filter((comment) => comment._id !== commentId),
@@ -187,7 +187,7 @@ Open up `src/components/CommentForm/CommentForm.jsx` and import `useParams` and 
 import { useParams } from 'react-router';
 ```
 
-Within the component, call upon `useParams()` to access the `hootId` **and** the `commentId`:
+Within the component, call `useParams()` to access the `hootId` **and** the `commentId`:
 
 ```jsx
 // // src/components/HootForm/HootForm.jsx
@@ -203,7 +203,7 @@ Next, we'll use the params from the step above to fetch the necessary data for `
 
 Our backend does not have a dedicated controller for retrieving a specific comment, but the existing `show` functionality for hoots should work well in this scenario.
 
-Within a `useEffect`, we can call upon `hootService.show()`. The `hoot` object issued as a response will contain the comment we need, which can be located by calling `Array.prototype.find()` on `hoot.comments`. The resulting comment data can be stored in `formData` state.
+Within a `useEffect`, we can call `hootService.show()`. The `hoot` object issued as a response will contain the comment we need, which can be located by calling `Array.prototype.find()` on `hoot.comments`. The resulting comment data can be stored in `formData` state.
 
 At the top of `src/components/CommentForm/CommentForm.jsx`, add imports for `hootService` and `useEffect`:
 
@@ -229,7 +229,7 @@ useEffect(() => {
 
 Take a moment to confirm that the initial state of `formData` is being set correctly when editing a comment.
 
-> 💡 Note the above `if` condition and inclusion of `hootId` and `commentId` in our effect's dependency array. Our effect will only call upon `fetchHoot` if both of these pieces of data are present. Otherwise, we can assume the component is being used to create a brand new comment, in which case `formData` state should maintain its initial value.
+> 💡 Note the above `if` condition and inclusion of `hootId` and `commentId` in our effect's dependency array. Our effect will only call `fetchHoot` if both of these pieces of data are present. Otherwise, we can assume the component is being used to create a brand new comment, in which case `formData` state should maintain its initial value.
 
 ### Build the service function
 
@@ -269,7 +269,7 @@ The final step is to modify your `handleSubmit` function by calling upon `hootSe
 
 Remember, this function is also responsible for adding comments, so we'll require an `if...else` block to switch between two services.
 
-Our `if` condition should check for both a `hootId` and a `commentId`. If both pieces of data are present, we can call upon `hootService.updateComment` and `navigate()` the user back to `/hoots/${hootId}`. Otherwise, we should call upon `props.handleAddComment(formData)`, with no redirect.
+Our `if` condition should check for both a `hootId` and a `commentId`. If both pieces of data are present, we can call `hootService.updateComment` and `navigate()` the user back to `/hoots/${hootId}`. Otherwise, we should call `props.handleAddComment(formData)`, with no redirect.
 
 Note, after updating a comment, the user will be redirected back to the hoot 'Details' page. This will cause the `hootService.show(hootId)` function to fire off again, thus updating state with whatever changes were made to our backend.
 

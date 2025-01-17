@@ -71,7 +71,7 @@ Head over to `src/components/HootForm/HootForm.jsx` and import `useParams` from 
 import { useParams } from 'react-router';
 ```
 
-Within the component, call upon `useParams()` to access the `hootId`:
+Within the component, call `useParams()` to access the `hootId`:
 
 ```jsx
 // // src/components/HootForm/HootForm.jsx
@@ -171,7 +171,7 @@ const handleSubmit = (evt) => {
 };
 ```
 
-Once again, we are relying on the `hootId` to determine the behavior of our component. If a `hootId` is present, we call upon `props.handleUpdateHoot(hootId, formData)`. Otherwise, we call upon `props.handleAddHoot(formData)`
+Once again, we are relying on the `hootId` to determine the behavior of our component. If a `hootId` is present, we call `props.handleUpdateHoot(hootId, formData)`. Otherwise, we call `props.handleAddHoot(formData)`
 
 Submit the edit form and confirm that the necessary data is being passed up the component tree.
 
