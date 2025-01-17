@@ -7,9 +7,9 @@
 Before we begin building the "Hoot" pages for our application, let’s confirm that the authentication system is working properly. This will ensure that the React Auth Template is correctly connected to the Hoot Back-End API.
 
 1. Open the application in your browser.
-2. Use the sign-up form to create a new user account.
+2. Use the sign-up form to create a new user account or sign in as an existing user (preferably with existing hoots!).
 
-If everything is set up correctly, your new user account will be created, and you’ll be redirected to the `Dashboard` page.
+If everything is set up correctly you’ll be signed in and redirected to the `Dashboard` page.
 
 ## Building the HootList component
 
@@ -85,7 +85,7 @@ With the component imported, we are ready to add the `<Route/>`.
 
 Certain routes in our application, like the `HootList` page, should only be accessible to **logged-in users**. These are called **protected routes**.
 
-We can implement protected routes using a ternary operator to check if a user is logged in. If the user exists, they gain access to the protected routes; otherwise, they are redirected or shown a placeholder (ex: a `404`).
+We can implement protected routes using a ternary operator to check if a user is logged in. If the user exists, they gain access to the protected routes; otherwise, they are redirected or shown a placeholder (like a `404`).
 
 ```jsx
 { user ? (
@@ -94,7 +94,7 @@ We can implement protected routes using a ternary operator to check if a user is
       <Route path="/hoots" element={<HootList />} />
     </>
   ) : (
-    // If no user is logged in, render an empty placeholder (a 404):
+    // If no user is logged in, render an empty placeholder:
     <></>
   );
 }
@@ -179,7 +179,9 @@ const index = async () => {
 export { index };
 ```
 
-> Notice the inclusion of the `headers` property. The `headers` property is an object containing any headers that need to be sent along with the request. In this case, we are including an `'Authorization'` header with a **bearer token**. This token is decoded by the `verifyToken` middleware function on our server, allowing us to indentify the logged in user, and ensuring that only a logged in user can access this functionality.
+> 🚨 Don't forget to `export` each service function after adding them. Otherwise they will not be accessible in the component where they are called upon.
+
+Notice the inclusion of the `headers` property. The `headers` property is an object containing any headers that need to be sent along with the request. In this case, we are including an `'Authorization'` header with a **bearer token**. This token is decoded by the `verifyToken` middleware function on our server, allowing us to indentify the logged in user, and ensuring that only a logged in user can access this functionality.
 
 If you look at the `controllers/hoots.js` file in your backend application, you'll notice that all of our routes for hoots are **protected** by the `verifyToken` middleware..
 
@@ -188,8 +190,6 @@ router.get('/', verifyToken, async (req, res) => {...}
 ```
 
 As a result, all of our hoot service functions will require this `'Authorization'` header.
-
-> 🚨 Don't forget to `export` each service function after adding them. Otherwise they will not be accessible in the component where they are called upon.
 
 ## Call upon the service
 
@@ -231,6 +231,8 @@ Add the following:
 useEffect(() => {
   const fetchAllHoots = async () => {
     const hootsData = await hootService.index();
+
+    // console log to verify
     console.log("hootsData:", hootsData);
   };
   if (user) fetchAllHoots();
@@ -252,7 +254,7 @@ useEffect(() => {
   const fetchAllHoots = async () => {
     const hootsData = await hootService.index();
 
-    // Set state:
+    // update to set state:
     setHoots(hootsData);
   };
   if (user) fetchAllHoots();

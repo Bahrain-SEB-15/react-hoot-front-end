@@ -45,7 +45,7 @@ Next, `import` the component in `src/App.jsx`:
 import HootDetails from "./components/HootDetails/HootDetails";
 ```
 
-And add the following protected route:
+And add the following **protected** route:
 
 ```jsx
 // src/App.jsx
@@ -85,7 +85,6 @@ Next, let's call upon `useParams()` to get access to the `hootId`:
 // src/components/HootDetails/HootDetails.jsx
 
 const HootDetails = () => {
-
   const { hootId } = useParams();
   console.log("hootId", hootId);
 
@@ -159,7 +158,6 @@ And add the following `useEffect()`:
 useEffect(() => {
   const fetchHoot = async () => {
     const hootData = await hootService.show(hootId);
-    console.log("hootData", hootData);
     setHoot(hootData);
   };
   fetchHoot();
