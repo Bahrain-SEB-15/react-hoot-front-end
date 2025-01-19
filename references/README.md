@@ -12,7 +12,7 @@
 - [Spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
 - [Logical AND ( && )](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND)
 - [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
-- [Fragment](https://beta.reactjs.org/apis/react/Fragment#fragment)
+- [Fragment](https://react.dev/reference/react/Fragment)
 - [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
 - [Updating arrays without mutation](https://react.dev/learn/updating-arrays-in-state#updating-arrays-without-mutation)
 
