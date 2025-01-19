@@ -34,7 +34,7 @@ courses {
       mls.styleTheHootListComponent
       mls.styleTheHootDetailsComponent
       mls.styleTheFormComponents
-      mls.styleSignupAndSignin
+      mls.styleTheSignUpAndSignInPages
       mls.buildALoadingScreen
       mls.buildALandingPage
       mls.buildAReusableIconComponent
@@ -68,7 +68,7 @@ courses {
       (mls.styleTheFormComponents) {
         type = "Level Up content"
       }
-      (mls.styleSignupAndSignin) {
+      (mls.styleTheSignUpAndSignInPages) {
         type = "Level Up content"
       }
       (mls.buildALoadingScreen) {

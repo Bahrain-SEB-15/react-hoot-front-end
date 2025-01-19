@@ -7,15 +7,15 @@
 
 ## Overview
 
-In this lesson, we’ll implement the following user story:
+In this lesson, we'll implement the following user story:
 
-- As the author of a hoot, I should see a button to 'Delete' a hoot on the 'Details' page. Clicking on the button should delete the hoot, and redirect me back to the 'List' page.
+> 👤 As the author of a hoot, I should see a button to 'Delete' a hoot on the 'Details' page. Clicking the button should delete the hoot and redirect me back to the 'List' page.
 
-When implementing delete functionality, it's important to ensure that **only the author of a given resource can delete it**. Our application should take measures to prevent users from deleting hoots that do no belong to them.
+When implementing delete functionality, it's important to ensure that **only the author of a given resource can delete it**. Our application should take measures to prevent users from deleting hoots that do not belong to them.
 
-These measures can be addressed in both the backend and frontend. In fact, we've already included a check for this in our **server**:
+We should address this need in both the back-end and front-end. We've already included a check for this in our **back-end** app:
 
-```js
+```javascript
 // controllers/hoots.js
 
 if (!hoot.author._id.equals(req.user._id)) {
@@ -23,126 +23,155 @@ if (!hoot.author._id.equals(req.user._id)) {
 }
 ```
 
-In this lesson we will focus on restricting access on the **client-side**.
+In this lesson, we will focus on restricting access in the **front-end** app.
 
-Based on our user story, we'll need to **conditionally render the delete button based authorship of the hoot**. We can accomplish this using the `UserContext` present in the React auth template. This makes the logged in `user` object easily accessible throughout our component tree. We'll make use of this `user` object when we render the delete button in `src/components/HootDetails/HootDetails.jsx`.
+Based on our user story, we'll need to **conditionally render the delete button based on the author of the hoot**. We can accomplish this using the `UserContext`. This makes the signed-in `user` object easily accessible throughout our component tree. We'll make use of this `user` object when we render the delete button in the `HootDetails` component.
 
 ## Build the UI
 
-1. At the top of `src/components/HootDetails/HootDetails.jsx`, import `AuthedUserContext` and `useContext`:
+1. At the top of the `HootDetails` component, add imports for import `UserContext` and `useContext`:
 
-```jsx
-// src/components/HootDetails/HootDetails.jsx
+   ```jsx
+   // src/components/HootDetails/HootDetails.jsx
 
-import { UserContext } from '../../contexts/UserContext';
-import { useState, useEffect, useContext } from 'react';
-```
+   // Add useContext to the existing import statement for react
+   import { useState, useEffect, useContext } from 'react';
+   import { useParams } from 'react-router';
+
+   import CommentForm from '../CommentForm/CommentForm';
+
+   import * as hootService from '../../services/hootService';
+
+   // Import the UserContext
+   import { UserContext } from '../../contexts/UserContext';
+   ```
 
 2. Within the component function, create the following `user` constant:
 
-```jsx
-// // src/components/HootDetails/HootDetails.jsx
+   ```jsx
+   // src/components/HootDetails/HootDetails.jsx
 
-const HootDetails = (props) => {
-  const [hoot, setHoot] = useState(null);
-  // Add the following
-  const { user } = useContext(UserContext);
-```
+   const HootDetails = () => {
+     const { hootId } = useParams();
+     // Access the user object from the UserContext
+     const { user } = useContext(UserContext);
+     const [hoot, setHoot] = useState(null);
 
-Time to add some conditional rendering for our button.
+     // useEffect, handleAddComment, and return statements here
+   };
+   ```
 
-For our conditional rendering, we’ll make use of the [Logical AND ( && )](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND) operator.
+   Time to add some conditional rendering for our button.
 
-If the `hoot.author._id` matches `user._id`, this piece of UI should be visible. If not, the UI should not be rendered. This means only the author of this particular `hoot` will be able to access the UI for updating or deleting a `Hoot`.
+   For our conditional rendering, we'll use the [Logical AND ( && )](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND) operator.
 
-3. Add the following to `src/components/HootDetails/HootDetails.jsx`:
+   If the `hoot.author._id` matches `user._id`, this piece of UI should be visible. If not, the UI should not be rendered. This means only the author of this particular `hoot` can access the UI to update or delete a `hoot`.
 
-```jsx
-// // src/components/HootDetails/HootDetails.jsx
+3. Modify the contents of the `<header>` in the main return for the `HootDetails` component to conditionally render the delete button:
 
-<header>
-  <p>{hoot.category.toUpperCase()}</p>
-  <h1>{hoot.title}</h1>
-  <p>
-    {hoot.author.username} posted on
-    {new Date(hoot.createdAt).toLocaleDateString()}
-  </p>
-  // Add the following:
-  {hoot.author._id === user._id && (
-    <>
-      <button>Delete</button>
-    </>
-  )}
-</header>
-```
+   ```jsx
+   // src/components/HootDetails/HootDetails.jsx
 
-> 💡 Notice the use of a React fragment (`<>`) here. While we don't actually need a fragment at the moment, we'll be adding another element in the next lesson.
+             <header>
+               <p>{hoot.category.toUpperCase()}</p>
+               <h1>{hoot.title}</h1>
+               <p>
+                 {`${hoot.author.username} posted on
+                 ${new Date(hoot.createdAt).toLocaleDateString()}`}
+               </p>
+               {/* Add the following */}
+               {hoot.author._id === user._id && (
+                 <>
+                   <button>Delete</button>
+                 </>
+               )}
+             </header>
+   ```
 
-## Build the `handleDeleteHoot` function
+   > 💡 Notice the use of a React fragment (`<> </>`) here. While we don't need a fragment now, we'll add another element alongside the delete button soon.
 
-1. Add the following to `src/App.jsx`:
+## Build the `handleDeleteHoot()` function
 
-```jsx
-// src/App.jsx
+1. Stub up the `handleDeleteHoot()` function in the `App` component:
 
-const handleDeleteHoot = async (hootId) => {
-  console.log('hootId', hootId);
-};
-```
+   ```jsx
+   // src/App.jsx
 
-2. Next, pass `handleDeleteHoot` down to `<HootDetails>`:
+   const handleDeleteHoot = async (hootId) => {
+     console.log('hootId', hootId);
+   };
+   ```
 
-```jsx
-// src/App.jsx
+2. Next, pass the function down to `HootDetails`:
 
-<Route
-  path='/hoots/:hootId'
-  element={<HootDetails handleDeleteHoot={handleDeleteHoot} />}
-/>
-```
+   ```jsx
+   // src/App.jsx
 
-> If your `HootDetails` component is not receiving a `props` parameter, make sure to add it.
+               <Route 
+                 path='/hoots/:hootId'
+                 element={<HootDetails handleDeleteHoot={handleDeleteHoot}/>}
+               />
+   ```
 
-In `src/components/HootDetails/HootDetails.jsx`, let’s update the delete button we added earlier. We’ll attach an `onClick` event handler that triggers the `props.handleDeleteHoot(hootId)` function when the button is clicked.
+3. The `HootDetails` component will need to receive the `handleDeleteHoot()` function as a prop. It currently doesn't have any props, so let's add the `props` parameter to the component function:
 
-3. Update your button with the following:
+   ```jsx
+   // src/components/HootDetails/HootDetails.jsx
 
-```jsx
-// src/components/HootDetails/HootDetails.jsx
+   // The HootDetails component function needs to receive props
+   const HootDetails = (props) => {
+     // HootDetails function code here
+   };
+   ```
 
-<button onClick={() => props.handleDeleteHoot(hootId)}>Delete</button>
-```
+4. In the `HootDetails` component, let's update the delete button we added earlier. We'll attach an `onClick` event handler that triggers the `props.handleDeleteHoot(hootId)` function when the button is clicked.
 
-> 🚨 Be sure to pass in `hootId` as an argument when you call the function.
+   Update your button with the following:
 
-4. In your browser, try deleting a hoot. You should see a `console.log` originating from `App.jsx` confirming that the `hootId` is being passed up the component tree.
+   ```jsx
+   // src/components/HootDetails/HootDetails.jsx
 
-5. With the `hootId` accessible in `handleDeleteHoot`, let's confirm that we can `filter()` state using this value:
+           {hoot.author._id === user._id && (
+             <>
+               {/* Modify the button */}
+               <button onClick={() => props.handleDeleteHoot(hootId)}>
+                 Delete
+               </button>
+             </>
+           )}
+   ```
 
-```jsx
-// src/App.jsx
+   > 🚨 Be sure to pass in `hootId` as an argument when you call the function. We won't know which hoot to delete without it.
 
-const handleDeleteHoot = async (hootId) => {
-  console.log('hootId', hootId);
-  setHoots(hoots.filter((hoot) => hoot._id !== hootId));
-  navigate('/hoots');
-};
-```
+5. In your browser, try deleting a hoot. You should see a `console.log()` originating from `App.jsx` confirming that the `hootId` is being passed up the component tree.
 
-> Remember, the [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method returns a shallow copy of the array, excluding all elements that do not pass the test implemented by the provided callback function.
-> In the code block above, our `filter()` method returns only the `hoot` objects whose `_id` values **do not match** the `hootId`.
+6. With the `hootId` accessible in `handleDeleteHoot()`, let's confirm that we can `filter()` state using this value:
 
-Try deleting a hoot. After clicking the delete button, you should be redirected to the list page where the hoot is no longer visible. However, if you refresh the browser, you’ll see the hoot reappear. This happens because **we are currently only managing local state**. No changes have been made to the database, so when the browser refreshes, `hootService.index()` runs again, loading hoots from the database.
+   ```jsx
+   // src/App.jsx
 
-Managing local state is useful for providing immediate visual updates. But for changes to persist beyond the current session, we need to update both the local state **and** the database. We’ll address this in the next step!
+   const handleDeleteHoot = async (hootId) => {
+     console.log('hootId', hootId);
+     setHoots(hoots.filter((hoot) => hoot._id !== hootId));
+     navigate('/hoots');
+   };
+   ```
+
+   > Remember, the [array's filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method returns a shallow copy of the array, excluding all elements that do not pass the test implemented by the provided callback function.
+   >
+   > In the code block above, our `filter()` method returns only the `hoot` objects whose `_id` values **do not match** the `hootId`. This effectively excludes the hoot we want to delete from the array used to update state.
+
+Try deleting a hoot. After clicking the delete button, you should be redirected to the list page where the hoot is no longer visible. However, if you refresh the browser, you'll see the hoot reappear. This happens because **we are currently only managing local state**.
+
+No changes have been made to the database, so when the browser refreshes, `hootService.index()` runs again, loading hoots from the database.
+
+Managing local state is useful for providing immediate visual updates. However, for changes to persist beyond the current session, we need to update both the local state **and** the database. We'll address this in the next step!
 
 ## Build the service function
 
-Let's finish up our delete functionality by adding the service.
+Let's finish up our delete functionality by adding the `deleteHoot()` service function to the hoot service:
 
-1. Add the following to `src/services/hootService.js`:
-
-```js
+```javascript
 // src/services/hootService.js
 
 const deleteHoot = async (hootId) => {
@@ -171,11 +200,11 @@ export {
 
 ## Call the service
 
-Now that we have our service function, we'll add it to `handleDeleteHoot`, along with one other small change.
+Now that we have our service function, we'll add it to `handleDeleteHoot()`, along with one other minor change.
 
-In our backend, you might recall that the delete hoot controller function responds with a `deletedHoot`:
+In our back-end, you might recall that the delete hoot controller function responds with a `deletedHoot`:
 
-```js
+```javascript
 res.status(200).json(deletedHoot);
 ```
 
@@ -185,21 +214,21 @@ If we call `hootService.deleteHoot()`, what we get back is this `deletedHoot` ob
 const deletedHoot = await hootService.deleteHoot(hootId);
 ```
 
-The `deletedHoot` object contains the `_id` (ObjectId) of the hoot that was removed from the database. With this in mind, when we use the `filter()` method inside `handleDeleteHoot`, we can use `deletedHoot._id` instead of the current `hootId`.
+The `deletedHoot` object contains the `_id` (ObjectId) of the hoot removed from the database. With this in mind, when we use the `filter()` method inside `handleDeleteHoot()`, we can use `deletedHoot._id` instead of the current `hootId`.
 
-This approach gives us additional assurance that the deletion was successfully processed on the backend *before* we update the frontend.
+This approach assures us that the deletion was successfully processed on the back-end and database *before* we update the front-end.
 
-1. Back in `src/App.jsx`, update `handleDeleteHoot` with the following:
+Back in `src/App.jsx`, update `handleDeleteHoot()` with the following:
 
 ```jsx
 // src/App.jsx
 
-const handleDeleteHoot = async (hootId) => {
-  const deletedHoot = await hootService.deleteHoot(hootId);
-  // Filter state using deletedHoot._id:
-  setHoots(hoots.filter((hoot) => hoot._id !== deletedHoot._id));
-  navigate('/hoots');
-};
+  const handleDeleteHoot = async (hootId) => {
+    const deletedHoot = await hootService.deleteHoot(hootId);
+    // Filter state using deletedHoot._id:
+    setHoots(hoots.filter((hoot) => hoot._id !== deletedHoot._id));
+    navigate('/hoots');
+  };
 ```
 
 Try it out! You should now be able to delete hoots.

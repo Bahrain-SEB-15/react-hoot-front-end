@@ -7,7 +7,6 @@
 
 - [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
 - [Destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
-- [RESTful/Resourceful Routing Conventions](https://www.notion.so/RESTful-Resourceful-Routing-Conventions-a54d1ddc99ee4a0cbda331addc6d1f97?pvs=21)
 - [e.preventDefault()](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault)
 - [JSON object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON)
 - [Spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
@@ -16,7 +15,6 @@
 - [Fragment](https://beta.reactjs.org/apis/react/Fragment#fragment)
 - [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
 - [Updating arrays without mutation](https://react.dev/learn/updating-arrays-in-state#updating-arrays-without-mutation)
-
 
 ## Level Up references
 

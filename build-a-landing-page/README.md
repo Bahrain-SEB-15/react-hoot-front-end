@@ -7,13 +7,13 @@
 
 ## Overview
 
-In this lesson, we'll build a landing page for our application. A landing page is a great way to introduce users to your application. Landing pages typically feature a headline, and hero image, a list of features or selling points, and a prominent call to action ('Sign Up', 'Learn More', etc).
+In this lesson, we'll build a landing page for our application. A landing page is a great way to introduce users to your application. Landing pages typically feature a headline and hero image, a list of features or selling points, and a prominent call to action ('Sign Up', 'Learn More', and so on).
 
-Our landing page will be fairly simple, featuring a large hero image with 'About Us' and 'Testimonials' sections. This should act as a helpful jumping off point for developing landing pages in your own applications.
+Our landing page will be fairly simple, featuring a large hero image with 'About Us' and 'Testimonials' sections. This should be a helpful jumping-off point for developing landing pages in your own applications.
 
 ## Build and style the component
 
-An `src/components/Landing/Landing.jsx` has been included in our auth template, so we won't need to recreate the component. Instead we'll update this file with new JSX and copy. But first, let's add a corresponding CSS Module.
+The auth template includes a `Landing` component, so we won't need to create any files. Instead, we'll update this file with new JSX and copy. But first, let's add a corresponding CSS Module.
 
 Run the following command in your terminal:
 
@@ -21,7 +21,7 @@ Run the following command in your terminal:
 touch src/components/Landing/Landing.module.css
 ```
 
-Add the following to `src/components/Landing/Landing.module.css`:
+Add the following to this new file:
 
 ```css
 /* src/components/Landing/Landing.module.css */
@@ -230,9 +230,9 @@ Add the following to `src/components/Landing/Landing.module.css`:
 
 Most of this styling concerns sizing sizing different elements and sections correctly. We also have a handful of media queries that adjust the layout for given screen sizes.
 
-This styling differs from previous examples in this lesson by using specific class names for subsections (`.splash`, `.about`, `.testimonial`). This approach makes it easier to target JSX elements that are reused across different parts of the component, and apply unique styles based on their parent container. This can help keep the CSS organized and straightforward when working with components that appear in multiple contexts.
+This styling differs from previous examples in this lesson by using specific class names for subsections (`.splash`, `.about`, `.testimonial`). This approach makes it easier to target JSX elements that are reused across different parts of the component and apply unique styles based on their parent container. This can help keep the CSS organized and straightforward when working with components that appear in multiple contexts.
 
-Now add the following to `src/components/Landing/Landing.jsx`:
+Now add the following to the `Landing` component:
 
 ```jsx
 // src/components/Landing/Landing.jsx
@@ -246,7 +246,7 @@ const Landing = () => {
     <>
       <main className={styles.container}>
         <section className={styles.splash}>
-          <img src={Logotype} alt="A cute owl" />
+          <img src={Logotype} alt='A cute owl' />
         </section>
 
         <section className={styles.about}>
@@ -287,14 +287,14 @@ const Landing = () => {
               convenient for me to write my blog posts at night.
             </p>
             <footer>
-              <img src={Stars} alt="Four blue stars" />
+              <img src={Stars} alt='Four blue stars' />
             </footer>
           </article>
         </section>
       </main>
 
       <footer className={styles.footer}>
-        © 2024 HOOT INC. OWL RIGHTS RESERVED
+        © 2025 HOOT INC. OWL RIGHTS RESERVED
       </footer>
     </>
   );
@@ -303,20 +303,14 @@ const Landing = () => {
 export default Landing;
 ```
 
-Take a look at the structure of our new landing page. Here we have three distinct `<section>` tags inside `<main>`. Below the `<main>`, we have a simple `<footer>`. Notice how two of the `<section>` blocks follow a very similar structure. This level of consistency in JSX can make styling more predictable and reusable.
+Take a look at the structure of our new landing page. Here, we have three distinct `<section>` tags inside `<main>`. Below the `<main>`, we have a simple `<footer>`. Notice how two of the `<section>` blocks follow a very similar structure. This level of consistency in JSX can make styling more predictable and reusable.
 
-Finally, let's make sure users can see this new landing page whether they are logged in or not. You might have noticed our application doesn't make use of the `<Dashboard />` component inherited from our auth template. Let's fix that now.
+Finally, let's ensure users can see this new landing page whether they are logged in or not.
 
-In `src/App.jsx`, locate `<Route />` to the `<Dashboard />` component.
-
-Replace `<Dashboard />` with the `<Landing />` component:
+In `src/App.jsx`, locate the `/` route, and remove the conditional logic and `<Dashboard />` component so that only the the `<Landing />` component remains:
 
 ```jsx
 // src/App.jsx
 
-<Routes>
-  {user ?
-  // Protected Routes:
-    <>
-      <Route path="/" element={<Landing />} />
+<Route path='/' element={<Landing />} />
 ```

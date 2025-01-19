@@ -150,8 +150,8 @@
           "estimatedDeliveryTimeInMinutes": 0
         },
         {
-          "friendlyName": "Style Signup and Signin",
-          "dirName": "style-signup-and-signin",
+          "friendlyName": "Style the Sign-Up and Sign-In Pages",
+          "dirName": "style-the-sign-up-and-sign-in-pages",
           "type": "Content",
           "skill": "",
           "learningObjective": "",
@@ -359,8 +359,8 @@
           "estimatedDeliveryTimeInMinutes": 0
         },
         {
-          "friendlyName": "Style Signup and Signin",
-          "dirName": "style-signup-and-signin",
+          "friendlyName": "Style the Sign-Up and Sign-In Pages",
+          "dirName": "style-the-sign-up-and-sign-in-pages",
           "type": "Level Up content",
           "skill": "",
           "learningObjective": "",

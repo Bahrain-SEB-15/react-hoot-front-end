@@ -3,13 +3,13 @@
   <span class="subhead">Build a Loading Screen</span>
 </h1>
 
-**Learning objective:** By the end of this lesson, students will be able create a reusable loading screen component.
+**Learning objective:** By the end of this lesson, students will be able to create a reusable loading screen component.
 
 ## Overview
 
-In this lesson, we'll build a reusable loading screen component. Our loading screen will make use of a decorative banner included in your visual assets.
+In this lesson, we'll build a reusable loading screen component. Our loading screen will use a decorative banner that is included in your visual assets.
 
-A component like this is useful anytime you are fetching data from your server, as the information is not immediately available to render. With a loading screen, we can give our users a visual indication that the content is forthcoming. Making the loading screen its own component, complete with styling, makes it easier to include wherever needed in our application. Additionally, componentizing the loading screen can be helpful if you ever wish to incorporate animations.
+A component like this is useful when fetching data from your server, as the information is not immediately available to render. With a loading screen, we can give our users a visual indication that the content is forthcoming. Making the loading screen its own component, complete with styling, makes it easier to include wherever needed in our application. Additionally, componentizing the loading screen can be helpful if you ever wish to incorporate animations.
 
 ## Build and style the component
 
@@ -54,7 +54,7 @@ Add the following to `src/components/Loading/Loading.module.css`:
 }
 ```
 
-Add the following to `src/components/Loading/Loading.jsx`:
+Add the following to the `Loading` component:
 
 ```jsx
 // src/components/Loading/Loading.jsx
@@ -65,7 +65,7 @@ import LoadingIcon from '../../assets/images/loading.svg';
 const Loading = () => {
   return (
     <main className={styles.container}>
-      <img src={LoadingIcon} alt="A cute owl" />
+      <img src={LoadingIcon} alt='A cute owl' />
     </main>
   )
 }
@@ -73,9 +73,7 @@ const Loading = () => {
 export default Loading
 ```
 
-The last step is to add our new `Loading` component to `src/components/HootDetails/HootDetails.jsx`.
-
-Add the following import to the top of `src/components/HootDetails/HootDetails.jsx`:
+The last step is to add our new `Loading` component to the `HootDetails` component. Add the following import:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
@@ -83,7 +81,7 @@ Add the following import to the top of `src/components/HootDetails/HootDetails.j
 import Loading from '../Loading/Loading';
 ```
 
-And finally, locate the `if` condition inside `src/components/HootDetails/HootDetails.jsx`.
+And finally, locate the `if` condition inside the `HootDetails` component.
 
 Replace the existing `<main>` tag with the `<Loading />` component:
 
@@ -98,4 +96,4 @@ return (
 );
 ```
 
-Navigate to the details page and refresh your browser. For a split second, you should see a loading image! 
+Navigate to the details page and refresh your browser. For a split second, you should see a loading image!

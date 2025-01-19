@@ -1,25 +1,25 @@
 <h1>
   <span class="headline">Hoot Front-End</span>
-  <span class="subhead">Style Signup and Signin</span>
+  <span class="subhead">Style the Sign-Up and Sign-In Pages</span>
 </h1>
 
-**Learning objective:** By the end of this lesson, students will be able to style sign up and sign in components with CSS modules.
+**Learning objective:** By the end of this lesson, students will be able to style sign-up and sign-in components with CSS modules.
 
-## Style the SignupForm
+## Style the `SignUpForm` component
 
-![Signup page](./assets/signup.png)
+![Sign-up page](./assets/signup.png)
 
-Let's add some styling to our SignupForm!
+Let's add some styling to our `SignUpForm`!
 
-Signup and Signin Forms pose an interesting design challenge. Generally, the elements of these forms are arranged in a narrow column, which is great for mobile devices, but can result in a lot of unused space on desktop screens.
+The `SignUpForm` and `SignInForm` pose an interesting design challenge. Generally, the elements of these forms are arranged in a narrow column, which is great for mobile devices, but can result in a lot of unused space on desktop screens.
 
-To address this, we'll modify our desktop layout by incorporating a large graphic alongside our Signup and Signin Forms. This will help us utilize the horizontal space more effectively. To maintain a clean and functional design on mobile devices, we'll employ media queries to hide the graphic on smaller screens. This will ensure that our forms are visually appealing and space-efficient across different devices.
+To address this, we'll modify our desktop layout by incorporating a large graphic alongside our `SignUpForm` and `SignInForm`. This will help us utilize the horizontal space more effectively. To maintain a clean and functional design on mobile devices, we'll employ media queries to hide the graphic on smaller screens. This will ensure that our forms are visually appealing and space-efficient across different devices.
 
-### Refactor `src/components/SignupForm/SignupForm.jsx`
+### Refactor `SignUpForm`
 
-Before we add styling to `src/components/SignupForm/SignupForm.jsx`, we'll need to make a few changes to its JSX structure. This will help facilitate a specific `flex` layout we are working towards.
+Before we add styling to The `SignUpForm` component, we'll need to make a few changes to its JSX structure. This will help facilitate a specific `flex` layout we are working towards.
 
-Take a look at the current structure of `src/components/SignupForm/SignupForm.jsx`:
+Take a look at the current structure of `src/components/SignUpForm/SignUpForm.jsx`:
 
 ```jsx
 <main>
@@ -29,7 +29,7 @@ Take a look at the current structure of `src/components/SignupForm/SignupForm.js
 </main>
 ```
 
-Notice how we have a single container in the form of `<main>`, with several child elements inside of it. If we restrict ourselves to flexbox, generally these child elements can be arranged in a column or a row.
+Notice how we have a single container - `<main>`, with several child elements inside it. If we restrict ourselves to flexbox, these child elements can be generally arranged in a column or row.
 
 In our desired layout, we want two distinct sections of the page, side by side one another in a row:
 
@@ -44,14 +44,14 @@ In our desired layout, we want two distinct sections of the page, side by side o
 </main>
 ```
 
-On the right-hand side of the screen, we'll display our sign up form component, while on the left-hand side, we'll display a decorative image directing the user to sign up with the form.
+On the right-hand side of the screen, we'll display our sign-up form component, while on the left, we'll display a decorative image directing the user to sign up with the form.
 
 Let's take this step by step.
 
 First, move the `<h1>` and `<p>` tags inside the `<form>` like so:
 
 ```jsx
-// src/components/SignupForm/SignupForm.jsx
+// src/components/SignUpForm/SignUpForm.jsx
 
 <form onSubmit={handleSubmit}>
   <h1>Sign Up</h1>
@@ -61,44 +61,46 @@ First, move the `<h1>` and `<p>` tags inside the `<form>` like so:
 Next, wrap the `<form>` in a `<section>` tag
 
 ```jsx
-// src/components/SignupForm/SignupForm.jsx
+// src/components/SignUpForm/SignUpForm.jsx
 
 <section>
   <form onSubmit={handleSubmit}>
 ```
 
-At the top of `src/components/SignupForm/SignupForm.jsx`, import the `SignupIcon` SVG file:
+At the top of the `SignUpForm` component, import the `SignUpIcon` SVG file:
 
 ```jsx
-// src/components/SignupForm/SignupForm.jsx
+// src/components/SignUpForm/SignUpForm.jsx
 
-import SignupIcon from '../../assets/images/signup.svg';
+import SignUpIcon from '../../assets/images/signup.svg';
 ```
 
 Next, add the following `<section>` and `<img>` tag. The `<section>` should be placed inside `<main>`, **directly above** the `<section>` containing the `<form>`:
 
 ```jsx
-// src/components/SignupForm/SignupForm.jsx
+// src/components/SignUpForm/SignUpForm.jsx
 
 <main>
   <section>
-    <img src={SignupIcon} alt="An owl sitting on a sign" />
+    <img src={SignupIcon} alt='An owl sitting on a sign' />
   </section>
 ```
 
-Now we have two distinct elements that can sit side by side within their shared parent container, a perfect set up for the `flex` layout we will be applying in the next step.
+Now, we have two distinct elements that can sit side by side within their shared parent container, which is a perfect setup for the `flex` layout we will be applying in the next step.
 
 ### Add the module
 
 Run the following command in your terminal:
 
 ```bash
-touch src/components/SignupForm/SignupForm.module.css
+touch src/components/SignUpForm/SignUpForm.module.css
 ```
 
-And add the following to `src/components/SignupForm/SignupForm.module.css`:
+Add the following to the new file:
 
 ```css
+/* src/components/SignUpForm/SignUpForm.module.css */
+
 .container {
   height: 100%;
   display: flex;
@@ -201,11 +203,11 @@ input:focus {
 }
 ```
 
-The above stylesheet gives us a two column layout on desktop, and through media queries, a single column layout on mobile. When we switch to a mobile layout (`max-width: 912px`), we apply `display: none;` to the left-side `section` containing our graphic. This effectively removes the image from our layout when it is no longer necessary as a placeholder.
+The above stylesheet gives us a two-column layout on desktop and, through media queries, a single-column layout on mobile. When we switch to a mobile layout (`max-width: 912px`), we apply `display: none;` to the left-side `section` containing our graphic. This effectively removes the image from our layout when it is no longer necessary as a placeholder.
 
 We also have some interesting CSS selectors here with `:first-child` and `:nth-child(2)`.
 
-The `.container section:first-child` selector targets the first `section` that is a direct child of `.container`. class, while the `.container section:nth-child(2)` selector targets the second `section` child of `.container`.
+The `.container section:first-child` selector targets the first `section` that is a direct child of `.container` class, while the `.container section:nth-child(2)` selector targets the second `section` child of `.container`.
 
 This is just a way of applying variations to the left and right sections of the page without additional class names.
 
@@ -213,38 +215,38 @@ You might also notice the use of `overflow: scroll`. This grants our form sectio
 
 ### Apply styles
 
-Add the following import to `src/components/SignupForm/SignupForm.jsx`:
+Add the following import to `src/components/SignUpForm/SignUpForm.jsx`:
 
 ```jsx
-// src/components/SignupForm/SignupForm.jsx
+// src/components/SignUpForm/SignUpForm.jsx
 
-import styles from './SignupForm.module.css';
+import styles from './SignUpForm.module.css';
 ```
 
 And apply `styles.container` to the `className` of the outermost element (`<main>`):
 
 ```jsx
-// src/components/SignupForm/SignupForm.jsx
+// src/components/SignUpForm/SignUpForm.jsx
 
 <main className={styles.container}>
 ```
 
-Checkout the page in your browser!
+Check out the page in your browser!
 
-## Style the SigninForm
+## Style the `SignInForm` component
 
-![Signin page](./assets/signin.png)
+![Sign in page](./assets/signin.png)
 
-Let's apply the same changes to `src/components/SigninForm/SigninForm.jsx`. Our layout here will be quite similar to Signup, but we'll include a brand new stylesheet for simplicity. We'll also include a 'Login' specific graphic.
+Let's apply the same changes to the `SignInForm` component. Our layout here will be quite similar to Sign up, but we'll include a brand new stylesheet for simplicity. We'll also include a 'Login' specific graphic.
 
-### Refactor `src/components/SigninForm/SigninForm.jsx`
+### Refactor the `SignInForm` component
 
 First, we'll refactor the form.
 
 Once again, we move the `<h1>` and `<p>` inside the `<form>` tag, and wrap the `<form>` in a `<section>`:
 
 ```jsx
-// src/components/SigninForm/SigninForm.jsx
+// src/components/SignInForm/SignInForm.jsx
 
 <section>
   <form autoComplete='off' onSubmit={handleSubmit}>
@@ -255,7 +257,7 @@ Once again, we move the `<h1>` and `<p>` inside the `<form>` tag, and wrap the `
 Next, import the `LoginIcon` SVG file:
 
 ```jsx
-// src/components/SigninForm/SigninForm.jsx
+// src/components/SignInForm/SignInForm.jsx
 
 import LoginIcon from '../../assets/images/login.svg';
 ```
@@ -263,23 +265,25 @@ import LoginIcon from '../../assets/images/login.svg';
 And add the following `<section>` and `<img>`:
 
 ```jsx
-// src/components/SigninForm/SigninForm.jsx
+// src/components/SignInForm/SignInForm.jsx
 
 <main>
   <section>
-    <img src={LoginIcon} alt="An owl sitting on a sign" />
+    <img src={LoginIcon} alt='An owl sitting on a sign' />
   </section>
 ```
 
 Run the following command in your terminal:
 
 ```bash
-touch src/components/SigninForm/SigninForm.module.css
+touch src/components/SignInForm/SignInForm.module.css
 ```
 
-Add the following to `src/components/SigninForm/SigninForm.module.css`:
+Add the following to the new file:
 
 ```css
+/* src/components/SignInForm/SignInForm.module.css */
+
 .container {
   height: 100%;
   display: flex;
@@ -371,18 +375,18 @@ input:focus {
 }
 ```
 
-Add the following import to `src/components/SigninForm/SigninForm.jsx`:
+Add the following import to the `SignInForm` component:
 
 ```jsx
-// src/components/SigninForm/SigninForm.jsx
+// src/components/SignInForm/SignInForm.jsx
 
-import styles from './SigninForm.module.css';
+import styles from './SignInForm.module.css';
 ```
 
 And apply `styles.container` to the `className` of the outermost element (`<main>`):
 
 ```jsx
-// src/components/SigninForm/SigninForm.jsx
+// src/components/SignInForm/SignInForm.jsx
 
 <main className={styles.container}>
 ```

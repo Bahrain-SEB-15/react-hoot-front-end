@@ -13,9 +13,11 @@ Run the following command in your terminal:
 touch src/components/HootList/HootList.module.css
 ```
 
-And add the following to `src/components/HootList/HootList.module.css`:
+Add the following to the file you just created:
 
 ```css
+/* src/components/HootList/HootList.module.css */
+
 /* List styling */
 
 .container {
@@ -106,17 +108,17 @@ And add the following to `src/components/HootList/HootList.module.css`:
 }
 ```
 
-This styling is mostly concerned with arranging our list view of hoot 'cards' into a grid layout.
+This styling is mainly concerned with arranging our list view of hoot cards into a grid layout.
 
-On mobile, the 'cards' are displayed in a single column. Through a series of [media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries), we are able to add additional columns to the grid layout based on the width of the browser (`grid-template-columns`).
+On mobile, the cards are displayed in a single column. Through a series of [media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries), we are able to add additional columns to the grid layout based on the width of the browser (`grid-template-columns`).
 
-We also do some work to transform each `<article>` tag into a distinct 'card' element, complete with `box-shadow` and some `padding` for legibility.
+We also do some work to transform each `<article>` tag into a distinct card element, complete with `box-shadow` and some `padding` for legibility.
 
-The interesting bit is how we handle `overflow` text. When the characters in a hoot’s title or text property can’t fit within the confines of an `<article>`, we hide the overflow and replace it with an ellipsis. After we apply the `styles` object to the component, try adding a new hoot with a large amount of text to test this out!
+The interesting bit is how we handle `overflow` text. When the characters in a hoot's title or text property can't fit within the confines of an `<article>`, we hide the overflow and replace it with an ellipsis. After we apply the `styles` object to the component, try adding a new hoot with a large amount of text to test this out!
 
 Time to apply the styling!
 
-Add the following import to `src/components/HootList/HootList.jsx`:
+Add the following import to the `HootList` component:
 
 ```jsx
 // src/components/HootList/HootList.jsx
@@ -132,4 +134,4 @@ And apply `styles.container` to the `className` of the outermost element (`<main
 <main className={styles.container}>
 ```
 
-And with that, you should now have a styled `src/components/HootList/HootList.jsx` component!
+And with that, you should now have a styled `HootList` component!

@@ -9,9 +9,9 @@
 
 In this lesson, we'll build a reusable icon component. This component should make it easier to access SVG assets across components in our app.
 
-If you take a look at the `src/assets/images` directory, you'll notice quite a few icons. Most of these will actually be used to visually indicate the `category` of a hoot on the list page. Conditionally rendering each icon based on the value of `hoot.category` would be cumbersome. Thankfully, our `Icon` component will streamline this process.
+If you look at the `src/assets/images` directory, you'll notice several icons. Most of these will actually be used to visually indicate the `category` of a hoot on the list page. Conditionally rendering each icon based on the value of `hoot.category` would be cumbersome. Thankfully, our `Icon` component will streamline this process.
 
-Instead of importing the asset and building out a new `img` tag, we can just provide the `Icon` component with a `category` prop. The `category` prop is just a string. The component uses that `category` string to access an `svg` value stored in the `icons` object, and renders the target `svg` as an image.
+Instead of importing the asset and building out a new `<img>` tag, we can just provide the `Icon` component with a `category` prop. The `category` prop is just a string. The component uses that `category` string to access an `svg` value stored in the `icons` object, and renders the target `svg` as an image.
 
 Additionally, we'll be able to use the `Icon` component for UI elements, like 'Delete' buttons and 'Edit' links.
 
@@ -69,7 +69,7 @@ const Icon = ({ category }) => {
       src={icons[category]}
       alt={`A ${category} icon.`}
       id={category.toLowerCase()}
-      className="icon"
+      className='icon'
     />
   );
 };
@@ -79,21 +79,23 @@ export default Icon;
 
 Let's break down how this component works.
 
-This `src/components/Icon/Icon.jsx` component dynamically selects and renders an SVG based on the provided `category` prop. Every SVG icon that we'll need in our application has been imported here. and stored in an object called `icons`. Each key in the `icons` object maps to a corresponding category name.
+This `Icon` component dynamically selects and renders an SVG based on the provided `category` prop. Every SVG icon we'll need in our application has been imported here and stored in an object called `icons`. Each key in the `icons` object maps to a corresponding category name.
 
-When the component is used, it receives a `category` prop which specifies the icon to display. Using using [bracket notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors#bracket_notation), the component _looks up_ the `category` in the `icons` object, and finds the associated SVG file. This SVG file is then set as the `src` attribute of an `<img>` element. The `alt` and `id` attributes are also dynamically set to describe the icon based on the value of the `category`.
+When the component is used, it receives a `category` prop that specifies the icon to display. Using [bracket notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors#bracket_notation), the component *looks up* the `category` in the `icons` object and finds the associated SVG file.
 
-For example, say we wanted to display the `News` SVG somewhere in our application. We would simply import our `<Icon>` component, add it to the return, and specify the SVG we wish to display using the `category` prop as demonstrated below:
+This SVG file is then set as the `src` attribute of an `<img>` element. The `alt` and `id` attributes are also dynamically set to describe the icon based on the value of the `category`.
+
+For example, say we wanted to display the `News` SVG somewhere in our application. We would import our `<Icon>` component, add it to the return, and specify the SVG we wish to display using the `category` prop as demonstrated below:
 
 ```jsx
-<Icon category="News" />
+<Icon category='News' />
 ```
 
 ## Accessing SVGs with the `category` prop
 
-Now let's put the `Icon` component to use.
+Now, let's put the `Icon` component to use.
 
-Add the following import to the top of `src/components/HootList/HootList.jsx`:
+Add the following import to the top of the `HootList` component:
 
 ```jsx
 // src/components/HootList/HootList.jsx
@@ -137,13 +139,11 @@ Next, we'll need to pass a `category` down to the `<Icon />`:
     </div>
 ```
 
-In your browser, navigate to the list page. For each hoot in the list, you should now an SVG icon representing that hoot's `category`.
+In your browser, navigate to the list page. For each hoot in the list, you should now have an SVG icon representing that hoot's `category`.
 
 ## Add the `Icon` to UI elements
 
-This component can be applied to interactive UI elements as well. Let's used it to improve each instance of 'Edit' and 'Delete' in `src/components/HootDetails/HootDetails.jsx`.
-
-Add the following to the top of `src/components/HootDetails/HootDetails.jsx`:
+This component can be applied to interactive UI elements as well. Let's use it to improve each instance of 'Edit' and 'Delete' in the `HootDetails` component. Start by importing the `Icon` component at the top of the file:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
@@ -158,15 +158,15 @@ Update the 'Edit' and 'Delete' elements with the following:
 
 <>
   <Link to={`/hoots/${hootId}/edit`}>
-    <Icon category="Edit" />
+    <Icon category='Edit' />
   </Link>
   <button onClick={() => props.handleDeleteHoot(hootId)}>
-    <Icon category="Trash" />
+    <Icon category='Trash' />
   </button>
 </>
 ```
 
-You'll notice an immediate advantage to this approach, in that it minimizes the number of imports we need to make in each component.
+You'll notice an immediate advantage to this approach - it minimizes the number of imports we need to make in each component.
 
 Let's make the same changes to the UI elements in our comments section:
 
@@ -175,15 +175,15 @@ Let's make the same changes to the UI elements in our comments section:
 
 <>
   <Link to={`/hoots/${hootId}/comments/${comment._id}/edit`}>
-    <Icon category="Edit" />
+    <Icon category='Edit' />
   </Link>
   <button onClick={() => handleDeleteComment(comment._id)}>
-    <Icon category="Trash" />
+    <Icon category='Trash' />
   </button>
 </>
 ```
 
-And to wrap up, header over to `src/components/CommentForm/CommentForm.jsx`.
+And to wrap up, head over to the `CommentForm` component.
 
 Add the following import:
 
@@ -198,9 +198,9 @@ And replace the text content of the `<button>` with the `<Icon />`
 ```jsx
 // src/components/CommentForm/CommentForm.jsx
 
-<button type="submit">
-  <Icon category="Create" />
+<button type='submit'>
+  <Icon category='Create' />
 </button>
 ```
 
-Checkout the changes we made in your browser!
+Check out the changes we made in your browser!

@@ -7,19 +7,17 @@
 
 ## Overview
 
-In this lesson, we'll learn how to apply CSS modules to components in a React application and begin the process of styling the app. We'll also add some visual assets, update our base styling (`src/index.css`), and make the `src/components/NavBar/NavBar.jsx` a bit more organized.
+In this lesson, we'll learn how to apply CSS modules to components in a React application and begin the process of styling the app. We'll also add some visual assets, update our base styling (`src/index.css`), and make the `NavBar` component a bit more organized.
 
 ## CSS Modules
 
-CSS Modules became available with the release of **create-react-app v2.0**, which improved the configuration of Webpack.
-
-With **CSS Modules**, a CSS file’s **class names** will be made unique by the tooling and will be dedicated to the component that imports the CSS Module - no more worrying about class name collisions!
+[**Vite's CSS Modules**](https://vite.dev/guide/features#css-modules) make it so that the **class names** in a CSS module will be unique and dedicated to the component that imports the CSS Module. No more worrying about class name collisions!
 
 Using a CSS Module differs from using a CSS stylesheet in three ways:
 
-1. The filename ends with `module.css`, e.g., `App.module.css` instead of `App.css`.
-2. The CSS Module is imported with the `from` syntax.
-3. **Class selectors** are unique to the component. Other selectors however become global CSS rules just like with CSS stylesheets.
+1. The filename ends with `module.css`. For example, `App.module.css` instead of `App.css`.
+2. The CSS Module is imported as an object.
+3. **Class selectors** are unique to the component. However, other selectors become global CSS rules, just like regular CSS stylesheets.
 
 Below is an example of how a CSS Module can be imported inside a React component:
 
@@ -33,17 +31,17 @@ Once imported, a specific class can be applied to an element like so:
 <div className={styles.myClassName}>
 ```
 
-> 💡 Note that the class names become keys on the styles object. Within the component function, a `console.log` of `styles` will reveal that the tooling has generated a unique name for each class.
+> 💡 Note that the class names become keys on the styles object. Within the component function, a `console.log()` of `styles` will reveal that the tooling has generated a unique name for each class.
 
 ## Visual assets
 
-Next we'll add some visual assets to the app. These assets include a logo, decorative background images, and iconography for UI elements.
+Next, we'll add some visual assets to the app. These assets include a logo, decorative background images, and iconography for UI elements.
 
 The assets can be found in [React Hoot Front-end Assets](https://git.generalassemb.ly/modular-curriculum-all-courses/react-hoot-front-end-assets).
 
-To add these to your project, first **make sure you are in your project’s root directory**.
+To add these to your project, first **make sure you are in your project's root directory**.
 
-> 🚨 Check your terminal and make sure you are in your project’s root directory before running the following command!
+> 🚨 Check your terminal and ensure you are in your project's root directory before running the following command!
 
 Next, run the following command in your terminal:
 
@@ -60,7 +58,7 @@ Now if you look at `src/assets`, you should see a new `images` directory. From h
 
 Let's make some changes to our base styling.
 
-First, remove all of the CSS held in `src/App.css`. We won't need it, and don't want it to interfere with any of the new styles we'll add here. Instead we'll consolidate all of the base styling inside `src/index.css`.
+First, remove all of the CSS held in `src/App.css`. We won't need it and don't want it to interfere with any new styles we'll add here. Instead, we'll consolidate all of the base styling inside `src/index.css`.
 
 Once you have removed `src/App.css`, replace the existing contents of `src/index.css` with the following:
 
@@ -159,9 +157,9 @@ a {
 
 Let's take a moment to review some of the more interesting aspects of this stylesheet:
 
-1. **Global box-sizing:** The `box-sizing: border-box;` applied universally (`*`) changes the CSS box model so that widths and heights include padding and borders. This simplifies layout design and is a common practice in responsive design.
+1. **Global box-sizing:** The `box-sizing: border-box;` applied universally (`*`), changes the CSS box model so that widths and heights include padding and borders. This simplifies layout design and is a common practice in responsive design.
 
-2. **Full-height layout with no overflow:** The `html` and `body` are set to a height of 100% with overflow hidden, ensuring the entire viewport is used while preventing scrolling at the root level. Scrolling is enabled only within the body content itself (`overflow: auto;`), specifically after a top padding of 80px. This is included to accommodate a fixed header (`src/components/NavBar/NavBar.jsx`).
+2. **Full-height layout with no overflow:** The `html` and `body` are set to a height of 100% with overflow hidden, ensuring the entire viewport is used while preventing scrolling at the root level. Scrolling is enabled only within the body content itself (`overflow: auto;`), specifically after a top padding of 80px. This accommodates a fixed header (the `NavBar` component).
 
 3. **Background image:** The background is set to an an SVG provided by a URL. The background we are using was provided by [Hero Patterns](https://heropatterns.com/). This is a great resource if you ever need patterned backgrounds for your applications.
 
@@ -171,9 +169,9 @@ Let's take a moment to review some of the more interesting aspects of this style
 
 6. **CSS variables:** Our stylesheet also defines a few CSS variables for the `primary` application color, the `background` color, the `card-background` color, and a standard `border` color. These CSS variables make it easier to maintain consistency with our design throughout the app.
 
-## Style `src/components/NavBar/NavBar.jsx`
+## Style the `NavBar` component
 
-With our base styling up to date, we can now start working with CSS Modules. We'll apply our first CSS Modules to `src/components/NavBar/NavBar.jsx`.
+With our base styling up to date, we can start working with CSS Modules. We'll apply our first CSS Modules to the `NavBar` component.
 
 Run the following command in your terminal:
 
@@ -181,7 +179,7 @@ Run the following command in your terminal:
 touch src/components/NavBar/NavBar.module.css
 ```
 
-Add the following to `src/components/NavBar/NavBar.module.css`:
+Add the following to that file:
 
 ```css
 /* src/components/NavBar/NavBar.module.css */
@@ -230,11 +228,11 @@ Add the following to `src/components/NavBar/NavBar.module.css`:
 
 Let's highlight a few key aspects of the styling above.
 
-The first is the use of `position: fixed` and `top: 0`. This ensures that the **navigation bar will stay locked and visible at the top of the page**, even as the user scrolls.
+The first is the use of `position: fixed` and `top: 0`. This ensures that the **navigation bar stays locked and visible at the top of the page**, even as the user scrolls.
 
 Next, we have some **responsive design adjustments** in the form of media queries. This ensures that our content stays legible and utilizes space effectively at smaller screen sizes.
 
-Add the following import to `src/components/NavBar/NavBar.jsx`:
+Add the following import to the `NavBar` component:
 
 ```jsx
 // src/components/NavBar/NavBar.jsx
@@ -250,7 +248,7 @@ And apply `styles.container` as a `className` to the outermost element (`<nav>`)
 
 Much better! Let's make one more change by adding a **logo** to our app. This SVG file is included in the visual assets we downloaded earlier.
 
-Add the following import to `src/components/NavBar/NavBar.jsx`:
+Add another import to the `NavBar` component:
 
 ```jsx
 // src/components/NavBar/NavBar.jsx
@@ -258,11 +256,13 @@ Add the following import to `src/components/NavBar/NavBar.jsx`:
 import Logo from '../../assets/images/logo.svg';
 ```
 
-And finally, add the following `<Link>` and `<img>` tag right below the opening of the `<nav>`:
+And finally, add the following `<Link>` and `<img>` tags right below the opening of the `<nav>`. This will replace the two existing links that go to the `/` route in this component:
 
 ```jsx
 // src/components/NavBar/NavBar.jsx
 
 <nav className={styles.container}>
-  <Link to='/'><img src={Logo} alt="A cute owl" /></Link>
+  <Link to='/'><img src={Logo} alt='A cute owl' /></Link>
 ```
+
+Congrats! You've successfully applied CSS Modules to the `NavBar` component and added a logo to the app.

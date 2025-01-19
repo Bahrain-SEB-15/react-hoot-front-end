@@ -3,7 +3,11 @@
   <span class="subhead">Setup</span>
 </h1>
 
-## Setup
+## Set up the Express API
+
+The app we're building in this lecture will require a back-end to handle requests from your React app. If you already have the **Express API - Hoot Back-End** set up, skip to the **Use an existing Express API - Hoot Back-End** section below. Otherwise, start from here and follow the steps to set up your development environment.
+
+### Get the Express API - Hoot Back-End starter
 
 Open your Terminal application and navigate to your `~/code/ga/lectures` directory:
 
@@ -11,17 +15,111 @@ Open your Terminal application and navigate to your `~/code/ga/lectures` directo
 cd ~/code/ga/lectures
 ```
 
-## Cloning the Auth boilerplate
-
-This lecture uses the [React JWT Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/react-jwt-auth-template.git) as starter code. The template includes code to authenticate users in React using JWT tokens generated from an existing Express backend API.
-
-Navigate to the `React JWT Auth Template` and clone the repository to your machine, and rename it `"react-hoot-front-end"`:
+Clone the Express API - Hoot Back-End from the [solution code repo](https://git.generalassemb.ly/modular-curriculum-all-courses/express-api-hoot-back-end-solution):
 
 ```bash
-git clone https://git.generalassemb.ly/modular-curriculum-all-courses/react-jwt-auth-template.git  react-hoot-front-end
+git clone https://git.generalassemb.ly/modular-curriculum-all-courses/express-api-hoot-back-end-solution.git express-api-hoot-back-end
 ```
 
-> By including the new folder name in the git clone command, you can immediately rename the directory during the cloning process, saving you from having to rename it manually later.
+> 💡 By including the new folder name in the git clone command, you can immediately rename the directory during the cloning process, saving you from having to rename it manually later.
+
+Move into the directory you just cloned the solution code into:
+
+```bash
+cd express-api-hoot-back-end
+```
+
+Install the dependencies:
+
+```bash
+npm i
+```
+
+Open the project in VS Code:
+
+```bash
+code .
+```
+
+Open the built-in terminal in VS Code. You'll need to set up a `.env` file that includes values for the `MONGODB_URI` and `JWT_SECRET` before the app can function. Start by creating the `.env` file:
+
+```bash
+touch .env
+```
+
+Add your MongoDB URI to the `.env` file. It will look similar to the following but with your username, password, and database name:
+
+```plaintext
+MONGODB_URI=mongodb+srv://<username>:<password>@sei-w0kys.azure.mongodb.net/hoot?retryWrites=true
+```
+
+> ⚠️ If you're unsure where to obtain your MongoDB URI, please refer to the MongoDB Atlas Setup Lab.
+
+On the next line in the `.env` file, add a `JWT_SECRET`:
+
+```plaintext
+JWT_SECRET=your_secure_random_string_here
+```
+
+> ⚠️ Replace `your_secure_random_string_here` with a secure random string of your choice.
+
+Remove the existing Git information from this solution code:
+
+```bash
+rm -rf .git
+```
+
+> ⚠️ Removing the `.git` directory is important as this is just starter code provided by GA. You do not need the existing Git history for this project.
+
+You're done! If your setup is complete, you should be able to run the server with this command:
+
+```bash
+npm run dev
+```
+
+You should see a message that the Express app is ready and that you've connected to a MongoDB database. Troubleshoot any errors before continuing.
+
+Skip to the **Clone the auth template** section below.
+
+### Use an existing Express API - Hoot Back-End
+
+Move into the `~/code/ga/lectures/express-api-hoot-back-end` directory:
+
+```bash
+cd ~/code/ga/lectures/express-api-hoot-back-end
+```
+
+Open the project in VS Code:
+
+```bash
+code .
+```
+
+Open the integrated terminal in VS Code and run the server:
+
+```bash
+npm run dev
+```
+
+You should see a message that the Express app is ready and that you've connected to a MongoDB database. Troubleshoot any errors before continuing.
+
+## Clone the auth template
+
+This lecture uses the [React JWT Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/react-jwt-auth-template.git) as starter code. The template includes code to authenticate users in React using JWT tokens generated from an existing Express back-end API.
+
+Return to your terminal window, and navigate to your `~/code/ga/lectures` directory:
+
+```bash
+cd ~/code/ga/lectures
+```
+
+Clone the repository to your machine, and rename it `react-hoot-front-end`:
+
+```bash
+git clone https://git.generalassemb.ly/modular-curriculum-all-courses/react-jwt-auth-template.git react-hoot-front-end
+```
+
+> 💡 By including the new folder name in the git clone command, you can immediately rename the directory during the cloning process, saving you from having to rename it manually later.
 
 Next, `cd` into your new directory:
 
@@ -29,15 +127,53 @@ Next, `cd` into your new directory:
 cd react-hoot-front-end
 ```
 
-Finally, remove the existing `.git` information from this template:
+Remove the existing Git information from this template:
 
 ```bash
 rm -rf .git
 ```
 
-> Removing the `.git` info is important as this is just a starter template provided by GA. You do not need the existing git history for this project.
+> ⚠️ Removing the `.git` directory is important as this is just a starter template provided by GA. You do not need the existing Git history for this project.
 
-## GitHub setup
+### Install dependencies
+
+Next, you will want to install all of the packages listed in `package.json`
+
+```bash
+npm i
+```
+
+Open the project's folder in your code editor:
+
+```bash
+code .
+```
+
+### Create a `.env`
+
+Open the integrated terminal in VS Code and run the following command to create a `.env` file:
+
+```bash
+touch .env
+```
+
+Add a new `VITE_BACK_END_SERVER_URL` environment variable by adding the following secret key to your `.env`:
+
+```plaintext
+VITE_BACK_END_SERVER_URL=http://localhost:3000
+```
+
+### Update the `.gitignore`
+
+Add `package-lock.json` and `.env` to the `.gitignore` file.
+
+```plaintext
+node_modules
+package-lock.json
+.env
+```
+
+### GitHub setup
 
 To add this project to GitHub, initialize a new Git repository:
 
@@ -58,100 +194,10 @@ git push origin main
 
 > 🚨 Do not copy the above command. It will not work. Your GitHub username will replace `<github-username>` (including the `<` and `>`) in the URL above.
 
-Open the project's folder in your code editor:
-
-```bash
-code .
-```
-
-## Install dependencies
-
-Next, you will want to install all of the packages listed in `package.json`
-
-```bash
-npm i
-```
-
-## Create a `.env`
-
-Run the following command in your terminal:
-
-```bash
-touch .env
-```
-
-Lastly, we want to include a `VITE_BACK_END_SERVER_URL`.
-
-Add the following secret key to your `.env`:
-
-```text
-VITE_BACK_END_SERVER_URL="http://localhost:3000"
-```
-
-## Update the `.gitignore`
-
-Add `package-lock.json` and `.env` to the `.gitignore` file.
-
-```text
-node_modules
-package-lock.json
-.env
-```
-
-## Start your application
+### Start your application
 
 Start the application with the following command:
 
 ```bash
 npm run dev
 ```
-
-## Running the Express backend
-
-Before diving into our React app development, you'll need to ensure that the Express backend server is operational. This backend will handle requests from your React app. You will be using the back-end server you created in the `Express API - Hoot Back-End` lesson as the API for this lesson.
-
-Follow these steps to set up the server:
-
-Open your Terminal application and navigate to your **`~/code/ga/lectures/express-api-hoot-back-end`** directory:
-
-```bash
-cd ~/code/ga/lectures/express-api-hoot-back-end
-```
-
-Once there, run your server:
-
-```bash
-npm run dev
-```
-
-> Note: If your `express-api-hoot-back-end` is incomplete, you can obtain a fully implemented version from the [solution code repo](https://git.generalassemb.ly/modular-curriculum-all-courses/express-api-hoot-back-end-solution). Remember to install all necessary dependencies with `npm i` and establish a connection to your MongoDB Atlas by adding a connection string in a `.env` file.
-
-### Create your server `.env`
-
-To configure your server using the provided starter code, you'll need to set up a `.env` file that includes both the `MONGODB_URI` and `JWT_SECRET`:
-
-1. **Establish a MongoDB Connection:**
-
-   - Sign up or log into MongoDB Atlas and create a new database cluster.
-   - Generate a connection string for your MongoDB Atlas database, which will be used as your `MONGODB_URI`.
-
-2. **Create JWT_SECRET:**
-
-   - The `JWT_SECRET` is a secret key used for signing your JWT tokens. Choose a secure and random string.
-
-3. **Set Up Your `.env` File:**
-   - In the root directory of your server application, create a `.env` file.
-   - Add your MongoDB connection string and JWT secret to this file as follows:
-
-```plaintext
-MONGODB_URI=your_mongodb_atlas_connection_string_here
-JWT_SECRET=your_secure_random_string_here
-```
-
-Start the server and you are ready to start on the React front-end!
-
-```bash
-npm run dev
-```
-
-Happy Coding!

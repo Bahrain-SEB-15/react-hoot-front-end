@@ -13,9 +13,11 @@ Run the following command in your terminal:
 touch src/components/HootDetails/HootDetails.module.css
 ```
 
-And add the following to `src/components/HootDetails/HootDetails.module.css`:
+Add the following to this new file :
 
 ```css
+/* src/components/HootDetails/HootDetails.module.css */
+
 /* Details and comments */
 
 .container {
@@ -161,13 +163,13 @@ And add the following to `src/components/HootDetails/HootDetails.module.css`:
 }
 ```
 
-The `src/components/HootDetails/HootDetails.jsx` component is rather complex, as it features several subsections and subcomponents. As a result, we have quite a bit of styling in here.
+The `HootDetails` component is rather complex, as it features several subsections and subcomponents. As a result, we have quite a bit of styling in here.
 
-First, take note of how we utilize **descendant** and **child** selectors in our CSS. This approach helps us to reduce the number of `className` and `id` attributes in our `JSX` by selecting elements based on their relationship to the parent `container`. This makes our code cleaner and more maintainable. If you need a refresher on how these selectors work, take a look at the MDN documentation on [CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors).
+First, note how we utilize **descendant** and **child** selectors in our CSS. This approach helps us to reduce the number of `className` and `id` attributes in our `JSX` by selecting elements based on their relationship to the parent `container`. This makes our code cleaner and more maintainable. If you need a refresher on how these selectors work, take a look at the MDN documentation on [CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors).
 
 Some other interesting details include:
 
-- The use of several flex-boxes to achieve the desired layout. Each `<section>` takes the shape of a column, with each column stack on top of one another. Additionally each `<section>` has its `width` capped at `700px`. This helps us maintain our layout without stretching content too wide on larger screens.
+- Several flex-boxes are used to achieve the desired layout. Each `<section>` takes the shape of a column, with each column stacked on top of one another. Additionally, each `<section>` has its `width` capped at `700px`. This helps us maintain our layout without stretching content too wide on larger screens.
 
 - Interactive elements like buttons and links are styled to be **circular**. This will look slightly awkward until we replace the current text content with iconography.
 
@@ -175,7 +177,7 @@ Some other interesting details include:
 
 Let's add the `styles` object to our component.
 
-Add the following import to the top of `src/components/HootDetails/HootDetails.jsx`:
+Add the following import to the top of the `HootDetails` component:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
@@ -191,41 +193,37 @@ And add apply `styles.container` to the `className` of the outermost element(`<m
 <main className={styles.container}>
 ```
 
-Next we'll need to make a small change to **authorship** and **interactive elements** of our hoot `<section>`.
+Next, we'll need to make a small change to **authorship** and **interactive elements** of our hoot details. For our layout, we'll need to wrap these elements in a `<div>`.
 
-For our layout, we'll need to wrap these elements in a `<div>`.
-
-Apply the following changes to `src/components/HootDetails/HootDetails.jsx`:
+Apply the following changes to the `HootDetails` component:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-<main className={styles.container}>
-  <section>
-    <header>
-      <p>{hoot.category.toUpperCase()}</p>
-      <h1>{hoot.title}</h1>
+      <section>
+        <header>
+          <p>{hoot.category.toUpperCase()}</p>
+          <h1>{hoot.title}</h1>
+          {/* Add this div */}
+          <div>
+            <p>
+              {`${hoot.author.username} posted on
+              ${new Date(hoot.createdAt).toLocaleDateString()}`}
+            </p>
+            {hoot.author._id === user._id && (
+              <>
+                <Link to={`/hoots/${hootId}/edit`}>Edit</Link>
+                <button onClick={() => props.handleDeleteHoot(hootId)}>
+                  Delete
+                </button>
+              </>
+            )}
+          {/* Don't forget to close it */}
+          </div>
 
-      <div>
-        <p>
-          {hoot.author.username} posted on
-          {new Date(hoot.createdAt).toLocaleDateString()}
-        </p>
-        {hoot.author._id === user._id && (
-          <>
-            <Link to={`/hoots/${hootId}/edit`}>Edit</Link>
-            <button onClick={() => props.handleDeleteHoot(hootId)}>
-              Delete
-            </button>
-          </>
-        )}
-      </div>
-
-    </header>
-    <p>{hoot.text}</p>
-  </section>
-
-  ...
+        </header>
+        <p>{hoot.text}</p>
+      </section>
 ```
 
 And now do the same to the `<article>` tag in your comments section like so:
@@ -233,25 +231,27 @@ And now do the same to the `<article>` tag in your comments section like so:
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
-<article key={comment._id}>
-  <header>
-    <div>
-      <p>
-        {comment.author.username} posted on
-        {new Date(comment.createdAt).toLocaleDateString()}
-      </p>
-      {comment.author._id === user._id && (
-        <>
-          <Link to={`/hoots/${hootId}/comments/${comment._id}/edit`}>Edit</Link>
-          <button onClick={() => handleDeleteComment(comment._id)}>
-            Delete
-          </button>
-        </>
-      )}
-    </div>
-  </header>
-  <p>{comment.text}</p>
-</article>
+          <article key={comment._id}>
+            <header>
+              {/* Add this div */}
+              <div>
+                <p>
+                  {`${comment.author.username} posted on
+                  ${new Date(comment.createdAt).toLocaleDateString()}`}
+                </p>
+                {comment.author._id === user._id && (
+                  <>
+                    <Link to={`/hoots/${hootId}/comments/${comment._id}/edit`}>Edit</Link>
+                    <button onClick={() => handleDeleteComment(comment._id)}>
+                      Delete
+                    </button>
+                  </>
+                )}
+              {/* Don't forget to close it */}
+              </div>
+            </header>
+            <p>{comment.text}</p>
+          </article>
 ```
 
-Take a look at the newly styled `src/components/HootDetails/HootDetails.jsx` in your browser.
+Take a look at the newly styled `HootDetails` component in your browser.

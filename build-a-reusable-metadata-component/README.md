@@ -7,30 +7,30 @@
 
 ## Overview
 
-In this lesson we'll build a reusable metadata component called `AuthorInfo`.
+In this lesson, we'll build a reusable metadata component called `AuthorInfo`.
 
-The term 'metadata' refers to data that provides information about other data. In the context of online content such as a blog posts or comments, metadata will often include information on the content's author, such as their name, and the date that the content was created on.
+The term 'metadata' refers to data that provides information about other data. In the context of online content such as blog posts or comments, metadata will often include information on the content's author, such as their name and the date the content was created.
 
 Throughout our application, we are currently rendering this information with a `<p>` tag:
 
 ```jsx
 <p>
-  {hoot.author.username} posted on
-  {new Date(hoot.createdAt).toLocaleDateString()}
+  {`${hoot.author.username} posted on
+  ${new Date(hoot.createdAt).toLocaleDateString()}`}
 </p>
 ```
 
-Our `AuthorInfo` component will replace this `<p>` tag, with a more refined layout and styling. This will make it easier to display information about an author in a visually consistent manner across the app.
+Our `AuthorInfo` component will replace this `<p>` tag with a more refined layout and styling. This will make it easier to display information about an author in a visually consistent manner across the app.
 
-Both `hoots` and `comments` will be able to make use of the `AuthorInfo` component. As a result, `AuthorInfo` is built to receive a generic `content` prop, so as not to mislabel either of these resources.
+Both `hoots` and `comments` will be able to use the `AuthorInfo` component. As a result, `AuthorInfo` is built to receive a generic `content` prop so as not to mislabel either of these resources.
 
-The `AuthorInfo` component will also display the `createdAt` property of a resource, and a `ProfileIcon` image representing the author.
+The `AuthorInfo` component will also display the `createdAt` property of a resource and a `ProfileIcon` image representing the author.
 
-Take a look at the component hierarchy diagram below for context on how `AuthorInfo` fit into our component tree:
+Take a look at the component hierarchy diagram below for context on how `AuthorInfo` fits into our component tree:
 
 ![Component hierarchy diagram](./assets/author-info.png)
 
-> 💡 In `src/components/HootList/HootList.jsx`, an instance of `AuthorInfo` will be produced for each `hoot` as we `map()` over the `hoots` array. The same will apply to the `hoot.comments` rendered inside of `src/components/HootDetails/HootDetails.jsx`. A stand-alone instance of `AuthorInfo` will also be rendered at the top of `src/components/HootDetails/HootDetails.jsx`, alongside details of a single `hoot`.
+> 💡 In the `HootList` component, an instance of `AuthorInfo` will be produced for each `hoot` as we `map()` over the `hoots` array. The same will apply to the `hoot.comments` rendered inside of the `HootDetails` component. A stand-alone instance of `AuthorInfo` will also be rendered at the top of `HootDetails`, alongside details of a single `hoot`.
 
 ## Build the component
 
@@ -44,9 +44,11 @@ touch src/components/AuthorInfo/AuthorInfo.jsx
 touch src/components/AuthorInfo/AuthorInfo.module.css
 ```
 
-Add the following to `src/components/AuthorInfo/AuthorInfo.module.css`:
+Add the following to the new CSS module file:
 
 ```css
+/* src/components/AuthorInfo/AuthorInfo.module.css */
+
 .container {
   display: flex;
   align-items: center;
@@ -99,7 +101,7 @@ Add the following to `src/components/AuthorInfo/AuthorInfo.module.css`:
 }
 ```
 
-Add the following to `src/components/AuthorInfo/AuthorInfo.jsx`:
+Add the following to the new `AuthorInfo` component:
 
 ```jsx
 // src/components/AuthorInfo/AuthorInfo.jsx
@@ -158,12 +160,12 @@ Replace this tag with the `<AuthorInfo />` component, passing down `content={hoo
 ```jsx
 // src/components/HootList/HootList.jsx
 
-<AuthorInfo content={hoot} />
+  <AuthorInfo content={hoot} />
 </header>
 <p>{hoot.text}</p>
 ```
 
-Add the following import to `src/components/HootDetails/HootDetails.jsx`:
+Add the following import to the `HootDetails` component:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
@@ -171,14 +173,14 @@ Add the following import to `src/components/HootDetails/HootDetails.jsx`:
 import AuthorInfo from '../../components/AuthorInfo/AuthorInfo';
 ```
 
-Locate the existing `<p>` tag in `src/components/HootDetails/HootDetails.jsx`:
+Locate the existing `<p>` tag this component:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
 
 <p>
-  {hoot.author.username} posted on
-  {new Date(hoot.createdAt).toLocaleDateString()}
+  {`${hoot.author.username} posted on
+  ${new Date(hoot.createdAt).toLocaleDateString()}`}
 </p>
 ```
 
@@ -206,11 +208,11 @@ And replace this tag with the `<AuthorInfo />` component, passing down `content=
 </header>
 ```
 
-Notice how we are labelling `hoot` as `content` when passing props to `<AuthorInfo>`. We do this because we'll be reusing `<AuthorInfo>` for our comments as well. Thankfully, the shape of a `hoot` and a `comment` are similar enough that we don't need to adjust any code inside `src/components/AuthorInfo/AuthorInfo.jsx`. By mapping `hoot` and a `comment` to a generic `content` prop, we avoid misrepresenting the data type or data source being used in the component.
+Notice how we label `hoot` as `content` when passing props to `<AuthorInfo>`. We do this because we'll reuse the `AuthorInfo` component for our comments as well. Thankfully, the shape of a `hoot` and `comment` are similar enough that we don't need to adjust any code inside the `AuthorInfo` component. By mapping `hoot` and a `comment` to a generic `content` prop, we avoid misrepresenting the data type or data source used in the component.
 
 Next, we can add the `<AuthorInfo />` component to our list of comments, replacing the existing `<p>` tag.
 
-Update `src/components/HootDetails/HootDetails.jsx` as shown below:
+Update the `HootDetails` component as shown below:
 
 ```jsx
 // src/components/HootDetails/HootDetails.jsx
@@ -239,6 +241,6 @@ Update `src/components/HootDetails/HootDetails.jsx` as shown below:
 }
 ```
 
-Checkout the changes we made in your browser. You should now have a fully developed application.
+Check out the changes we made in your browser. You should now have a fully developed application.
 
 Congratulations! You've reached the end of this code-along!
